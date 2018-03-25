@@ -31,6 +31,7 @@ Auth::routes();
 
 Route::prefix('admin')->group(function(){
 
+Route::resource('course-management','Admin\CourseManagementController');
 
 Route::get('/login','Auth\AdminLoginController@showloginform')->name('admin.login');
 
