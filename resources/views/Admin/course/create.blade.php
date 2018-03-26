@@ -30,13 +30,13 @@
                         <div class="form-group">
                           <label class="col-sm-3 control-label">Course Title</label>
                           <div class="col-sm-9">
-                            <input type="text" name="name" class="form-control"  data-required="true" placeholder="Product Title" required>   
+                            <input type="text" name="name" class="form-control"  data-required="true" placeholder="Course Title" required>   
                           </div>
                         </div>
                          <div class="form-group">
                           <label class="col-sm-3 control-label">Course Caption</label>
                           <div class="col-sm-9">
-                            <input type="text" name="caption" class="form-control"  data-required="true" placeholder="Product Title" required>   
+                            <input type="text" name="caption" class="form-control"  data-required="true" placeholder="Course Caption" required>   
                           </div>
                         </div>
                          <div class="line line-dashed line-lg pull-in"></div>
@@ -44,6 +44,20 @@
                           <label class="col-sm-3 control-label"> Price</label>
                           <div class="col-sm-9">
                             <input type="text" name="price"  class="form-control" placeholder="Starting Price" required>
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="col-sm-3 control-label">Demo Video Link</label>
+                          <div class="col-sm-9">
+                            <input type="text" name="video_link" class="form-control"  data-required="true" placeholder="Video Link" required>   
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="col-sm-3 control-label">Description</label>
+                          <div class="col-sm-9">
+                            <input type="text" name="description" class="form-control"  data-required="true" placeholder="Description" required>   
                           </div>
                         </div>
 
@@ -84,10 +98,10 @@
                           <div class="col-sm-9">
 
             <div class="input_fields_wrap">
-                  <button class="add_field_button glyphicon glyphicon-plus btn btn-primary" aria-hidden="true" style="margin-bottom:10px;">Add More Images</button><br>
+                
                 
                   <div style="margin-bottom:10px;">
-                       <input type="file" name="image_name[]" class="GalleryImage" id="img0" required /> &nbsp 
+                       <input type="file" name="image_name" class="GalleryImage" id="img0" required /> &nbsp 
                   </div>
 
            </div>      
