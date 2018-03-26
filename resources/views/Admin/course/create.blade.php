@@ -30,7 +30,7 @@
                         <div class="form-group">
                           <label class="col-sm-3 control-label">Course Title</label>
                           <div class="col-sm-9">
-                            <input type="text" name="name" class="form-control"  data-required="true" placeholder="Course Title" required>   
+                            <input type="text" name="title" class="form-control"  data-required="true" placeholder="Course Title" required>   
                           </div>
                         </div>
                          <div class="form-group">

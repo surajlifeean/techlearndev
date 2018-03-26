@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Course;
+use Image;
+use Session;
+
 
 class CourseManagementController extends Controller
 {
@@ -35,7 +39,29 @@ class CourseManagementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         $course=new Course;
+        
+        $variable=$request->toArray();
+        foreach ($variable as $key => $value) {
+           if($key!='_token' & $key!='image_name')
+            $course->$key=$value;
+        }
+
+
+        $image=$request->file('image_name');
+        //if($request->hasFile('image_name')){
+        //dd($image);
+        $filename='course'.'-'.$course->title.'-'.rand().time().'.'.$image->getClientOriginalExtension();//part of image intervention library
+        $location=public_path('/uploaded_images/courses/'.$filename);
+
+        // use $location='images/'.$filename; on a server
+
+        Image::make($image)->resize(600,400)->save($location);
+        $course->image=$filename;
+        $course->save();        
+
+        session::flash('success', 'The Course Has Been Added Successfully!');
+         return redirect()->route('course-management.index');
     }
 
     /**
