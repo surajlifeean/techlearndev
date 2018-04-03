@@ -11,12 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+// Route::get('/', function () {
+//     return view('home');
+// });
 
 
-Route::get('/sendsms', 'HomeController@sendsms')->name('sendsms');
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/verifyemail/{token}', 'Auth\RegisterController@verify');
 
@@ -32,6 +32,10 @@ Auth::routes();
 Route::prefix('admin')->group(function(){
 
 Route::resource('course-management','Admin\CourseManagementController');
+
+Route::resource('banner-management','Admin\BannerManagementController');
+
+Route::resource('review-management','Admin\ReviewController');
 
 Route::get('/login','Auth\AdminLoginController@showloginform')->name('admin.login');
 

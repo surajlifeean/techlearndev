@@ -720,7 +720,7 @@ ul.footer-links li a {
 .register-wrapper
 {
 	padding: 100px 0px;
-	background: #f6f8f8;
+	background: #dddddd;
 }
 .register-wrapper h1 {
     color: #1040a3;
@@ -746,4 +746,30 @@ ul.footer-links li a {
     display: none;
     padding: 3px 10px;
     border-radius: 4px;
+}
+.screen-reader h5
+{
+	font-size: 20px;
+	color: #1040a3;
+}
+.screen-reader
+{
+	margin-bottom: 40px;
+	border-top: 1px solid #acacac;
+	padding-top: 30px;
+}
+select.form-control
+{
+	appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url(../images/drop.png);
+    background-repeat: no-repeat;
+    background-position: right 13px center;
+	height: 44px !important;
+	border: 1px solid #1040a3;
+
+}
+.form-wrapper .form-group {
+    margin-bottom: 2.5rem;
 }

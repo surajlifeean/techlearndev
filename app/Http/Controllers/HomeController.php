@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Textlocal\Textlocal;
+use App\Course;
+use App\Review;
 class HomeController extends Controller
 {
     /**
@@ -11,10 +12,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-       $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //    $this->middleware('auth');
+    // }
 
     /**
      * Show the application dashboard.
@@ -23,7 +24,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+
+       $courses=Course::all();
+       $review=Review::all();
+        
+        return view('home')->withCourses($courses)->withReview($review);
+
     }
 
     public function sendsms()

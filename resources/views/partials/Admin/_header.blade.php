@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="{{asset('Admin/js/calendar/bootstrap_calendar.css')}}" type="text/css" />
   <link rel="stylesheet" href="{{asset('Admin/css/app.css')}}" type="text/css" />
   <link rel="stylesheet" href="{{asset('css/parsley.css')}}" type="text/css" />
-
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
   <!--[if lt IE 9]>
     <script src="js/ie/html5shiv.js"></script>
     <script src="js/ie/respond.min.js"></script>

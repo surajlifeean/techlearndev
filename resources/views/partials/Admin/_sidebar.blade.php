@@ -191,10 +191,10 @@
                             <span>Add</span>
                           </a>
                         </li>
-                        <li >
-                          <a href="profile.html" >                                                        
+                         <li >
+                          <a href="{{route('course-management.index')}}" >                                                        
                             <i class="fa fa-angle-right"></i>
-                            <span>Profile</span>
+                            <span>List</span>
                           </a>
                         </li>
                         <li >
@@ -248,12 +248,12 @@
                       </ul>
                     </li>
                     <li >
-                      <a href="mail.html"  >
+                      <a href="{{route('review-management.index')}}"  >
                         <b class="badge bg-danger pull-right">3</b>
                         <i class="fa fa-envelope-o icon">
                           <b class="bg-primary dker"></b>
                         </i>
-                        <span>Message</span>
+                        <span>Review Management</span>
                       </a>
                     </li>
                     <li >

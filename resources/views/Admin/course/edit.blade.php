@@ -25,32 +25,32 @@
                       <header class="panel-heading">
                         <strong>Enter The Course Details</strong>
                       </header>
-                      {{Form::open(['route' => 'course-management.store','files' => true, 'class'=>'form-horizontal course-form','data-parsley-validate'])}}
+                      {{Form::model($course,['route' =>['course-management.update',$course->id],'method' =>'PUT', 'files' => true, 'class'=>'form-horizontal course-form','data-parsley-validate'])}}
                       <div class="panel-body">                   
                         <div class="form-group">
                           <label class="col-sm-3 control-label">Course Title</label>
                           <div class="col-sm-9">
-                            <input type="text" name="title" class="form-control"  data-required="true" placeholder="Course Title" required>   
+                            <input type="text" name="title" class="form-control"  data-required="true" placeholder="Course Title" value="{{$course->title}}" required>   
                           </div>
                         </div>
                          <div class="form-group">
                           <label class="col-sm-3 control-label">Course Caption</label>
                           <div class="col-sm-9">
-                            <input type="text" name="caption" class="form-control"  data-required="true" placeholder="Course Caption" required>   
+                            <input type="text" name="caption" class="form-control"  data-required="true" placeholder="Course Caption" value="{{$course->caption}}" required>   
                           </div>
                         </div>
                          <div class="line line-dashed line-lg pull-in"></div>
                         <div class="form-group">
                           <label class="col-sm-3 control-label"> Price</label>
                           <div class="col-sm-9">
-                            <input type="text" name="price"  class="form-control" placeholder="Starting Price" required>
+                            <input type="text" name="price"  value="{{$course->price}}" class="form-control" placeholder="Starting Price" required>
                           </div>
                         </div>
 
                         <div class="form-group">
                           <label class="col-sm-3 control-label">Demo Video Link</label>
                           <div class="col-sm-9">
-                            <input type="text" name="video_link" class="form-control"  data-required="true" placeholder="Video Link" required>   
+                            <input type="text" name="video_link" class="form-control"  data-required="true" value="{{$course->video_link}}" placeholder="Video Link" required>   
                           </div>
                         </div>
 
@@ -58,7 +58,7 @@
                           <label class="col-sm-3 control-label">Description</label>
                           <div class="col-sm-9">
                             <!-- <input type="text" name="description" class="form-control"  data-required="true" placeholder="Description" required> -->  
-                            <textarea id="summernote" name="description" class="form-control" required></textarea> 
+                            <textarea id="summernote" name="description" class="form-control" required>{!!$course->description!!}</textarea> 
                           </div>
                         </div>
 
@@ -81,11 +81,8 @@
                         <div class="form-group">
                           <label class="col-sm-3 control-label">Status</label>
                           <div class="col-sm-9">
-                            <select name="status" required>
-                         <option value="">select</option>
-                         <option value="A">Active</option>
-                         <option value="I">Inactive</option>
-                           </select>
+
+                           {!!Form::select('status', ['A' => 'Active', 'I' => 'Inactive'],null, ['placeholder' => 'Select'])!!}
 
                           </div>
                          </div>
@@ -102,7 +99,7 @@
                 
                 
                   <div style="margin-bottom:10px;">
-                       <input type="file" name="image_name" class="GalleryImage" id="img0" required /> &nbsp 
+                       <input type="file" name="image_name" class="GalleryImage" id="img0" /> &nbsp 
                   </div>
 
            </div>      
@@ -110,10 +107,12 @@
                      </div>
                   <footer class="panel-footer text-right bg-light lter">
                        
-                          <input type="submit" class="btn btn-success btn-s-xs" value="Submit"/>
+                  <input type="submit" class="btn btn-success btn-s-xs" value="Submit"/>
 
-                        <a href="{{url('/admin/course-management')}}" class="btn btn-danger">Cancel</a>
-                      </footer>
+                 <!--  <a href="{{url('/admin/course-management')}}" class="btn btn-danger">Cancel</a>
+ -->
+
+                  </footer>
 
 
                      </div>

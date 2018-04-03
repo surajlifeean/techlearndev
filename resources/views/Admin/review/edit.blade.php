@@ -9,56 +9,55 @@
 
  <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
                 <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-home"></i> Home</a></li>
-                <li><a href="{{route('course-management.index')}}">Course Management</a></li>
-                <li><a href="{{route('course-management.create')}}">Add Course</a></li>
+                <li><a href="{{route('course-management.index')}}">Review Management</a></li>
+                <li><a href="{{route('course-management.create')}}">Add Review</a></li>
                
               </ul>
 
  
                       <header class="panel-heading">
-                        <span class="h4">Add Course</span>
+                        <span class="h4">Add Review</span>
                       </header>
 
                       
                  
                      
                       <header class="panel-heading">
-                        <strong>Enter The Course Details</strong>
+                        <strong>Enter The Review Details</strong>
                       </header>
-                      {{Form::open(['route' => 'course-management.store','files' => true, 'class'=>'form-horizontal course-form','data-parsley-validate'])}}
+                      {{Form::model($review,['route' =>['review-management.update',$review->id],'method'=>'PUT','files' => true, 'class'=>'form-horizontal course-form','data-parsley-validate'])}}
                       <div class="panel-body">                   
                         <div class="form-group">
-                          <label class="col-sm-3 control-label">Course Title</label>
+                          <label class="col-sm-3 control-label">Review On</label>
                           <div class="col-sm-9">
-                            <input type="text" name="title" class="form-control"  data-required="true" placeholder="Course Title" required>   
+<!--                             <input type="text" name="title" class="form-control"  data-required="true" placeholder="Course Title" required> -->   
+
+                          {!!Form::select('review_on',$reviewon,null,['class'=>'form-control'])!!}
                           </div>
                         </div>
                          <div class="form-group">
-                          <label class="col-sm-3 control-label">Course Caption</label>
+                          <label class="col-sm-3 control-label">Reviewer's Name</label>
                           <div class="col-sm-9">
-                            <input type="text" name="caption" class="form-control"  data-required="true" placeholder="Course Caption" required>   
+                            <input type="text" name="review_by"  value="{{$review->review_by}}" class="form-control"  data-required="true" placeholder="Course Review" required>   
                           </div>
                         </div>
                          <div class="line line-dashed line-lg pull-in"></div>
-                        <div class="form-group">
+                      <!--   <div class="form-group">
                           <label class="col-sm-3 control-label"> Price</label>
                           <div class="col-sm-9">
                             <input type="text" name="price"  class="form-control" placeholder="Starting Price" required>
                           </div>
-                        </div>
+                        </div> -->
+
+                        
 
                         <div class="form-group">
-                          <label class="col-sm-3 control-label">Demo Video Link</label>
+                          <label class="col-sm-3 control-label">Comments</label>
                           <div class="col-sm-9">
-                            <input type="text" name="video_link" class="form-control"  data-required="true" placeholder="Video Link" required>   
-                          </div>
-                        </div>
+                          
+                            <textarea id="summernote" name="comment" class="form-control" required>{!!$review->comment!!}</textarea> 
+                          
 
-                        <div class="form-group">
-                          <label class="col-sm-3 control-label">Description</label>
-                          <div class="col-sm-9">
-                            <!-- <input type="text" name="description" class="form-control"  data-required="true" placeholder="Description" required> -->  
-                            <textarea id="summernote" name="description" class="form-control" required></textarea> 
                           </div>
                         </div>
 
@@ -71,21 +70,12 @@
                           </div>
                         </div>
                         <div class="line line-dashed line-lg pull-in"></div>
-                        <!-- <div class="form-group">
-                          <label class="col-sm-3 control-label">No of Bedroom</label>
-                          <div class="col-sm-9">
-                            <input type="number" min="1" step="1" name="no_of_bedroom" required />
-                          </div>
-                        </div> -->
+                  
                         <div class="line line-dashed line-lg pull-in"></div>
                         <div class="form-group">
                           <label class="col-sm-3 control-label">Status</label>
                           <div class="col-sm-9">
-                            <select name="status" required>
-                         <option value="">select</option>
-                         <option value="A">Active</option>
-                         <option value="I">Inactive</option>
-                           </select>
+                         {!!Form::select('status',['A'=>'Active','I'=>'Inactive'],null,['placeholder'=>'select status'])!!}
 
                           </div>
                          </div>
@@ -95,14 +85,14 @@
 
                        <div class="line line-dashed line-lg pull-in"></div>
                         <div class="form-group">
-                          <label class="col-sm-3 control-label">Images(Min Dimension:1925x725)</label>
+                          <label class="col-sm-3 control-label">Reviewer's Images(Min Dimension:90x90)</label>
                           <div class="col-sm-9">
 
             <div class="input_fields_wrap">
                 
                 
                   <div style="margin-bottom:10px;">
-                       <input type="file" name="image_name" class="GalleryImage" id="img0" required /> &nbsp 
+                       <input type="file" name="image_name" class="GalleryImage" id="img0"/> &nbsp 
                   </div>
 
            </div>      

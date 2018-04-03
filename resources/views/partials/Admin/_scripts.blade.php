@@ -19,4 +19,6 @@
   <script src="{{asset('Admin/js/sortable/jquery.sortable.js')}}"></script>
 
   <script src="{{asset('js/parsley.min.js')}}"></script>
+
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
   

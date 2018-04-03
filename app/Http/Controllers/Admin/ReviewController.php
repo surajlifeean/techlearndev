@@ -1,17 +1,15 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Course;
-use Image;
+use App\Review;
+use DateTime;
 use Session;
-use Auth;
-use Illuminate\Support\Str;
+use Image;
 
-
-class CourseManagementController extends Controller
+class ReviewController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,12 +18,8 @@ class CourseManagementController extends Controller
      */
     public function index()
     {
-        $course=Course::paginate(10);
-        
-        // dd(property_exists($course,'title'));
-        //dd($course);
-        return view('Admin.course.index')->withCourses($course);
-       // return view('Admin.course.index');
+        $review=Review::Paginate(5);
+        return view('Admin.review.index')->withReviews($review);
     }
 
     /**
@@ -35,7 +29,15 @@ class CourseManagementController extends Controller
      */
     public function create()
     {
-        return view('Admin.course.create');
+        $course=Course::all();
+        $review_on=array();
+        $review_on[0]="General";
+        foreach ($course as $key => $value) {
+            # code...
+            $review_on[$value->id]=$value->title;
+
+        }
+        return view('Admin.review.create')->withReviewon($review_on);
     }
 
     /**
@@ -46,33 +48,28 @@ class CourseManagementController extends Controller
      */
     public function store(Request $request)
     {
-        $course=new Course;
+        $review=new Review;
         
         $variable=$request->toArray();
         foreach ($variable as $key => $value) {
            if($key!='_token' & $key!='image_name')
-            $course->$key=$value;
+            $review->$key=$value;
         }
-
-         $slug=strtolower($request['title']);
-           // $slug=str_replace(" ","-",$slug);
-            $slug = $this->getSlug($slug);
-            $course->slug=$slug;
 
         $image=$request->file('image_name');
         //if($request->hasFile('image_name')){
         //dd($image);
-        $filename='course'.'-'.rand().time().'.'.$image->getClientOriginalExtension();//part of image intervention library
-        $location=public_path('/uploaded_images/courses/'.$filename);
+        $filename='review'.'-'.rand().time().'.'.$image->getClientOriginalExtension();//part of image intervention library
+        $location=public_path('/uploaded_images/reviewers/'.$filename);
 
         // use $location='images/'.$filename; on a server
 
-        Image::make($image)->resize(600,400)->save($location);
-        $course->image=$filename;
-        $course->save();        
+        Image::make($image)->resize(90,90)->save($location);
+        $review->image=$filename;
+        $review->save();        
 
-        session::flash('success', 'The Course Has Been Added Successfully!');
-         return redirect()->route('course-management.index');
+        session::flash('success', 'The review Has Been Added Successfully!');
+         return redirect()->route('review-management.index');
     }
 
     /**
@@ -94,8 +91,19 @@ class CourseManagementController extends Controller
      */
     public function edit($id)
     {
-        $course=Course::find($id);
-        return view('Admin.course.edit')->withCourse($course);
+
+        $course=Course::all();
+        $review_on=array();
+        $review_on[0]="General";
+        foreach ($course as $key => $value) {
+            # code...
+            $review_on[$value->id]=$value->title;
+
+        }
+
+        $review=Review::find($id);
+
+        return view('Admin.review.edit')->withReview($review)->withReviewon($review_on);
     }
 
     /**
@@ -107,29 +115,32 @@ class CourseManagementController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $course=Course::find($id);
+        $review=Review::find($id);
+        
         $variable=$request->toArray();
         foreach ($variable as $key => $value) {
            if($key!='_token' && $key!='image_name' && $key!='_method')
-            $course->$key=$value;
+            $review->$key=$value;
         }
 
         if($request->hasFile('image_name')){
+
         $image=$request->file('image_name');
         //if($request->hasFile('image_name')){
         //dd($image);
-        $filename='course'.'-'.rand().time().'.'.$image->getClientOriginalExtension();//part of image intervention library
-        $location=public_path('/uploaded_images/courses/'.$filename);
+        $filename='review'.'-'.rand().time().'.'.$image->getClientOriginalExtension();//part of image intervention library
+        $location=public_path('/uploaded_images/reviewers/'.$filename);
 
         // use $location='images/'.$filename; on a server
 
-        Image::make($image)->resize(600,400)->save($location);
-        $course->image=$filename;
-    }
-        $course->save();        
+        Image::make($image)->resize(90,90)->save($location);
+        $review->image=$filename;
 
-        session::flash('success', 'The Course Has Been Updated Successfully!');
-         return redirect()->route('course-management.index');
+    }
+        $review->save();        
+
+        session::flash('success', 'The review Has Been Added Successfully!');
+         return redirect()->route('review-management.index');
 
     }
 
@@ -141,14 +152,6 @@ class CourseManagementController extends Controller
      */
     public function destroy($id)
     {
-        $course=Course::find($id);
-        $course->delete();
-        return redirect()->back()->with('success','Record has been successfully deleted');
+        //
     }
-       public function getSlug($title) {
-    $slug = Str::slug($title);
-    $slugCount = count( Course::whereRaw("slug REGEXP '^{$slug}(-[0-9]*)?$'")->get() );
-    $sl=($slugCount > 0) ? "{$slug}-{$slugCount}" : $slug;
-    return $sl;
-}
 }
