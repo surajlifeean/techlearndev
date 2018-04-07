@@ -58,3 +58,5 @@
         });
 
     </script>
+    
+  <script src="{{asset('js/parsley.min.js')}}"></script>

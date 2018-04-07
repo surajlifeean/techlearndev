@@ -11,9 +11,16 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('home');
-// });
+Route::get('/reg/step2', function () {
+	 $course=App\Course::all();
+	 $coursearray=array();
+     foreach ($course as $key => $value) {
+     	# code...
+     	$coursearray[$value->id]=$value->title;
+
+     }
+    return view('auth.register2')->withCourse($coursearray);
+});
 
 
 Route::get('/', 'HomeController@index')->name('home');
@@ -27,6 +34,11 @@ Route::get('/learn', function () {
 });
 
 Route::get('users/logout','Auth\LoginController@logout')->name('logout');
+
+
+Route::post('/register/step-2','Auth\RegisterController@register2')->name('register.step2');
+
+
 Auth::routes();
 
 Route::prefix('admin')->group(function(){

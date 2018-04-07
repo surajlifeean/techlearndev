@@ -22,6 +22,7 @@
     <script type="text/javascript" src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/lightslider.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/custom.js')}}"></script>
+    <link rel="stylesheet" href="{{asset('css/parsley.css')}}" type="text/css" />
     <style type="text/css">
         .how-works-list{
             padding-left: 0px;

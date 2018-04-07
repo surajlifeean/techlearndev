@@ -9,7 +9,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Jobs\SendVerificationEmail;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
-
+use Session;
+use App\Course;
 class RegisterController extends Controller
 {
     /*
@@ -81,10 +82,11 @@ class RegisterController extends Controller
         */
         public function register(Request $request)
         {
+            dd($request);
+            
         $this->validator($request->all())->validate();
-        event(new Registered($user = $this->create($request->all())));
-        dispatch(new SendVerificationEmail($user));
-        return view('email.verification');
+        $user = $this->create($request->all());
+        return view('auth.registration2');
         }
         /**
         * Handle a registration request for the application.
@@ -99,7 +101,23 @@ class RegisterController extends Controller
         if($user->save()){
         return view('email.emailconfirm',['user'=>$user]);
         }
+    }
+        public function register2(Request $request)
+        {
+            //dd($request);
+
+            $userexists=User::where('student_id','=',$request->sponsor_id)->first();
+            
+            if($userexists){
+            Session::flash('success','Fill in the for to complete registration!');
+            return view('auth.register2');
         }
+            else{
+            Session::flash('error','No Student with the entered ID exists.');
+            return redirect()->back();
+            }
+        }
+        
 
 
 }
