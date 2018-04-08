@@ -52,9 +52,27 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
+            'lname' => 'required|string',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            "fname" => 'required|string',
+            "nominee" => "required",
+            "contact_no" => "required",
+            "dob" => 'required',
+            "correspondence" => "required",
+            "guardian" => "required",
+            "address" => "required",
+            "landmark" => "required",
+            "username" => "required",
+            "side" => "required",
+            "course" => "required",
+            "ddno" => "required",
+            "amount" => "required",
+            "issuing_bank" => "required",
+            "issuing_date" => "required",
+            "bank_branch" => "required",
+            "sponsored_by" => "required",
+        
         ]);
     }
 
@@ -66,11 +84,32 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        //dd($data);
         return User::create([
-            'name' => $data['name'],
+            'lname' => $data['lname'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'email_token' => base64_encode($data['email'])
+            "fname" => $data['fname'],
+            "nominee" => $data['nominee'],
+            "contact_no" => $data['contact_no'],
+            "dob" => $data['dob'],
+            "correspondence" => 'Courier',
+            "guardian" => $data['guardian'],
+            "address" => $data['address'],
+            "landmark" => $data['landmark'],
+            "username" => $data['username'],
+            "side" => $data['side'],
+            "course" => $data['course'],
+            "ddno" => $data['ddno'],
+            "amount" => $data['amount'],
+            "issuing_bank" => $data['issuing_bank'],
+            "issuing_date" => $data['issuing_date'],
+            "bank_branch" => $data['bank_branch'],
+            "business_id"=> 'B-'.strtotime((date('Ymd His'))).rand(0,20),
+            "student_id"=> 'S-'.strtotime((date('Ymd His'))).rand(0,20),
+            'email_token' => base64_encode($data['email']),
+            "bank_branch" =>$data['sponsored_by'],
+        
         ]);
 
     }
@@ -82,11 +121,11 @@ class RegisterController extends Controller
         */
         public function register(Request $request)
         {
-            dd($request);
-            
-        $this->validator($request->all())->validate();
-        $user = $this->create($request->all());
-        return view('auth.registration2');
+            //dd($request);
+
+        //$this->validator($request->all())->validate();
+        event(new Registered($user = $this->create($request->all())));
+        return redirect()->route('login')->with('success',"Your accout has been created! You can now login.");
         }
         /**
         * Handle a registration request for the application.
@@ -109,10 +148,18 @@ class RegisterController extends Controller
             $userexists=User::where('student_id','=',$request->sponsor_id)->first();
             
             if($userexists){
-            Session::flash('success','Fill in the for to complete registration!');
-            return view('auth.register2');
+                $course=Course::all();
+                $coursearray=array();
+                foreach ($course as $key => $value) {
+                # code...
+                $coursearray[$value->id]=$value->title;
+
+                }
+            Session::flash('success','Fill in the form to complete registration!');
+            return view('auth.register2')->withSponsorid($request->sponsor_id)->withCourse($coursearray);
         }
             else{
+
             Session::flash('error','No Student with the entered ID exists.');
             return redirect()->back();
             }

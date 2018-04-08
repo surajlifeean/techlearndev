@@ -20,13 +20,13 @@
                           <i class="fa fa-angle-down text"></i>
                           <i class="fa fa-angle-up text-active"></i>
                         </span>
-                        <span>Layouts</span>
+                        <span>User Mngt.</span>
                       </a>
                       <ul class="nav lt">
                         <li >
-                          <a href="layout-c.html" >                                                        
+                          <a href="{{route('users.index')}}" >                                                        
                             <i class="fa fa-angle-right"></i>
-                            <span>Color option</span>
+                            <span>User List</span>
                           </a>
                         </li>
                         <li >
@@ -52,20 +52,19 @@
                           <i class="fa fa-angle-down text"></i>
                           <i class="fa fa-angle-up text-active"></i>
                         </span>
-                        <span>UI kit</span>
+                        <span>Banner Mngt.</span>
                       </a>
                       <ul class="nav lt">
                         <li >
-                          <a href="buttons.html" >                                                        
+                          <a href="{{route('banner-management.create')}}" >                                                        
                             <i class="fa fa-angle-right"></i>
-                            <span>Buttons</span>
+                            <span>Add Banner</span>
                           </a>
                         </li>
                         <li >
-                          <a href="icons.html" >                            
-                            <b class="badge bg-info pull-right">369</b>                                                        
+                          <a href="{{route('banner-management.index')}}">                                                                                    
                             <i class="fa fa-angle-right"></i>
-                            <span>Icons</span>
+                            <span>Banner Listing</span>
                           </a>
                         </li>
                         <li >
@@ -182,7 +181,7 @@
                           <i class="fa fa-angle-down text"></i>
                           <i class="fa fa-angle-up text-active"></i>
                         </span>
-                        <span>Course Management</span>
+                        <span>Course Mngt.</span>
                       </a>
                       <ul class="nav lt">
                         <li >
@@ -253,7 +252,7 @@
                         <i class="fa fa-envelope-o icon">
                           <b class="bg-primary dker"></b>
                         </i>
-                        <span>Review Management</span>
+                        <span>Review Mngt.</span>
                       </a>
                     </li>
                     <li >

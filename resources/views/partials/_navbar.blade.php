@@ -15,8 +15,23 @@
                         <li><a href="{{url('/learn')}}">Learn</a></li>
                         <li><a href="#">Business</a></li>
                         <li><a href="#">Support</a></li>
+                        @guest
                         <li><a href="{{route('login')}}">Sign in</a></li>
                         <li><a class="crest-account" href="{{route('register')}}">Create Account</a></li>
+                        @else
+                        <li><a class="crest-account" href="{{route('dashboard.index')}}">Dashboard</a></li>
+                         <a href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                            Logout
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+
+                        @endguest
+                        
                     </ul>
                     </div>  
                 </div>

@@ -39,11 +39,17 @@ Route::get('users/logout','Auth\LoginController@logout')->name('logout');
 Route::post('/register/step-2','Auth\RegisterController@register2')->name('register.step2');
 
 
+Route::resource('dashboard','Site\StudyDashboardController');
+
 Auth::routes();
 
 Route::prefix('admin')->group(function(){
 
 Route::resource('course-management','Admin\CourseManagementController');
+
+
+Route::resource('users','Admin\UsersController');
+
 
 Route::resource('banner-management','Admin\BannerManagementController');
 

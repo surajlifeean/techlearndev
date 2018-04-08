@@ -12,14 +12,26 @@
             <div class="form-wrapper text-left">
                 <div class="row justify-content-center">
                     <div class="col-md-4 col-sm-4">
-                    <form action="">
+                    <form action="{{route('login')}}" method="post">
+                        {{ csrf_field() }}
                     <div class="form-group">
                         <label for="">User Name</label>
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" name="username" value="{{old('username')}}">
+                         @if ($errors->has('username'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('username') }}</strong>
+                                    </span>
+                                @endif
                     </div>
                     <div class="form-group">
                         <label for="">Password</label>
-                        <input type="password" class="form-control">
+                        <input type="password" class="form-control" name="password">
+
+                                @if ($errors->has('password'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
                     </div>
                         
                         <div class="buttonset text-center">

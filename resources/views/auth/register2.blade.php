@@ -3,9 +3,6 @@
 @section('stylesheets')
 
 <style>
-
-
-
 input[type="checkbox"], input[type="radio"]{
 	position: absolute;
 	right: 9000px;
@@ -142,6 +139,7 @@ input[type="radio"]:disabled + .label-text:before{
 					<div class="col-md-8 col-sm-6">
 					<form action="{{route('register')}}" method="post" data-parsley-validate>
 					{{ csrf_field() }}
+					<input type="hidden" name="sponsored_by" value="{{$sponsorid}}" >
 						<div class="form-row">
 							<div class="col-md-6">
 								<div class="form-group">
@@ -232,7 +230,7 @@ input[type="radio"]:disabled + .label-text:before{
 							<div class="col-md-6">
 							  <div class="form-group">
 									<label for="">Landmark</label>
-								  	<input type="text" name="state" class="form-control" required>
+								  	<input type="text" name="landmark" class="form-control" required>
 							  </div>	
 							</div>	
 						</div>
@@ -263,12 +261,12 @@ input[type="radio"]:disabled + .label-text:before{
 									<label for="">Placed Side</label>
 										<div class="form-check">
 											<label>
-												<input type="radio" name="radio" checked> <span class="label-text">Left</span>
+												<input type="radio" name="side" value="left" checked> <span class="label-text">Left</span>
 											</label>
 										</div>
 										<div class="form-check">
 											<label>
-												<input type="radio" name="radio"> <span class="label-text">Right</span>
+												<input type="radio" name="side" value="right"> <span class="label-text">Right</span>
 											</label>
 										</div>
 							  	</div>
@@ -276,7 +274,7 @@ input[type="radio"]:disabled + .label-text:before{
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="">Course</label>
-								  	{{Form::select('course',$course,null,['placeholder'=>'Pick your course','class'=>'form-control'])}}
+								  	{{Form::select('course',$course,null,['placeholder'=>'Pick your course','class'=>'form-control','required'=>'true'])}}
 							  	</div>
 							</div>
 								
