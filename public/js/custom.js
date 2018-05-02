@@ -1,4 +1,7 @@
 $(document).ready(function(){
+	"use strict";
+	
+//	$('#datetimepicker4').datetimepicker();
 	$('.menu-button').click(function(){
 		
 		$('body').toggleClass('menu-open');

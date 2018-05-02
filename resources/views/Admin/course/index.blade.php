@@ -75,6 +75,7 @@
                             <th>Description</th>
                             <th>Image</th>
                             <th>Video Link</th>
+                            <th>Duration</th>
                             <th>Created At</th>
                             <th>Action</th>
                           </tr>
@@ -121,6 +122,8 @@
                             
 
                             </td>
+
+                            <td>{{$value->duration}}</td>
                            
                             <td>{{date('jS M, Y', strtotime($value->created_at))}}</td>
                             <td>
@@ -146,13 +149,13 @@
                                              
              					 
 
-                        <a href="{{route('course-management.show',$value->id)}}" data-toggle="tooltip" title="Villa Details"><i class="fa fa-search-plus"></i></a>
+                        <a href="{{route('course-management.show',$value->id)}}" data-toggle="tooltip" title="Course Details"><i class="fa fa-search-plus"></i></a>
 
                             </td>
                            
                           </tr>
 
-                    {!! Form::open(['route'=>['course-management.destroy',$value->id], 'method'=>'DELETE','class'=>'delete-villa','id'=>'delete'.$value->id])!!}
+                    {!! Form::open(['route'=>['course-management.destroy',$value->id], 'method'=>'DELETE','class'=>'delete-Course','id'=>'delete'.$value->id])!!}
                     {!!Form::close()!!}
 
 

@@ -108,22 +108,22 @@
 
                   @endif
 <!-- 
-                     {!! Html::LinkRoute('review-management.edit',null,array($value->id),array('class'=>"fa fa-pencil-square-o",'data-toggle'=>"tooltip",'title'=>"Edit Course"))!!} -->
+                     {!! Html::LinkRoute('review-management.edit',null,array($value->id),array('class'=>"fa fa-pencil-square-o",'data-toggle'=>"tooltip",'title'=>"Edit review"))!!} -->
                       <a href="{{route('review-management.edit',$value->id)}}" class="btn btn-default btn-sm"><i class="fa fa-pencil-square-o"></i></a>
 
-                        <a href="#" class="delete-icon" id="{{$value->id}}" aria-label="Left Align" data-toggle="tooltip" title="Delete Course">
+                        <a href="#" class="delete-icon" id="{{$value->id}}" aria-label="Left Align" data-toggle="tooltip" title="Delete review">
                 			 <i class="fa fa-trash-o" aria-hidden="true"></i>
              					</a>  <!-- delete icon that submits the form -->
                                              
              					 
 
-                        <a href="{{route('review-management.show',$value->id)}}" data-toggle="tooltip" title="Villa Details"><i class="fa fa-search-plus"></i></a>
+                        <a href="{{route('review-management.show',$value->id)}}" data-toggle="tooltip" title="review Details"><i class="fa fa-search-plus"></i></a>
 
                             </td>
                            
                           </tr>
 
-                    {!! Form::open(['route'=>['review-management.destroy',$value->id], 'method'=>'DELETE','class'=>'delete-villa','id'=>'delete'.$value->id])!!}
+                    {!! Form::open(['route'=>['review-management.destroy',$value->id], 'method'=>'DELETE','class'=>'delete-review','id'=>'delete'.$value->id])!!}
                     {!!Form::close()!!}
 
 
@@ -228,7 +228,7 @@
     e.preventDefault();
     var id=$(this).attr('id');
    
-    var r = confirm("Are You Sure You Wanna Delete The Course?");
+    var r = confirm("Are You Sure You Wanna Delete The review?");
     if (r == true) {
        $("#delete"+id).submit();
     } 

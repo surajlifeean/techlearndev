@@ -22,6 +22,19 @@ Route::get('/reg/step2', function () {
     return view('auth.register2')->withCourse($coursearray);
 });
 
+// Route::get('/show', function () {
+	 
+//     return view('courses.show');
+// });
+
+// Route::get('/profile', function () {
+	 
+//     return view('student.profile');
+// });
+
+
+Route::resource('profile','Site\StudentController');
+
 
 Route::get('/', 'HomeController@index')->name('home');
 
@@ -29,15 +42,15 @@ Route::get('/verifyemail/{token}', 'Auth\RegisterController@verify');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/learn', function () {
-    return view('courses.index');
-});
+Route::get('/aboutus', 'Site\CmsController@aboutus')->name('aboutus');
+
 
 Route::get('users/logout','Auth\LoginController@logout')->name('logout');
 
 
 Route::post('/register/step-2','Auth\RegisterController@register2')->name('register.step2');
 
+Route::resource('learn','Site\CourseController');
 
 Route::resource('dashboard','Site\StudyDashboardController');
 

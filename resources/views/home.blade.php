@@ -123,7 +123,8 @@
                         Demo
                         </button>
 
-                        <a href="#" class="button-common">Details</a>
+
+                                       <a href="{{route('learn.show',$value->slug)}}" class="button-common">Details</a>
                     </div>
                 </div>
                 @if($key%2!=0)

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Site;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Course;
-class CourseController extends Controller
+class StudentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,9 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses=Course::all();
-        return view('courses.index')->withCourses($courses);
+        // $courses=Course::all();
+        // return view('courses.index')->withCourses($courses);
+            return view('student.profile');
     }
 
     /**
@@ -47,10 +48,7 @@ class CourseController extends Controller
      */
     public function show($id)
     {
-        $course=Course::where('slug','=',$id)->first();
-        //dd($course);
-        return view('courses.show')->withCourse($course);
-        
+        //
     }
 
     /**

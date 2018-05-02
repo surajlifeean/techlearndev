@@ -20,26 +20,24 @@
                     </div>
                     <div class="col-md-6">
                         <ul class="footer-links">
-                            <li><a href="#">Code School</a></li>
                             <li><a href="#">Courses</a></li>
-                            <li><a href="#">Screencasts</a></li>
                             <li><a href="#">Blog</a></li>
                             <li><a href="#">Pricing</a></li>
-                            <li><a href="#">For Business</a></li>
+                            <li><a href="#">Business</a></li>
                         </ul>
                         <ul class="footer-links">
                             <li><a href="#">About Us</a></li>
-                            <li><a href="#">Company</a></li>
-                            <li><a href="#">Jobs</a></li>
                             <li><a href="#">Press</a></li>
                             <li><a href="#">Terms of Use</a></li>
                             <li><a href="#">Privacy Policy</a></li>
                         </ul>
                         <ul class="footer-links">
-                            <li><a href="#">Need Help?</a></li>
-                            <li><a href="#">Contact Us</a></li>
-                            <li><a href="#">Knowledge Base</a></li>
-                            <li><a href="#">Forum</a></li>
+                            <!-- <li><a href="#">Need Help?</a></li> -->
+                            <li><a href="#">Contact Us</a></li><!-- 
+                            <li><a href="#">Knowledge Base</a></li> -->
+                            <li><a href="#">Register</a></li>
+                            <li><a href="#">Login</a></li>
+
                         </ul>
                     </div>
                 </div>
@@ -49,6 +47,21 @@
             <p>© 2018 My School All Rights Reserved.</p>
         </div>
     </footer>
+    
+<script type="text/javascript" src="{{asset('js/easyResponsiveTabs.js')}}"></script>
+<script>
+  $(document).ready(function(){
+      $("#aboutTab").easyResponsiveTabs({
+          type: 'vertical',         
+          width: 'auto',
+          fit: true,  
+          closed: false,
+          tabidentify: 'about-tab'
+         
+      });
+     }); 
+</script>
+
 <script>
         $(document).ready(function() {
             $('#lightSlider').lightSlider({

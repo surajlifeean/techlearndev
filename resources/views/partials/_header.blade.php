@@ -23,9 +23,12 @@
     <script type="text/javascript" src="{{asset('js/lightslider.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/custom.js')}}"></script>
     <link rel="stylesheet" href="{{asset('css/parsley.css')}}" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="{{asset('css/easy-responsive-tabs.css')}}" />
+
     <style type="text/css">
         .how-works-list{
             padding-left: 0px;
         }
     </style>
+    @yield('stylesheets')
 </head>

@@ -19,8 +19,13 @@
 	}
 	
 }
-
-
+@media only screen and (max-width:1280px)
+{
+	.card h3 {
+    	font-size: 23px;
+	}
+	
+}
 @media only screen and (min-width:992px) and (max-width:1104px) {
 	.course-single-block .row
 	{
@@ -91,7 +96,34 @@
 	{
 		text-align: right;
 	}
+	
 }
+@media only screen and (max-width:768px)
+{
+	.about-section .resp-vtabs .resp-tabs-container
+	{
+		width: 100%;
+	}
+	.about-section h2.resp-accordion.about-tab {
+		font-size: 20px;
+		color: #1040a3;
+	}
+	.about-section .resp-tab-active
+	{
+		border-color: #1040a3 !important;
+		border-bottom :1px solid #1040a3 !important;
+	}
+	.resp-vtabs .resp-tab-content {
+    
+		padding: 31px 20px;
+	}
+    .card.profile-card {
+        padding: 63px 50px;
+    }
+
+
+}
+	
 @media only screen and (max-width:767px)
 {
 	.menu-container
@@ -136,6 +168,16 @@
 	{
 		background: #000;
 	}
+	ul.review-list li .review-left
+	{
+		width: 100%;
+		margin-bottom: 15px;
+	}
+	ul.review-list li .review-right
+	{
+		width: 100%;
+	}
+    
 }
 @media only screen and (max-width:575px) {
 	.course-single-block .row
@@ -193,6 +235,39 @@
 		.form-wrapper .form-group {
 		margin-bottom: 2.5rem;
 	}
+    .profile-card .pro-details
+    {
+        width: 100%;
+        margin-top: 20px
+    }
+    .profile-card .propic
+    {
+        width: 100%;
+        min-width: inherit;
+        min-height: inherit;
+    }
+	.course-details-card ul
+	{
+		-ms-column-count: 1; 
+		-moz-column-count: 1; 
+		column-count: 1; 
+	}
 }
-@media (max-width:480px) {
+@media only screen and (max-width:480px) {
+    .card.profile-card
+    {
+        padding: 30px 30px;
+    }
+    .profile-card .pro-details li
+    {
+        font-size: 16px;
+    }
+        .card.profile-card .button-set .button-small {
+        margin: 5px 7px;
+    }
+    .profile-card .pro-details li span
+    {
+        margin-bottom: 3px;
+        display: block;
+    }
 }

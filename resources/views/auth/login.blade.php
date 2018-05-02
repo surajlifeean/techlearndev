@@ -12,11 +12,11 @@
             <div class="form-wrapper text-left">
                 <div class="row justify-content-center">
                     <div class="col-md-4 col-sm-4">
-                    <form action="{{route('login')}}" method="post">
+                    <form action="{{route('login')}}" method="post" data-parsley-validate>
                         {{ csrf_field() }}
                     <div class="form-group">
                         <label for="">User Name</label>
-                        <input type="text" class="form-control" name="username" value="{{old('username')}}">
+                        <input type="text" class="form-control" name="username" value="{{old('username')}}" placeholder="Enter Username" required>
                          @if ($errors->has('username'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('username') }}</strong>
@@ -25,7 +25,7 @@
                     </div>
                     <div class="form-group">
                         <label for="">Password</label>
-                        <input type="password" class="form-control" name="password">
+                        <input type="password" class="form-control" placeholder="Enter Password"  name="password" required>
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">

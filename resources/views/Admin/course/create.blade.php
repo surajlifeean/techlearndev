@@ -41,10 +41,19 @@
                         </div>
                          <div class="line line-dashed line-lg pull-in"></div>
                         <div class="form-group">
+                          <div class="row">
+                            <div class="col-md-12">
                           <label class="col-sm-3 control-label"> Price</label>
-                          <div class="col-sm-9">
+                          <div class="col-sm-3">
                             <input type="text" name="price"  class="form-control" placeholder="Starting Price" required>
                           </div>
+
+                          <label class="col-sm-3 control-label">Duration</label>
+                          <div class="col-sm-3">
+                            <input type="text" name="duration"  class="form-control" placeholder="Duration" required>
+                          </div>
+                        </div>
+                        </div>
                         </div>
 
                         <div class="form-group">
@@ -98,16 +107,33 @@
                           <label class="col-sm-3 control-label">Images(Min Dimension:1925x725)</label>
                           <div class="col-sm-9">
 
-            <div class="input_fields_wrap">
-                
-                
-                  <div style="margin-bottom:10px;">
-                       <input type="file" name="image_name" class="GalleryImage" id="img0" required /> &nbsp 
-                  </div>
+                            <div class="input_fields_wrap">
+                                
+                                
+                                  <div style="margin-bottom:10px;">
+                                       <input type="file" name="image_name" class="GalleryImage" id="img0" required /> &nbsp 
+                                  </div>
 
-           </div>      
+                           </div>      
                        </div>
                      </div>
+
+                     <div class="line line-dashed line-lg pull-in"></div>
+                        <div class="form-group">
+                          <label class="col-sm-3 control-label">Image List Thumbnail(Min Dimension:318x174)</label>
+                          <div class="col-sm-9">
+
+                            <div class="input_fields_wrap">
+                                
+                                
+                                  <div style="margin-bottom:10px;">
+                                       <input type="file" name="image_thumbnail" class="GalleryImage" id="img1" required /> &nbsp 
+                                  </div>
+
+                           </div>      
+                       </div>
+                     </div>
+
                   <footer class="panel-footer text-right bg-light lter">
                        
                           <input type="submit" class="btn btn-success btn-s-xs" value="Submit"/>
