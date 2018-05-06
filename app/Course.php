@@ -10,4 +10,8 @@ class Course extends Model
 
     	return $this->hasMany('App\Review','review_on');
     }
+        public function getVideos(){
+
+    	return $this->hasMany('App\Video');
+    }
 }

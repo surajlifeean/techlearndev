@@ -60,6 +60,11 @@ Route::prefix('admin')->group(function(){
 
 Route::resource('course-management','Admin\CourseManagementController');
 
+Route::get('course-video/create/{id}','Admin\CourseVideoController@create')->name('course-video.create');
+
+Route::resource('course-video-management','Admin\CourseVideoController');
+
+Route::resource('video-management','Admin\VideoManagementController');
 
 Route::resource('users','Admin\UsersController');
 

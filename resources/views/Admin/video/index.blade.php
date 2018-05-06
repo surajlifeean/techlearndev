@@ -9,14 +9,14 @@
 
  <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
                 <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-home"></i> Home</a></li>
-                <li><a href="{{route('users.index')}}">Course Management</a></li>
-                <li><a href="{{route('users.index')}}">Course List</a></li>
+                <li><a href="{{route('video-management.index')}}">Video Management</a></li>
+                <li><a href="{{route('video-management.index')}}">Video List</a></li>
                
               </ul>
 
  
                       <header class="panel-heading">
-                        <span class="h4">Users Listing</span>
+                        <span class="h4">Video Listing</span>
                       </header>
 
                        <header class="header bg-white b-b clearfix">
@@ -24,7 +24,7 @@
                     <div class="col-sm-8 m-b-xs">
                       <!-- <a href="#subNav" data-toggle="class:hide" class="btn btn-sm btn-default active"><i class="fa fa-caret-right text fa-lg"></i><i class="fa fa-caret-left text-active fa-lg"></i></a> -->
                       <div class="btn-group">
-                       <a href="{{route('course-management.index')}}"> <button type="button" class="btn btn-sm btn-default" title="Refresh"><i class="fa fa-refresh"></i></button></a>
+                       <a href="{{route('video-management.index')}}"> <button type="button" class="btn btn-sm btn-default" title="Refresh"><i class="fa fa-refresh"></i></button></a>
                         <button type="button" class="btn btn-sm btn-default delete-many" title="Remove"><i class="fa fa-trash-o"></i></button>
 
                           &nbsp;&nbsp;
@@ -37,14 +37,14 @@
                        <i class="fa fa-unlock" aria-hidden="true"></i>
                       </a>
                       </div>
-                      
+                      <a href="{{route('video-management.create')}}" class="btn btn-sm btn-default"><i class="fa fa-plus"></i>Add New video</a>
                     </div>
 
                     <form action="" method="get">
                     <div class="col-sm-4 m-b-xs">
                       <div class="input-group">
                    
-                      <input type="text" class="input-sm form-control" name="search" value=""  placeholder="Enter Users Title">
+                      <input type="text" class="input-sm form-control" name="search" value=""  placeholder="Enter video Title">
                         <span class="input-group-btn">
                             
                           <button class="btn btn-sm btn-default" type="submit">Go!</button>
@@ -70,26 +70,51 @@
                             <!-- <th width="20"></th> -->
                             <th>Title</th>
                             
-                            <th>Name</th>
-                            <th>Address</th>
-                            <th>Course</th>
+                            <th>Caption</th>
+                            
+                            <th>Video Link</th>
                             <th>Created At</th>
                             <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
 
-				@foreach($users as $value)
+				@foreach($videos as $value)
 
-        
+         @php
+
+                    $url = $value->video_link;
+                    $urlParts = explode("/", parse_url($url, PHP_URL_PATH));
+                    $videoId = (int)$urlParts[count($urlParts)-1];
+                    
+
+            @endphp
                           <tr>
 
                             <td><input type="checkbox" name="del[]" value="{{$value->id}}" id="checked"></td>
 
                             <td>{{$value->title}}</td>
-                            <td>{{$value->fname}}{{$value->lname}}</td>
-                            <td>{{$value->address}}</td>
-                            <td>{{$value->userCourse->title}}</td>                       
+                            <td>{{$value->caption}}
+                            <td>
+
+            @php
+
+                    $url = $value->video_link;
+                    $urlParts = explode("/", parse_url($url, PHP_URL_PATH));
+                    $videoId = (int)$urlParts[count($urlParts)-1];
+                    
+
+            @endphp
+              <button type="button" class="button-common btn btn-primary video-btn" data-toggle="modal" data-src="https://player.vimeo.com/video/{{$videoId}}?title=0&byline=0&portrait=0&transparent=0" data-target="#myModal">
+                         <i class="fa fa-eye" aria-hidden="true"></i>
+                        </button>
+                        
+
+                            
+                            
+
+                            </td>
+
                             <td>{{date('jS M, Y', strtotime($value->created_at))}}</td>
                             <td>
                                 @if($value->status=='A')
@@ -105,22 +130,22 @@
 
                   @endif
 <!-- 
-                     {!! Html::LinkRoute('course-management.edit',null,array($value->id),array('class'=>"fa fa-pencil-square-o",'data-toggle'=>"tooltip",'title'=>"Edit Course"))!!} -->
-                      <a href="{{route('course-management.edit',$value->id)}}" class="btn btn-default btn-sm"><i class="fa fa-pencil-square-o"></i></a>
+                     {!! Html::LinkRoute('video-management.edit',null,array($value->id),array('class'=>"fa fa-pencil-square-o",'data-toggle'=>"tooltip",'title'=>"Edit video"))!!} -->
+                      <a href="{{route('video-management.edit',$value->id)}}" class="btn btn-default btn-sm"><i class="fa fa-pencil-square-o"></i></a>
 
-                        <a href="#" class="delete-icon" id="{{$value->id}}" aria-label="Left Align" data-toggle="tooltip" title="Delete Course">
+                        <a href="#" class="delete-icon" id="{{$value->id}}" aria-label="Left Align" data-toggle="tooltip" title="Delete video">
                 			 <i class="fa fa-trash-o" aria-hidden="true"></i>
              					</a>  <!-- delete icon that submits the form -->
                                              
              					 
 
-                        <a href="{{route('course-management.show',$value->id)}}" data-toggle="tooltip" title="Villa Details"><i class="fa fa-search-plus"></i></a>
+                        <a href="{{route('video-management.show',$value->id)}}" data-toggle="tooltip" title="video Details"><i class="fa fa-search-plus"></i></a>
 
                             </td>
                            
                           </tr>
 
-                    {!! Form::open(['route'=>['course-management.destroy',$value->id], 'method'=>'DELETE','class'=>'delete-villa','id'=>'delete'.$value->id])!!}
+                    {!! Form::open(['route'=>['video-management.destroy',$value->id], 'method'=>'DELETE','class'=>'delete-video','id'=>'delete'.$value->id])!!}
                     {!!Form::close()!!}
 
 
@@ -133,10 +158,10 @@
                   </section>
                 </section>
 
-{!!$users->links()!!}
+{!!$videos->links()!!}
 
 
-<div> Showing {!!$users->count()!!}|{!!$users->total()!!}</div>
+<div> Showing {!!$videos->count()!!}|{!!$videos->total()!!}</div>
     
                       
                  
@@ -225,7 +250,7 @@
     e.preventDefault();
     var id=$(this).attr('id');
    
-    var r = confirm("Are You Sure You Wanna Delete The Course?");
+    var r = confirm("Are You Sure You Wanna Delete The video?");
     if (r == true) {
        $("#delete"+id).submit();
     } 

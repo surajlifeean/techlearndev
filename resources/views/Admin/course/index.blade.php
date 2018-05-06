@@ -149,7 +149,7 @@
                                              
              					 
 
-                        <a href="{{route('course-management.show',$value->id)}}" data-toggle="tooltip" title="Course Details"><i class="fa fa-search-plus"></i></a>
+                        <a href="{{route('course-video.create',$value->id)}}" data-toggle="tooltip" title="Add Video"><i class="fa fa-video-camera"></i></a>
 
                             </td>
                            

@@ -57,9 +57,23 @@
                         </div>
 
                         <div class="form-group">
-                          <label class="col-sm-3 control-label">Demo Video Link</label>
+                          <label class="col-sm-3 control-label">Video Link</label>
                           <div class="col-sm-9">
                             <input type="text" name="video_link" class="form-control"  data-required="true" placeholder="Video Link" required>   
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-3 control-label">What will I learn?</label>
+                          <div class="col-sm-9">
+                            <!-- <input type="text" name="description" class="form-control"  data-required="true" placeholder="Description" required> -->  
+                            <textarea class="summernote" name="whatwillilearn" class="form-control" required></textarea> 
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-3 control-label">Requirements</label>
+                          <div class="col-sm-9">
+                            <!-- <input type="text" name="description" class="form-control"  data-required="true" placeholder="Description" required> -->  
+                            <textarea class="summernote" name="requirement" class="form-control" required></textarea> 
                           </div>
                         </div>
 
@@ -67,9 +81,10 @@
                           <label class="col-sm-3 control-label">Description</label>
                           <div class="col-sm-9">
                             <!-- <input type="text" name="description" class="form-control"  data-required="true" placeholder="Description" required> -->  
-                            <textarea id="summernote" name="description" class="form-control" required></textarea> 
+                            <textarea class="summernote" name="description" class="form-control" required></textarea> 
                           </div>
                         </div>
+
 
                         <div class="form-group">
                           <label class="col-sm-3 control-label">Set Featured</label>
@@ -160,7 +175,7 @@
 
  <script>
     $(document).ready(function() {
-        $('#summernote').summernote();
+        $('.summernote').summernote();
     });
   </script>
 

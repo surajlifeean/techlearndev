@@ -65,10 +65,26 @@
                         </div>
 
                         <div class="form-group">
+                          <label class="col-sm-3 control-label">What will I learn?</label>
+                          <div class="col-sm-9">
+                            <!-- <input type="text" name="description" class="form-control"  data-required="true" placeholder="Description" required> -->  
+                            <textarea class="summernote" name="whatwillilearn" class="form-control" required>{!!$course->whatwillilearn!!}</textarea> 
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="col-sm-3 control-label">Requirements</label>
+                          <div class="col-sm-9">
+                            <textarea class="summernote" name="requirement" class="form-control" required>{!!$course->requirement!!}</textarea> 
+                          </div>
+                        </div>
+
+
+                        <div class="form-group">
                           <label class="col-sm-3 control-label">Description</label>
                           <div class="col-sm-9">
                             <!-- <input type="text" name="description" class="form-control"  data-required="true" placeholder="Description" required> -->  
-                            <textarea id="summernote" name="description" class="form-control" required>{!!$course->description!!}</textarea> 
+                            <textarea class="summernote" name="description" class="form-control" required>{!!$course->description!!}</textarea> 
                           </div>
                         </div>
 
@@ -125,7 +141,7 @@
                                 
                                 
                                   <div style="margin-bottom:10px;">
-                                       <input type="file" name="image_thumbnail" class="GalleryImage" id="img1" required /> &nbsp 
+                                       <input type="file" name="image_thumbnail" class="GalleryImage" id="img1" /> &nbsp 
                                   </div>
 
                            </div>      
@@ -160,7 +176,7 @@
 
  <script>
     $(document).ready(function() {
-        $('#summernote').summernote();
+        $('.summernote').summernote();
     });
   </script>
 

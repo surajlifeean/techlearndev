@@ -14,7 +14,7 @@
     <div class="banner-container">
       <h3>{{$course->title}}</h3>
       <p> {{$course->caption}} </p>
-      <div class="button-set"> <a href="#" class="button-common-white button-common">Enroll Now</a> </div>
+      <!-- <div class="button-set"> <a href="#" class="button-common-white button-common">Enroll Now</a> </div> -->
     </div>
   </div>
 </section>
@@ -26,20 +26,7 @@
         <div class="card course-details-card ">
           <div class="card-body">
             <h3 class="mb-3">What Will I Learn?</h3>
-            <ul>
-              <li>120 detailed videos about ethical hacking & computer security</li>
-              <li> Learn about the different fields of ethical hacking </li>
-              <li> nstall Kali Linux - a penetration testing operating system </li>
-              <li> Learn linux basics </li>
-              <li> Learn Network Penetration Testing </li>
-              <li>120 detailed videos about ethical hacking & computer security</li>
-              <li> Learn about the different fields of ethical hacking </li>
-              <li> nstall Kali Linux - a penetration testing operating system </li>
-              <li> Learn linux basics </li>
-              <li> Learn Network Penetration Testing </li>
-			  <li> Learn about the different fields of ethical hacking </li>
-              <li> nstall Kali Linux - a penetration testing operating system </li>	
-            </ul>
+            {!!$course->whatwillilearn!!}
           </div>
         </div>
       </div>
@@ -49,9 +36,9 @@
 			
 		  <div class="progress-label text-center">
 				<p>Courses Complete</p>
-			    <span style="color:#1040a3"><strong>70/100 (70%)</strong></span> <br> <br>	
+			    <span style="color:#1040a3"><strong>0/100 (0%)</strong></span> <br> <br>	
 			  
-			    <a href="profile.html" class="button-common">My Account</a>
+			    <a href="{{route('register')}}" class="button-common">Enroll Now</a>
 		  </div>	
         </div>
       </div>
@@ -60,27 +47,22 @@
 	  
 	<div class="course-description row mt-5">
 	  	<div class="col-md-8">
+        @if($course->requirement!=NULL)
+			
 			<h3>Requirements</h3>
 			
-			<ul class="arrow-list">
-				<li>
-					Basic IT Skills
-				</li>
-				
-				<li>
-					Wireless adapter (for the wifi cracking section ONLY) - like ALFA AWUS036NHA Or anything with an Atheros chipset (more info provided in the course).
-				</li>
-			</ul>
-			
+
+				{!!$course->requirement!!}
 			
 			<hr>
-			
+		@endif
 			
 			<h3>Description</h3>
 			
 			<p>
 
-				{{$course->description}}
+				{!!$course->description!!}
+				
 			</p>
 		
 			
@@ -212,7 +194,7 @@
 			
 			<br>
 			<hr>
-			<div class="rating-sec">
+			<!-- <div class="rating-sec">
 			 <div class="score-rate clearfix">
 				  <h3>Student Feedback</h3>
 				 <div class="left-score">
@@ -270,7 +252,8 @@
 			
 			
 			</div>
-			<div class="review-section">
+			 -->
+<!-- 			 <div class="review-section">
 			  	<h5>Reviews</h5>
 			
 				
@@ -352,11 +335,11 @@
 					
 					<div class="text-center"><a href="#" class="button-common">Load More</a></div>
 				</ul>
-			</div>
+			</div> -->
 			
 		</div>
 	 	<div class="col-md-4">
-			<div class="card">
+			<!-- <div class="card">
 				<div class="card-body">
 					<h3>FILTER COURSES BY:</h3>
 					<ul class="courser-filter">
@@ -371,7 +354,7 @@
 						<li><a href="#">IOS</a></li>
 					</ul>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>  
   </div>

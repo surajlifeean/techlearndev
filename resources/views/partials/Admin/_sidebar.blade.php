@@ -3,15 +3,7 @@
                 <!-- nav -->
                 <nav class="nav-primary hidden-xs">
                   <ul class="nav">
-                    <li  class="active">
-                      <a href="index.html"   class="active">
-                        <i class="fa fa-dashboard icon">
-                          <b class="bg-danger"></b>
-                        </i>
-                        <span>Workset</span>
-                      </a>
-                    </li>
-                    <li >
+                    <li>
                       <a href="#layout"  >
                         <i class="fa fa-columns icon">
                           <b class="bg-warning"></b>
@@ -83,6 +75,14 @@
                             <span>List</span>
                           </a>
                         </li>
+
+                        <li >
+                          <a href="{{route('course-video-management.create')}}" >                                                        
+                            <i class="fa fa-angle-right"></i>
+                            <span>Course Videos</span>
+                          </a>
+                        </li>
+
                         
                       </ul>
                     </li>
@@ -94,6 +94,35 @@
                         <span>Review Mngt.</span>
                       </a>
                     </li>
+
+                    <li>
+                      <a href="#layout"  >
+                        <i class="fa fa-columns icon">
+                          <b class="bg-warning"></b>
+                        </i>
+                        <span class="pull-right">
+                          <i class="fa fa-angle-down text"></i>
+                          <i class="fa fa-angle-up text-active"></i>
+                        </span>
+                        <span>Video Mngt.</span>
+                      </a>
+                      <ul class="nav lt">
+                        <li >
+                          <a href="{{route('video-management.index')}}" >                                                        
+                            <i class="fa fa-angle-right"></i>
+                            <span>Video List</span>
+                          </a>
+                        </li>
+                        <li >
+                          <a href="{{route('video-management.create')}}" >                                                        
+                            <i class="fa fa-angle-right"></i>
+                            <span>Add</span>
+                          </a>
+                        </li>
+
+                      </ul>
+                    </li>
+
                     
                   </ul>
                 </nav>
