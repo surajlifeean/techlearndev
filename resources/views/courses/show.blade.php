@@ -72,6 +72,7 @@
 			
 			<h3> Course Overview</h3>
 			
+			@foreach($video as $value)
 			<div class="courseoverview">
 			 <div class="single-oevrview">
 				<div class="overview-image">
@@ -80,12 +81,12 @@
 				 
 				<div class="overview">
 				    <div class="meta">
-						<a href="#">LEVEL 1</a>   <span>2 Videos | 11 Challenges</span>
+						<a href="#">LEVEL {{$value->level}}</a>   <span>{{$value->vid}} Videos <!-- | 11 Challenges --></span>
 					</div> 
 					
-					<h5>Responding With Data</h5>
+					<h5>{{$value->topic_name}}</h5>
 					
-					<p>Discover how to respond to client requests with text and HTML rendered responses.</p>
+					<p>{{$value->description}}</p>
 				 
 				</div>
 				 
@@ -95,102 +96,8 @@
 			
 			 
 			</div>
+			@endforeach
 			
-			<div class="courseoverview">
-			 <div class="single-oevrview">
-				<div class="overview-image">
-				 	<img src="{{asset('images/img-circle.jpg')}}" alt="">
-			    </div>
-				 
-				<div class="overview">
-				    <div class="meta">
-						<a href="#">LEVEL 1</a>   <span>2 Videos | 11 Challenges</span>
-					</div> 
-					
-					<h5>Responding With Data</h5>
-					
-					<p>Discover how to respond to client requests with text and HTML rendered responses.</p>
-				 
-				</div>
-				 
-				 
-				 
-			 </div>
-			
-			 
-			</div>
-			
-			<div class="courseoverview">
-			 <div class="single-oevrview">
-				<div class="overview-image">
-				 	<img src="{{asset('images/img-circle.jpg')}}" alt="">
-			    </div>
-				 
-				<div class="overview">
-				    <div class="meta">
-						<a href="#">LEVEL 1</a>   <span>2 Videos | 11 Challenges</span>
-					</div> 
-					
-					<h5>Responding With Data</h5>
-					
-					<p>Discover how to respond to client requests with text and HTML rendered responses.</p>
-				 
-				</div>
-				 
-				 
-				 
-			 </div>
-			
-			 
-			</div>
-			
-			<div class="courseoverview">
-			 <div class="single-oevrview">
-				<div class="overview-image">
-				 	<img src="{{asset('images/img-circle.jpg')}}" alt="">
-			    </div>
-				 
-				<div class="overview">
-				    <div class="meta">
-						<a href="#">LEVEL 1</a>   <span>2 Videos | 11 Challenges</span>
-					</div> 
-					
-					<h5>Responding With Data</h5>
-					
-					<p>Discover how to respond to client requests with text and HTML rendered responses.</p>
-				 
-				</div>
-				 
-				 
-				 
-			 </div>
-			
-			 
-			</div>
-			
-			<div class="courseoverview">
-			 <div class="single-oevrview">
-				<div class="overview-image">
-				 	<img src="{{asset('images/img-circle.jpg')}}" alt="">
-			    </div>
-				 
-				<div class="overview">
-				    <div class="meta">
-						<a href="#">LEVEL 1</a>   <span>2 Videos | 11 Challenges</span>
-					</div> 
-					
-					<h5>Responding With Data</h5>
-					
-					<p>Discover how to respond to client requests with text and HTML rendered responses.</p>
-				 
-				</div>
-				 
-				 
-				 
-			 </div>
-			
-			 
-			</div>
 			
 			<br>
 			<hr>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Site;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Course;
+use App\CourseVideo;
+use DB;
 class CourseController extends Controller
 {
     /**
@@ -48,8 +50,18 @@ class CourseController extends Controller
     public function show($id)
     {
         $course=Course::where('slug','=',$id)->first();
+        $course_video=DB::table('course_videos')
+                ->select('level','topic_name','description',DB::raw('count(*) as vid'))
+                ->groupBy('level','topic_name','description')
+                ->get();
+        // $user_info = DB::table('usermetas')
+        //      ->select('browser', DB::raw('count(*) as total'))
+        //      ->groupBy('browser')
+        //      ->pluck('total','browser')->all();
+
+       // dd($course_video);
         //dd($course);
-        return view('courses.show')->withCourse($course);
+        return view('courses.show')->withCourse($course)->withVideo($course_video);
         
     }
 
