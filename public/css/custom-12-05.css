@@ -4,10 +4,6 @@ b * {
 	padding: 0;
 	outline: none!important
 }
-.how-works-list img 
-{
-	max-width: 100%;
-}
 html {
 	position: relative;
 	min-height: 100%;
@@ -511,14 +507,8 @@ li.right-style {
 	align-items: center;
 }
 .txt-flex {
-    text-align: center;
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
-.img-flex img{
-	width: 100%;
-	height: auto;
-	display: block;
+	text-align: center;
+	margin-left: 35px;
 }
 .txt-flex h4 {
 	font-size: 30px;
@@ -1178,10 +1168,4 @@ ul.courser-filter li.active a,
 ul.courser-filter a:hover
 {
 	color: #000;
-}
-
-
-
-.demo-course .row:nth-child(even) {
-    flex-direction: row-reverse;
 }

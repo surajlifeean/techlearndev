@@ -88,16 +88,13 @@
         </div>
     </section>
     <section class="course">
-        <div class="section-heading clearfix">
+        <div class="section-heading">
             <h3>Course Demo</h3>
         </div>
 
-          
-          
+        <div class="flex-wrap">
 
-        <div class="gen" style="float:left; width:100%">
-
-            <!-- @foreach($courses as $key=>$value)
+            @foreach($courses as $key=>$value)
 
             @php
 
@@ -107,9 +104,9 @@
                     
 
             @endphp
-             -->
+            
 
-           <!-- <div class="flex">
+           <div class="flex">
                 @if($key%2==0)
                 <div class="img-flex">
                     <img src="{{asset('uploaded_images/courses/'.$value->image)}}">
@@ -120,69 +117,23 @@
                     <h4>{!!$value->title!!}</h4>
                     <p>{!!substr($value->description,0,500)!!}</p>
                     <div class="botton-flex">
-                      <!   <a href="#" class="button-common"></a>
+                      <!--   <a href="#" class="button-common"></a>
                         --> 
-                        <!-- <button type="button" class="button-common btn btn-primary video-btn" data-toggle="modal" data-src="https://player.vimeo.com/video/{{$videoId}}?title=0&byline=0&portrait=0&transparent=0" data-target="#myModal">
+                        <button type="button" class="button-common btn btn-primary video-btn" data-toggle="modal" data-src="https://player.vimeo.com/video/{{$videoId}}?title=0&byline=0&portrait=0&transparent=0" data-target="#myModal">
                         Demo
                         </button>
 
-                        <a href="#" class="button-common">Details</a> -->
-                    <!-- </div>
+
+                                       <a href="{{route('learn.show',$value->slug)}}" class="button-common">Details</a>
+                    </div>
                 </div>
                 @if($key%2!=0)
                  <div class="img-flex">
                     <img src="{{asset('uploaded_images/courses/'.$value->image)}}">
-                </div> 
+                </div>
                 @endif
-            </div> -->
-                <!-- @endforeach  -->
-
-            <div class="container demo-course">
-
-               <div class="row justify-content-center">
-                    <div class="col-md-9">
-
-                  @foreach($courses as $key=>$value)
-
-
-            @php
-
-                    $url = $value->video_link;
-                    $urlParts = explode("/", parse_url($url, PHP_URL_PATH));
-                    $videoId = (int)$urlParts[count($urlParts)-1];
-                    
-
-            @endphp
-
-                    <div class="row align-items-center">
-                        <div class="img-flex col-lg-6">
-                                <img src="{{asset('uploaded_images/courses/'.$value->image)}}">
-                        </div>
-                        <div class="txt-flex col-lg-6">
-                     <h4>{!!$value->title!!}</h4>
-                    <p>{!!substr($value->description,0,500)!!}</p>
-                            <div class="botton-flex">
-                                <!-- <a href="#" class="button-common">Demo</a> -->
-                                <button type="button" class="button-common btn btn-primary video-btn" data-toggle="modal" data-src="https://player.vimeo.com/video/{{$videoId}}?title=0&byline=0&portrait=0&transparent=0" data-target="#myModal">
-                        Demo
-                        </button>
-
-                                       <a href="{{route('learn.show',$value->slug)}}" class="button-common">Details</a>
-                            </div>
-                        </div>
-
-                     </div>
-
-                    @endforeach
-                    </div>
-               </div>
-                 
-
-               
             </div>
-
-
-
+                @endforeach
             <!-- <div class="flex">
                 <div class="img-flex">
                     <img src="{{asset('images/a.png')}}">
@@ -264,8 +215,7 @@
                         <p>“ {!!$value->comment!!} ”</p>
                         <div class="clint">
                             <div class="img">
-                                <img src="{{asset('uploaded_images/reviewers/'.$value->image)}}" style="border-radius: 50%";
-">
+                                <img src="{{asset('uploaded_images/reviewers/'.$value->image)}}">
                             </div>
                             <p>{{$value->comment_by}}</p>
                         </div>
