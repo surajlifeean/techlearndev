@@ -109,9 +109,40 @@ class UsersController extends Controller
     }
 
 
+   public function bulkuserstatus()
+   {
 
+    $ids=$_REQUEST['IDs'];
+       //echo $ids;
+        $ids=explode(',',$ids);
+        $status=$_REQUEST['status'];
 
+        foreach ($ids as $id) {
+         
+        $var=User::find($id);
+            if($status=='A')
+            $var->status='I';
+            else
+            $var->status='A';
 
+        $var->save();
+        }
+        //Session::flash('success', 'User Status Changed!');
+        echo "done";
+   }
+
+public function usersearch()
+    {
+        if(isset($_REQUEST['search']))
+
+         session(['search'=>$_REQUEST['search']]);
+     $search=session('search');
+       $search=strtolower($search);
+       $users=User::whereRaw('LOWER(fname) like ?', ["%".$search."%"])->orwhereRaw('LOWER(lname) like ?', ["%".$search."%"])->orwhereRaw('LOWER(title) like ?', ["%".$search."%"])->paginate(5);
+        
+        
+        return view('Admin.user.index')->withUsers($users);
+    }
 
 
 

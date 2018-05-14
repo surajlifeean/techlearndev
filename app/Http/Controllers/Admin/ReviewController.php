@@ -202,6 +202,63 @@ class ReviewController extends Controller
     }
 
 
+    public function bulkreviewstatus(){
+
+
+        $ids=$_REQUEST['IDs'];
+       //echo $ids;
+        $ids=explode(',',$ids);
+        $status=$_REQUEST['status'];
+
+        foreach ($ids as $id) {
+         
+        $var=Review::find($id);
+            if($status=='A')
+            $var->status='Y';
+            else
+            $var->status='A';
+
+        $var->save();
+        }
+        Session::flash('success', 'Review Status Changed!');
+        echo "done";
+    }
+
+    public function reviewdeletebulk(){
+
+
+        $ids=$_REQUEST['IDs'];
+        //echo $ids;
+        $ids=explode(',',$ids);
+        
+        foreach ($ids as $id) {
+            if($id!=null){
+            $dir=Review::find($id);
+            //dd($dir);
+            //unlink(public_path('/uploaded_images/banner/'.$dir->image_name));
+            $dir->delete();
+        }
+    }
+       
+        Session::flash('success', 'Data Deleted Successfully!');
+        echo "done";
+    }
+
+
+    public function reviewsearch(){
+
+     if(isset($_REQUEST['search']))
+
+         session(['search'=>$_REQUEST['search']]);
+     $search=session('search');
+       $search=strtolower($search);
+        $review=Review::whereRaw('LOWER(review_by) like ?', ["%".$search."%"])->orwhereRaw('LOWER(comment) like ?', ["%".$search."%"])->paginate(5);
+        
+        return view('Admin.review.index')->withReviews($review);
+    }
+
+
+    
 
 
 

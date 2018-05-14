@@ -28,23 +28,23 @@
                         <button type="button" class="btn btn-sm btn-default delete-many" title="Remove"><i class="fa fa-trash-o"></i></button>
 
                           &nbsp;&nbsp;
-                        <a href="" class="active-status" aria-label="Left Align" onclick="changebulkstatus('Y')"  title="Deactivate Review">
+                        <a href="javascript:void(0)" class="active-status" aria-label="Left Align" onclick="changebulkstatus('A')"  title="Deactivate Review">
                        <i class="fa fa-lock" aria-hidden="true"></i>
                       </a>
                  
                   &nbsp;&nbsp;
-                  <a href="" class="inactive-status" aria-label="Left Align" onclick="changebulkstatus('N')"  title="Activate Review">
+                  <a href="javascript:void(0)" class="inactive-status" aria-label="Left Align" onclick="changebulkstatus('Y')"  title="Activate Review">
                        <i class="fa fa-unlock" aria-hidden="true"></i>
                       </a>
                       </div>
                       <a href="{{route('review-management.create')}}" class="btn btn-sm btn-default"><i class="fa fa-plus"></i>Add New Review</a>
                     </div>
 
-                    <form action="" method="get">
+                    <form action="{{route('review-search')}}" method="get">
                     <div class="col-sm-4 m-b-xs">
                       <div class="input-group">
                    
-                      <input type="text" class="input-sm form-control" name="search" value=""  placeholder="Enter Search text">
+                      <input type="text" class="input-sm form-control" name="search" value="{{session('search')}}"  placeholder="Search By Reviewer Or comment">
                         <span class="input-group-btn">
                             
                           <button class="btn btn-sm btn-default" type="submit">Go!</button>
@@ -363,6 +363,64 @@ $("input[type='checkbox']:not(.checkAll)").change(function(){
 
   
 });
+
+</script>
+
+
+<script type="text/javascript">
+  function changebulkstatus(status){
+  /*alert(id);*/
+  if(!id){
+    alert("Please Select Some Items To Activate/Deactivate");
+  }
+  else{
+    var r = confirm("Are You Sure You Wanna Change the status ?");
+    if (r == true) {
+    console.log(id);
+    $.ajax({
+        url:"{{route('bulk-review-status')}}", 
+        type:"get",
+        data:{IDs:id,status:status},
+        success: function(result){
+          //alert(result);
+          console.log(result);
+          //location.reload();
+          //location.reload();
+          window.parent.location.reload();
+        
+        $("input[type='checkbox']").prop('checked', false);
+    }});
+
+   }//if ends
+  }
+}
+
+
+$('.delete-many').click(function(){
+
+  if(!id)
+    alert("Please Select Some Items To Delete");
+  else{
+    var r = confirm("Are You Sure You Wanna Delete The Review ?");
+    if (r == true) {
+     //alert(id);
+    $.ajax({
+        url:"{{route('review-delete-bulk')}}", 
+        type:"get",
+        data:{IDs:id},
+        success: function(result){
+      //alert(result);
+            
+          //location.reload();
+           window.parent.location.reload();
+          $("input[type='checkbox']").prop('checked', false);
+
+    }});
+
+  }//if ends
+}
+
+  });
 
 </script>
 @endsection

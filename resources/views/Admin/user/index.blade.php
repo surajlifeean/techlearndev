@@ -9,8 +9,8 @@
 
  <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
                 <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-home"></i> Home</a></li>
-                <li><a href="{{route('users.index')}}">Course Management</a></li>
-                <li><a href="{{route('users.index')}}">Course List</a></li>
+                <li><a href="{{route('users.index')}}">User Management</a></li>
+                <li><a href="{{route('users.index')}}">User List</a></li>
                
               </ul>
 
@@ -28,23 +28,23 @@
                        <!--  <button type="button" class="btn btn-sm btn-default delete-many" title="Remove"><i class="fa fa-trash-o"></i></button> -->
 
                           &nbsp;&nbsp;
-                        <a href="" class="active-status" aria-label="Left Align" onclick="changebulkstatus('Y')"  title="Deactivate Newsletter Subscription">
+                        <a href="javascript:void(0)" class="active-status" aria-label="Left Align" onclick="changebulkstatus('A')"  title="Deactivate user">
                        <i class="fa fa-lock" aria-hidden="true"></i>
                       </a>
                  
                   &nbsp;&nbsp;
-                  <a href="" class="inactive-status" aria-label="Left Align" onclick="changebulkstatus('N')"  title="Activate Newsletter Subscription">
+                  <a href="javascript:void(0)" class="inactive-status" aria-label="Left Align" onclick="changebulkstatus('I')"  title="Activate User">
                        <i class="fa fa-unlock" aria-hidden="true"></i>
                       </a>
                       </div>
                       
                     </div>
 
-                    <form action="" method="get">
+                    <form action="{{route('user-search')}}" method="get">
                     <div class="col-sm-4 m-b-xs">
                       <div class="input-group">
                    
-                      <input type="text" class="input-sm form-control" name="search" value=""  placeholder="Enter Users Title">
+                      <input type="text" class="input-sm form-control" name="search" value="{{session('search')}}"  placeholder="Search By Name or Title">
                         <span class="input-group-btn">
                             
                           <button class="btn btn-sm btn-default" type="submit">Go!</button>
@@ -349,5 +349,36 @@ $("input[type='checkbox']:not(.checkAll)").change(function(){
   
 });
 
+</script>
+
+<script type="text/javascript">
+  
+  function changebulkstatus(status){
+  /*alert(id);*/
+  if(!id){
+    alert("Please Select Some Items To Activate/Deactivate");
+  }
+  else{
+    var r = confirm("Are You Sure You Wanna Change the status ?");
+    if (r == true) {
+    console.log(id);
+    //alert(id);
+    $.ajax({
+        url:"{{route('bulk-user-status')}}", 
+        type:"get",
+        data:{IDs:id,status:status},
+        success: function(result){
+          //alert(result);
+          //console.log(result);
+          //location.reload();
+          //location.reload();
+          window.parent.location.reload();
+        
+        $("input[type='checkbox']").prop('checked', false);
+    }});
+
+   }//if ends
+  }
+}
 </script>
 @endsection

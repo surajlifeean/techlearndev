@@ -192,4 +192,64 @@ class BannerManagementController extends Controller
             }
         }
     }
+
+    public function bulkbannerstatus()
+    {
+        
+        $ids=$_REQUEST['IDs'];
+       //echo $ids;
+        $ids=explode(',',$ids);
+        $status=$_REQUEST['status'];
+
+        foreach ($ids as $id) {
+         
+        $var=Banner::find($id);
+            if($status=='A')
+            $var->status='Y';
+            else
+            $var->status='A';
+
+        $var->save();
+        }
+        Session::flash('success', 'Banner Status Changed!');
+        echo "done";
+    }
+
+
+    public function bannerbulkdelete()
+    {
+        
+        $ids=$_REQUEST['IDs'];
+        //echo $ids;
+        $ids=explode(',',$ids);
+        
+        foreach ($ids as $id) {
+            if($id!=null){
+            $dir=Banner::find($id);
+            //dd($dir);
+            //unlink(public_path('/uploaded_images/banner/'.$dir->image_name));
+            $dir->delete();
+        }
+    }
+       
+        Session::flash('success', 'Data Deleted Successfully!');
+        echo "done";
+    }
+
+    public function bannersearch()
+    {
+        if(isset($_REQUEST['search']))
+
+         session(['search'=>$_REQUEST['search']]);
+     $search=session('search');
+       $search=strtolower($search);
+        $banner=Banner::whereRaw('LOWER(banner_text) like ?', ["%".$search."%"])->paginate(5);
+        
+        return view('Admin.banner.index')->withbanners($banner);
+    }
+
+
+
+
+
 }

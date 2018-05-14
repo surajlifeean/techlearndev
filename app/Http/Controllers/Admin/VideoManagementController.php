@@ -51,8 +51,8 @@ class VideoManagementController extends Controller
         $video->save();        
 
         session::flash('success', 'The Video Has Been Added Successfully!');
-         return redirect()->back();
-         //return redirect()->route('video-management.index');
+         //return redirect()->back();
+         return redirect()->route('video-management.index');
 
     }
 
@@ -147,8 +147,61 @@ class VideoManagementController extends Controller
         }
     }
 
+    public function bulkvideostatus(){
 
 
+                $ids=$_REQUEST['IDs'];
+       //echo $ids;
+        $ids=explode(',',$ids);
+        $status=$_REQUEST['status'];
+
+        foreach ($ids as $id) {
+         
+        $var=Video::find($id);
+            if($status=='A')
+            $var->status='I';
+            else
+            $var->status='A';
+
+        $var->save();
+        }
+        Session::flash('success', 'Video Status Changed!');
+        echo "done";
+    }
+
+
+
+    public function videobulkdelete()
+    {
+        
+        $ids=$_REQUEST['IDs'];
+        //echo $ids;
+        $ids=explode(',',$ids);
+        
+        foreach ($ids as $id) {
+            if($id!=null){
+            $dir=Video::find($id);
+            //dd($dir);
+            //unlink(public_path('/uploaded_images/banner/'.$dir->image_name));
+            $dir->delete();
+        }
+    }
+       
+        Session::flash('success', 'Data Deleted Successfully!');
+        echo "done";
+    }
+
+    public function videosearch()
+    {
+        if(isset($_REQUEST['search']))
+
+         session(['search'=>$_REQUEST['search']]);
+     $search=session('search');
+       $search=strtolower($search);
+        $video=Video::whereRaw('LOWER(title) like ?', ["%".$search."%"])->orwhereRaw('LOWER(caption) like ?', ["%".$search."%"])->paginate(5);
+        
+        return view('Admin.video.index')->withVideos($video);
+    }
 
 
 

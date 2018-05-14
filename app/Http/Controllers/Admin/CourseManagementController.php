@@ -202,5 +202,63 @@ public function delete($id,Request $request)
 
 
 
+
+    public function bulkcoursestatus(){
+
+        $ids=$_REQUEST['IDs'];
+       //echo $ids;
+        $ids=explode(',',$ids);
+        $status=$_REQUEST['status'];
+
+        foreach ($ids as $id) {
+         
+        $var=Course::find($id);
+            if($status=='A')
+            $var->status='I';
+            else
+            $var->status='A';
+
+        $var->save();
+        }
+        Session::flash('success', 'Course Status Changed!');
+        echo "done";
+    }
+
+    public function deletecourse()
+    {
+        
+        $ids=$_REQUEST['IDs'];
+        //echo $ids;
+        $ids=explode(',',$ids);
+        
+        foreach ($ids as $id) {
+            if($id!=null){
+            $dir=Course::find($id);
+            //dd($dir);
+            //unlink(public_path('/uploaded_images/banner/'.$dir->image_name));
+            $dir->delete();
+        }
+    }
+       
+        Session::flash('success', 'Data Deleted Successfully!');
+        echo "done";
+    }
+
+    public function coursesearch()
+    {
+        if(isset($_REQUEST['search']))
+
+         session(['search'=>$_REQUEST['search']]);
+     $search=session('search');
+       $search=strtolower($search);
+        $course=Course::whereRaw('LOWER(title) like ?', ["%".$search."%"])->paginate(5);
+        
+       return view('Admin.course.index')->withCourses($course);
+    }
+
+
+
+
+
 }
 
