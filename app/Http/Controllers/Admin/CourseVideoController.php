@@ -30,7 +30,10 @@ class CourseVideoController extends Controller
         $course=Course::find($id);
         $video=Video::where('status','=','A')->pluck('title','id');
        // dd($video);
-                return view('Admin.course.addVideo')->withVideos($video)->withCourse($course);
+        $course_video=CourseVideo::where('course_id','=',$id)->orderby('level')->get();
+        
+
+        return view('Admin.course.addVideo')->withVideos($video)->withCourse($course)->withCoursevideo($course_video);
     }
 
     /**
@@ -41,6 +44,7 @@ class CourseVideoController extends Controller
      */
     public function store(Request $request)
     {
+
         $topic=$request['topic'];
         $level=$request['level'];
         $video_id=$request['video_id'];
@@ -63,6 +67,9 @@ class CourseVideoController extends Controller
                                     
             }
         }
+
+
+        return redirect()->route('course-management.index')->with('success','Content has been successfully added to the course');
     }
 
     /**
@@ -96,7 +103,12 @@ class CourseVideoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rec=CourseVideo::where('course_id','=',$id)->delete();
+
+       // $rec->delete();
+
+        //dd($rec);
+        
     }
 
     /**

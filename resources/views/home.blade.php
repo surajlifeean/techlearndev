@@ -97,50 +97,10 @@
 
         <div class="gen" style="float:left; width:100%">
 
-            <!-- @foreach($courses as $key=>$value)
-
-            @php
-
-                    $url = $value->video_link;
-                    $urlParts = explode("/", parse_url($url, PHP_URL_PATH));
-                    $videoId = (int)$urlParts[count($urlParts)-1];
-                    
-
-            @endphp
-             -->
-
-           <!-- <div class="flex">
-                @if($key%2==0)
-                <div class="img-flex">
-                    <img src="{{asset('uploaded_images/courses/'.$value->image)}}">
-                </div>
-                @endif
-
-                <div class="txt-flex">
-                    <h4>{!!$value->title!!}</h4>
-                    <p>{!!substr($value->description,0,500)!!}</p>
-                    <div class="botton-flex">
-                      <!   <a href="#" class="button-common"></a>
-                        --> 
-                        <!-- <button type="button" class="button-common btn btn-primary video-btn" data-toggle="modal" data-src="https://player.vimeo.com/video/{{$videoId}}?title=0&byline=0&portrait=0&transparent=0" data-target="#myModal">
-                        Demo
-                        </button>
-
-                        <a href="#" class="button-common">Details</a> -->
-                    <!-- </div>
-                </div>
-                @if($key%2!=0)
-                 <div class="img-flex">
-                    <img src="{{asset('uploaded_images/courses/'.$value->image)}}">
-                </div> 
-                @endif
-            </div> -->
-                <!-- @endforeach  -->
-
             <div class="container demo-course">
 
                <div class="row justify-content-center">
-                    <div class="col-md-9">
+                    <div class="col-md-12">
 
                   @foreach($courses as $key=>$value)
 
@@ -183,70 +143,6 @@
 
 
 
-            <!-- <div class="flex">
-                <div class="img-flex">
-                    <img src="{{asset('images/a.png')}}">
-                </div>
-                <div class="txt-flex">
-                    <h4>javascript</h4>
-                    <p> JavaScript is object-oriented language to make HTML pages interactive..</p>
-                    <div class="botton-flex">
-                        <a href="#" class="button-common">Demo</a>
-                        <a href="#" class="button-common">Try A Quiz</a>
-                    </div>
-                </div>
-            </div>
-            <div class="flex">
-                <div class="txt-flex">
-                    <h4>jQuery</h4>
-                    <p>jQuery is a library of JavaScript to enhance the performance and compatibility of JavaScript.</p>
-                    <div class="botton-flex">
-                        <a href="#" class="button-common">Demo</a>
-                        <a href="#" class="button-common">Try A Quiz</a>
-                    </div>
-                </div>
-                <div class="img-flex">
-                    <img src="{{asset('images/b.png')}}">
-                </div>
-            </div>
-            <div class="flex">
-                <div class="img-flex">
-                    <img src="{{asset('images/a.png')}}">
-                </div>
-                <div class="txt-flex">
-                    <h4>AngularJS</h4>
-                    <p>AngularJS is the most popular framework of JavaScript for SPA (Single Page Applications) online.</p>
-                    <div class="botton-flex">
-                        <a href="#" class="button-common">Demo</a>
-                        <a href="#" class="button-common">Try A Quiz</a>
-                    </div>
-                </div>
-            </div>
-            <div class="flex">
-                <div class="txt-flex">
-                    <h4>Angular 4</h4>
-                    <p>Angular 4, or just Angular is the recent and done-from-scratch release of Angular by Google to create an extremely powerful MV* framework for web.</p>
-                    <div class="botton-flex">
-                        <a href="#" class="button-common">Demo</a>
-                        <a href="#" class="button-common">Try A Quiz</a>
-                    </div>
-                </div>
-                <div class="img-flex">
-                    <img src="{{asset('images/b.png')}}">
-                </div>
-            </div>
-            <div class="flex">
-                <div class="img-flex">
-                    <img src="{{asset('images/a.png')}}">
-                </div>
-                <div class="txt-flex">
-                    <h4>+ More</h4>
-                    <p>Well, that's not the end of the world! We've got more in store! Check All Playlists.</p>
-                    <div class="botton-flex">
-                        <a href="#" class="button-common">See All Courses</a>
-                    </div>
-                </div>
-            </div> -->
         </div>
     </section>
     <section class="testimonial">

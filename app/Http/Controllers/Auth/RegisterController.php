@@ -102,6 +102,7 @@ class RegisterController extends Controller
             "course" => $data['course'],
             "ddno" => $data['ddno'],
             "amount" => $data['amount'],
+            "sponsor_id" => $data['sponsor_id'],
             "issuing_bank" => $data['issuing_bank'],
             "issuing_date" => $data['issuing_date'],
             "bank_branch" => $data['bank_branch'],
@@ -125,7 +126,7 @@ class RegisterController extends Controller
 
         //$this->validator($request->all())->validate();
         event(new Registered($user = $this->create($request->all())));
-        return redirect()->route('login')->with('success',"Your accout has been created! You can now login.");
+        return redirect()->route('login')->with('success',"Your account has been created! You can now login.");
         }
         /**
         * Handle a registration request for the application.
@@ -152,11 +153,11 @@ class RegisterController extends Controller
                 $coursearray=array();
                 foreach ($course as $key => $value) {
                 # code...
-                $coursearray[$value->id]=$value->title;
+                        $coursearray[$value->id]=$value->title;
 
                 }
             Session::flash('success','Fill in the form to complete registration!');
-            return view('auth.register2')->withSponsorid($request->sponsor_id)->withCourse($coursearray);
+            return view('auth.register2')->withSponsorid($userexists->id)->withCourse($coursearray);
         }
             else{
 

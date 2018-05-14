@@ -52,6 +52,7 @@ class CourseController extends Controller
         $course=Course::where('slug','=',$id)->first();
         $course_video=DB::table('course_videos')
                 ->select('level','topic_name','description',DB::raw('count(*) as vid'))
+                ->where('course_id','=',$course->id)
                 ->groupBy('level','topic_name','description')
                 ->get();
         // $user_info = DB::table('usermetas')

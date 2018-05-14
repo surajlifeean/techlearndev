@@ -19,7 +19,7 @@
                         <li><a href="{{route('login')}}">Sign in</a></li>
                         <li><a class="crest-account" href="{{route('register')}}">Create Account</a></li>
                         @else
-                        <li><a class="crest-account" href="{{route('dashboard.index')}}">Dashboard</a></li>
+                        <li><a class="crest-account" href="{{route('profile.index')}}">Dashboard</a></li>
                          <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

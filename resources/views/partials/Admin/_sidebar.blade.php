@@ -76,12 +76,6 @@
                           </a>
                         </li>
 
-                        <li >
-                          <a href="{{route('course-video-management.create')}}" >                                                        
-                            <i class="fa fa-angle-right"></i>
-                            <span>Course Videos</span>
-                          </a>
-                        </li>
 
                         
                       </ul>

@@ -32,4 +32,9 @@ class User extends Authenticatable
         return $this->belongsTo('App\Course','course');
     }
 
+     public function sponsor(){
+
+        return $this->belongsTo('App\User','sponsor_id');
+    }
+
 }

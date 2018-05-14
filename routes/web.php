@@ -22,6 +22,13 @@ Route::get('/reg/step2', function () {
     return view('auth.register2')->withCourse($coursearray);
 });
 
+Route::get('/invoice', function () {
+    return view('invoice.create');
+});
+
+
+Route::get('/downloadPDF/{id}','Site\StudyDashboardController@downloadPDF');
+
 // Route::get('/show', function () {
 	 
 //     return view('courses.show');

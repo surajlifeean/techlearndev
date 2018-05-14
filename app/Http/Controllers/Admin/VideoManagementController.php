@@ -28,6 +28,7 @@ class VideoManagementController extends Controller
     public function create()
     {
         //dd("hi");
+        
         return view('admin.video.create');
     }
 

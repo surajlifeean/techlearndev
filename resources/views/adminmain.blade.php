@@ -5,7 +5,12 @@
 </head>
 <body>
   <section class="vbox">
+  
+
+    @include('partials.Admin._message')
+
     @include('partials.Admin._navbar')
+
     <section>
       <section class="hbox stretch">
         <!-- .aside -->
@@ -53,7 +58,7 @@
           </section>
         </aside>
         <!-- /.aside -->
-     
+
 
                  @yield('content')
 

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Site;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\User;
+use PDF;
 
 class StudyDashboardController extends Controller
 {
@@ -82,4 +84,15 @@ class StudyDashboardController extends Controller
     {
         //
     }
+
+     public function downloadPDF($id){
+
+        
+      $user = User::find($id);
+      $pdf = PDF::loadView('invoice.create', compact('user'));
+//      dd(compact('user'));
+      return $pdf->download('invoice.pdf');
+
+    }
+
 }
