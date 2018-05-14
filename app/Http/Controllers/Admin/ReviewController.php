@@ -80,7 +80,18 @@ class ReviewController extends Controller
      */
     public function show($id)
     {
-        //
+        $course=Course::all();
+        $review_on=array();
+        $review_on[0]="General";
+        foreach ($course as $key => $value) {
+            # code...
+            $review_on[$value->id]=$value->title;
+
+        }
+
+        $review=Review::find($id);
+
+        return view('Admin.review.show')->withReview($review)->withReviewon($review_on);
     }
 
     /**
@@ -144,6 +155,20 @@ class ReviewController extends Controller
 
     }
 
+
+    public function delete($id,Request $request)
+    {   //dd($id);
+        $customer =Review::find($id);
+        //dd($customer);
+         if(Review::find($id)->delete()){
+            $request->session()->flash('success', 'Review deletded successfully.');
+            return redirect('/admin/review-management');
+        } else {
+            $request->session()->flash('error', 'Review not deletded.');
+            return redirect('/admin/review-management');
+        }
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -154,4 +179,87 @@ class ReviewController extends Controller
     {
         //
     }
+    
+
+    public function statuschange($id,Request $request)
+    {   //dd($id);
+        $customer =Review::find($id);
+        //dd($customer);
+        if($customer->status == 'A'){
+    //dd($customer->status);
+            $customer->status = 'Y';
+            if($customer->save()){
+                $request->session()->flash('success', 'Review deactivated successfully.');
+                return redirect('/admin/review-management');
+            }
+        } else {
+            $customer->status = 'A';
+            if($customer->save()){
+                $request->session()->flash('success', 'Review activated successfully.');
+                return redirect('/admin/review-management');
+            }
+        }
+    }
+
+
+    public function bulkreviewstatus(){
+
+
+        $ids=$_REQUEST['IDs'];
+       //echo $ids;
+        $ids=explode(',',$ids);
+        $status=$_REQUEST['status'];
+
+        foreach ($ids as $id) {
+         
+        $var=Review::find($id);
+            if($status=='A')
+            $var->status='Y';
+            else
+            $var->status='A';
+
+        $var->save();
+        }
+        Session::flash('success', 'Review Status Changed!');
+        echo "done";
+    }
+
+    public function reviewdeletebulk(){
+
+
+        $ids=$_REQUEST['IDs'];
+        //echo $ids;
+        $ids=explode(',',$ids);
+        
+        foreach ($ids as $id) {
+            if($id!=null){
+            $dir=Review::find($id);
+            //dd($dir);
+            //unlink(public_path('/uploaded_images/banner/'.$dir->image_name));
+            $dir->delete();
+        }
+    }
+       
+        Session::flash('success', 'Data Deleted Successfully!');
+        echo "done";
+    }
+
+
+    public function reviewsearch(){
+
+     if(isset($_REQUEST['search']))
+
+         session(['search'=>$_REQUEST['search']]);
+     $search=session('search');
+       $search=strtolower($search);
+        $review=Review::whereRaw('LOWER(review_by) like ?', ["%".$search."%"])->orwhereRaw('LOWER(comment) like ?', ["%".$search."%"])->paginate(5);
+        
+        return view('Admin.review.index')->withReviews($review);
+    }
+
+
+    
+
+
+
 }

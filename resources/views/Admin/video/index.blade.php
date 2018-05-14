@@ -28,23 +28,23 @@
                         <button type="button" class="btn btn-sm btn-default delete-many" title="Remove"><i class="fa fa-trash-o"></i></button>
 
                           &nbsp;&nbsp;
-                        <a href="" class="active-status" aria-label="Left Align" onclick="changebulkstatus('Y')"  title="Deactivate Newsletter Subscription">
+                        <a href="javascript:void(0)" class="active-status" aria-label="Left Align" onclick="changebulkstatus('A')"  title="Deactivate Newsletter Subscription">
                        <i class="fa fa-lock" aria-hidden="true"></i>
                       </a>
                  
                   &nbsp;&nbsp;
-                  <a href="" class="inactive-status" aria-label="Left Align" onclick="changebulkstatus('N')"  title="Activate Newsletter Subscription">
+                  <a href="javascript:void(0)" class="inactive-status" aria-label="Left Align" onclick="changebulkstatus('I')"  title="Activate Newsletter Subscription">
                        <i class="fa fa-unlock" aria-hidden="true"></i>
                       </a>
                       </div>
                       <a href="{{route('video-management.create')}}" class="btn btn-sm btn-default"><i class="fa fa-plus"></i>Add New video</a>
                     </div>
 
-                    <form action="" method="get">
+                     <form action="{{route('video-search')}}" method="get">
                     <div class="col-sm-4 m-b-xs">
                       <div class="input-group">
                    
-                      <input type="text" class="input-sm form-control" name="search" value=""  placeholder="Enter video Title">
+                      <input type="text" class="input-sm form-control" name="search" value="{{session('search')}}"  placeholder="Search By Title Or Caption">
                         <span class="input-group-btn">
                             
                           <button class="btn btn-sm btn-default" type="submit">Go!</button>
@@ -117,7 +117,7 @@
 
                             <td>{{date('jS M, Y', strtotime($value->created_at))}}</td>
                             <td>
-                                @if($value->status=='A')
+                                <!-- @if($value->status=='A')
            <a href="javascript:void(0)" class="active-status" aria-label="Left Align" onclick="changestatus('A',{{$value->id}})" data-toggle="tooltip" title="Deactivate Product">
                        <i class="fa fa-unlock" aria-hidden="true"></i>
                       </a>
@@ -128,18 +128,47 @@
                       </a>
                    
 
-                  @endif
-<!-- 
+                  @endif -->
+                  <button class="btn btn-primary btn-rounded formConfirm" data-form="#frmStatus-{{$value->id}}" data-title="Status Change" data-message="Are you sure, you want to change the status ?" >
+                                        <?php if($value->status == 'I'){ ?>
+                                            <i title="Inactive" style="margin-right: 0;" class="fa fa-lock" aria-hidden="true"></i>
+                                        <?php } else { ?>
+                                            <i title="Active" style="margin-right: 0;" class="fa fa-unlock" aria-hidden="true"></i>
+                                        <?php } ?>
+                                    </button>
+                                    {!! Form::open(array(
+                                            'url' => route('admin.video.statuschange', array($value->id)),
+                                            'method' => 'get',
+                                            'style' => 'display:none',
+                                            'id' => 'frmStatus-' . $value->id,
+                                            'status' => 'frmStatus-' . $value->status,
+                                        ))
+                                    !!}
+                                    {!! Form::submit('Submit') !!}
+                                    {!! Form::close() !!}
+                   <!-- 
                      {!! Html::LinkRoute('video-management.edit',null,array($value->id),array('class'=>"fa fa-pencil-square-o",'data-toggle'=>"tooltip",'title'=>"Edit video"))!!} -->
-                      <a href="{{route('video-management.edit',$value->id)}}" class="btn btn-default btn-sm"><i class="fa fa-pencil-square-o"></i></a>
+                      <a href="{{route('video-management.edit',$value->id)}}" class="btn btn-info btn-rounded"><i class="fa fa-pencil-square-o"></i></a>
 
-                        <a href="#" class="delete-icon" id="{{$value->id}}" aria-label="Left Align" data-toggle="tooltip" title="Delete video">
+                        <!-- <a href="#" class="delete-icon" id="{{$value->id}}" aria-label="Left Align" data-toggle="tooltip" title="Delete video">
                 			 <i class="fa fa-trash-o" aria-hidden="true"></i>
-             					</a>  <!-- delete icon that submits the form -->
-                                             
+             					</a> -->  <!-- delete icon that submits the form -->
+                        
+                        <button class="btn btn-danger btn-rounded formConfirm" data-form="#frmDelete-{{$value->id}}" data-title="Delete video" data-message="Are you sure, you want to delete this video ?" >
+                                        <i title="Delete" style="margin-right: 0;" class="fa fa-trash-o" aria-hidden="true"></i>
+                                    </button>
+                                    {!! Form::open(array(
+                                            'url' => route('admin.video.delete', array($value->id)),
+                                            'method' => 'get',
+                                            'style' => 'display:none',
+                                            'id' => 'frmDelete-'.$value->id
+                                        ))
+                                    !!}
+                                    {!! Form::submit('Submit') !!}
+                                    {!! Form::close() !!}                     
              					 
 
-                        <a href="{{route('video-management.show',$value->id)}}" data-toggle="tooltip" title="video Details"><i class="fa fa-search-plus"></i></a>
+                        <a href="{{route('video-management.show',$value->id)}}" data-toggle="tooltip" title="video Details" class="btn btn-info btn-rounded"><i class="fa fa-search-plus"></i></a>
 
                             </td>
                            
@@ -163,7 +192,24 @@
 
 <div> Showing {!!$videos->count()!!}|{!!$videos->total()!!}</div>
     
-                      
+      
+
+
+      <div class="modal fade" id="formConfirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="frm_title">Delete</h4>
+      </div>
+      <div class="modal-body" id="frm_body">Are you sure, you want to delete this Topic ?</div>
+      <div class="modal-footer">
+        <button style='margin-left:10px;' type="button" class="btn btn-danger col-sm-2 pull-right" id="frm_submit">Confirm</button>
+        <button type="button" class="btn btn-primary col-sm-2 pull-right" data-dismiss="modal" id="frm_cancel">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>                
                  
                      
 
@@ -199,6 +245,35 @@
 
 
     @section('scripts')
+
+    <script type="text/javascript">
+
+$(document).ready(function(){
+
+     
+  $('.formConfirm').on('click', function(e) {
+    //alert();
+        e.preventDefault();
+        var el = $(this);
+        //alert(el);
+        var title = el.attr('data-title');
+        var msg = el.attr('data-message');
+        var dataForm = el.attr('data-form');
+        
+        $('#formConfirm')
+        .find('#frm_body').html(msg)
+        .end().find('#frm_title').html(title)
+        .end().modal('show');
+        
+        $('#formConfirm').find('#frm_submit').attr('data-form', dataForm);
+  });
+  $('#formConfirm').on('click', '#frm_submit', function(e) {
+        var id = $(this).attr('data-form');
+        //alert(id);
+        $(id).submit();
+  });
+});
+</script>
 
     <script type="text/javascript">
 
@@ -311,5 +386,62 @@ $("input[type='checkbox']:not(.checkAll)").change(function(){
   
 });
 
+</script>
+
+<script type="text/javascript">
+  function changebulkstatus(status){
+  /*alert(id);*/
+  if(!id){
+    alert("Please Select Some Items To Activate/Deactivate");
+  }
+  else{
+    var r = confirm("Are You Sure You Wanna Change the status ?");
+    if (r == true) {
+    console.log(id);
+    $.ajax({
+        url:"{{route('bulk-video-status')}}", 
+        type:"get",
+        data:{IDs:id,status:status},
+        success: function(result){
+          //alert(result);
+          console.log(result);
+          //location.reload();
+          //location.reload();
+          window.parent.location.reload();
+        
+        $("input[type='checkbox']").prop('checked', false);
+    }});
+
+   }//if ends
+  }
+}
+
+
+
+$('.delete-many').click(function(){
+
+  if(!id)
+    alert("Please Select Some Items To Delete");
+  else{
+    var r = confirm("Are You Sure You Wanna Delete The Video ?");
+    if (r == true) {
+     //alert(id);
+    $.ajax({
+        url:"{{route('video-bulk-delete')}}", 
+        type:"get",
+        data:{IDs:id},
+        success: function(result){
+      //alert(result);
+            
+          //location.reload();
+           window.parent.location.reload();
+          $("input[type='checkbox']").prop('checked', false);
+
+    }});
+
+  }//if ends
+}
+
+  });
 </script>
 @endsection

@@ -9,8 +9,8 @@
 
  <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
                 <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-home"></i> Home</a></li>
-                <li><a href="{{route('users.index')}}">Course Management</a></li>
-                <li><a href="{{route('users.index')}}">Course List</a></li>
+                <li><a href="{{route('users.index')}}">User Management</a></li>
+                <li><a href="{{route('users.index')}}">User List</a></li>
                
               </ul>
 
@@ -25,26 +25,26 @@
                       <!-- <a href="#subNav" data-toggle="class:hide" class="btn btn-sm btn-default active"><i class="fa fa-caret-right text fa-lg"></i><i class="fa fa-caret-left text-active fa-lg"></i></a> -->
                       <div class="btn-group">
                        <a href="{{route('course-management.index')}}"> <button type="button" class="btn btn-sm btn-default" title="Refresh"><i class="fa fa-refresh"></i></button></a>
-                        <button type="button" class="btn btn-sm btn-default delete-many" title="Remove"><i class="fa fa-trash-o"></i></button>
+                       <!--  <button type="button" class="btn btn-sm btn-default delete-many" title="Remove"><i class="fa fa-trash-o"></i></button> -->
 
                           &nbsp;&nbsp;
-                        <a href="" class="active-status" aria-label="Left Align" onclick="changebulkstatus('Y')"  title="Deactivate Newsletter Subscription">
+                        <a href="javascript:void(0)" class="active-status" aria-label="Left Align" onclick="changebulkstatus('A')"  title="Deactivate user">
                        <i class="fa fa-lock" aria-hidden="true"></i>
                       </a>
                  
                   &nbsp;&nbsp;
-                  <a href="" class="inactive-status" aria-label="Left Align" onclick="changebulkstatus('N')"  title="Activate Newsletter Subscription">
+                  <a href="javascript:void(0)" class="inactive-status" aria-label="Left Align" onclick="changebulkstatus('I')"  title="Activate User">
                        <i class="fa fa-unlock" aria-hidden="true"></i>
                       </a>
                       </div>
                       
                     </div>
 
-                    <form action="" method="get">
+                    <form action="{{route('user-search')}}" method="get">
                     <div class="col-sm-4 m-b-xs">
                       <div class="input-group">
                    
-                      <input type="text" class="input-sm form-control" name="search" value=""  placeholder="Enter Users Title">
+                      <input type="text" class="input-sm form-control" name="search" value="{{session('search')}}"  placeholder="Search By Name or Title">
                         <span class="input-group-btn">
                             
                           <button class="btn btn-sm btn-default" type="submit">Go!</button>
@@ -81,6 +81,9 @@
 
 				@foreach($users as $value)
 
+        <?php //dd($value);?>
+        <!-- {{dump($value)}} -->
+
         
                           <tr>
 
@@ -92,7 +95,7 @@
                             <td>{{$value->userCourse->title}}</td>                       
                             <td>{{date('jS M, Y', strtotime($value->created_at))}}</td>
                             <td>
-                                @if($value->status=='A')
+                                <!-- @if($value->status=='A')
            <a href="javascript:void(0)" class="active-status" aria-label="Left Align" onclick="changestatus('A',{{$value->id}})" data-toggle="tooltip" title="Deactivate Product">
                        <i class="fa fa-unlock" aria-hidden="true"></i>
                       </a>
@@ -103,24 +106,42 @@
                       </a>
                    
 
-                  @endif
+                  @endif -->
+
+                   <button class="btn btn-primary btn-rounded formConfirm" data-form="#frmStatus-{{$value->id}}" data-title="Status Change" data-message="Are you sure, you want to change the status ?" >
+                                        <?php if($value->status == 'I'){ ?>
+                                            <i title="Inactive" style="margin-right: 0;" class="fa fa-lock" aria-hidden="true"></i>
+                                        <?php } else { ?>
+                                            <i title="Active" style="margin-right: 0;" class="fa fa-unlock" aria-hidden="true"></i>
+                                        <?php } ?>
+                                    </button>
+                                    {!! Form::open(array(
+                                            'url' => route('admin.user.statuschange', array($value->id)),
+                                            'method' => 'get',
+                                            'style' => 'display:none',
+                                            'id' => 'frmStatus-' . $value->id,
+                                            'status' => 'frmStatus-' . $value->status,
+                                        ))
+                                    !!}
+                                    {!! Form::submit('Submit') !!}
+                                    {!! Form::close() !!}
 <!-- 
                      {!! Html::LinkRoute('course-management.edit',null,array($value->id),array('class'=>"fa fa-pencil-square-o",'data-toggle'=>"tooltip",'title'=>"Edit Course"))!!} -->
-                      <a href="{{route('course-management.edit',$value->id)}}" class="btn btn-default btn-sm"><i class="fa fa-pencil-square-o"></i></a>
+                        <!-- <a href="{{route('users.edit',$value->id)}}" class="btn btn-default btn-sm"><i class="fa fa-pencil-square-o"></i></a>
 
-                        <a href="#" class="delete-icon" id="{{$value->id}}" aria-label="Left Align" data-toggle="tooltip" title="Delete Course">
-                			 <i class="fa fa-trash-o" aria-hidden="true"></i>
-             					</a>  <!-- delete icon that submits the form -->
+                          <a href="#" class="delete-icon" id="{{$value->id}}" aria-label="Left Align" data-toggle="tooltip" title="Delete Course">
+                  			 <i class="fa fa-trash-o" aria-hidden="true"></i>
+               					</a> -->  <!-- delete icon that submits the form -->
                                              
              					 
 
-                        <a href="{{route('course-management.show',$value->id)}}" data-toggle="tooltip" title="Villa Details"><i class="fa fa-search-plus"></i></a>
+                        <a href="{{route('users.show',$value->id)}}" data-toggle="tooltip" title="Villa Details" class="btn btn-info btn-rounded"><i class="fa fa-search-plus"></i></a>    
 
                             </td>
                            
                           </tr>
 
-                    {!! Form::open(['route'=>['course-management.destroy',$value->id], 'method'=>'DELETE','class'=>'delete-villa','id'=>'delete'.$value->id])!!}
+                    {!! Form::open(['route'=>['users.destroy',$value->id], 'method'=>'DELETE','class'=>'delete-villa','id'=>'delete'.$value->id])!!}
                     {!!Form::close()!!}
 
 
@@ -140,7 +161,21 @@
     
                       
                  
-                     
+  <div class="modal fade" id="formConfirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="frm_title">Delete</h4>
+      </div>
+      <div class="modal-body" id="frm_body">Are you sure, you want to delete this Topic ?</div>
+      <div class="modal-footer">
+        <button style='margin-left:10px;' type="button" class="btn btn-danger col-sm-2 pull-right" id="frm_submit">Confirm</button>
+        <button type="button" class="btn btn-primary col-sm-2 pull-right" data-dismiss="modal" id="frm_cancel">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>                   
 
 
 </section>
@@ -174,6 +209,34 @@
 
 
     @section('scripts')
+
+     <script type="text/javascript">
+
+$(document).ready(function(){
+
+     
+  $('.formConfirm').on('click', function(e) {
+    //alert();
+        e.preventDefault();
+        var el = $(this);
+        //aler(el);
+        var title = el.attr('data-title');
+        var msg = el.attr('data-message');
+        var dataForm = el.attr('data-form');
+        
+        $('#formConfirm')
+        .find('#frm_body').html(msg)
+        .end().find('#frm_title').html(title)
+        .end().modal('show');
+        
+        $('#formConfirm').find('#frm_submit').attr('data-form', dataForm);
+  });
+  $('#formConfirm').on('click', '#frm_submit', function(e) {
+        var id = $(this).attr('data-form');
+        $(id).submit();
+  });
+});
+</script>
 
     <script type="text/javascript">
 
@@ -286,5 +349,36 @@ $("input[type='checkbox']:not(.checkAll)").change(function(){
   
 });
 
+</script>
+
+<script type="text/javascript">
+  
+  function changebulkstatus(status){
+  /*alert(id);*/
+  if(!id){
+    alert("Please Select Some Items To Activate/Deactivate");
+  }
+  else{
+    var r = confirm("Are You Sure You Wanna Change the status ?");
+    if (r == true) {
+    console.log(id);
+    //alert(id);
+    $.ajax({
+        url:"{{route('bulk-user-status')}}", 
+        type:"get",
+        data:{IDs:id,status:status},
+        success: function(result){
+          //alert(result);
+          //console.log(result);
+          //location.reload();
+          //location.reload();
+          window.parent.location.reload();
+        
+        $("input[type='checkbox']").prop('checked', false);
+    }});
+
+   }//if ends
+  }
+}
 </script>
 @endsection
