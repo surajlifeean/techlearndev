@@ -164,5 +164,43 @@ class CourseManagementController extends Controller
     $sl=($slugCount > 0) ? "{$slug}-{$slugCount}" : $slug;
     return $sl;
 }
+
+
+public function delete($id,Request $request)
+    {   //dd($id);
+        $Course =Course::find($id);
+        //dd($customer);
+         if(Course::find($id)->delete()){
+            $request->session()->flash('success', 'Course deletded successfully.');
+            return redirect('/admin/course-management');
+        } else {
+            $request->session()->flash('error', 'Course not deletded.');
+            return redirect('/admin/course-management');
+        }
+    }
+
+
+ public function statuschange($id,Request $request)
+    {   //dd($id);
+        $course =Course::find($id);
+        //dd($customer);
+        if($course->status == 'A'){
+    //dd($customer->status);
+            $course->status = 'I';
+            if($course->save()){
+                $request->session()->flash('success', 'course deactivated successfully.');
+                return redirect('/admin/course-management');
+            }
+        } else {
+            $course->status = 'A';
+            if($course->save()){
+                $request->session()->flash('success', 'course activated successfully.');
+                return redirect('/admin/course-management');
+            }
+        }
+    }
+
+
+
 }
 

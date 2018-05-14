@@ -80,7 +80,18 @@ class ReviewController extends Controller
      */
     public function show($id)
     {
-        //
+        $course=Course::all();
+        $review_on=array();
+        $review_on[0]="General";
+        foreach ($course as $key => $value) {
+            # code...
+            $review_on[$value->id]=$value->title;
+
+        }
+
+        $review=Review::find($id);
+
+        return view('Admin.review.show')->withReview($review)->withReviewon($review_on);
     }
 
     /**
@@ -144,6 +155,20 @@ class ReviewController extends Controller
 
     }
 
+
+    public function delete($id,Request $request)
+    {   //dd($id);
+        $customer =Review::find($id);
+        //dd($customer);
+         if(Review::find($id)->delete()){
+            $request->session()->flash('success', 'Review deletded successfully.');
+            return redirect('/admin/review-management');
+        } else {
+            $request->session()->flash('error', 'Review not deletded.');
+            return redirect('/admin/review-management');
+        }
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -154,4 +179,30 @@ class ReviewController extends Controller
     {
         //
     }
+    
+
+    public function statuschange($id,Request $request)
+    {   //dd($id);
+        $customer =Review::find($id);
+        //dd($customer);
+        if($customer->status == 'A'){
+    //dd($customer->status);
+            $customer->status = 'Y';
+            if($customer->save()){
+                $request->session()->flash('success', 'Review deactivated successfully.');
+                return redirect('/admin/review-management');
+            }
+        } else {
+            $customer->status = 'A';
+            if($customer->save()){
+                $request->session()->flash('success', 'Review activated successfully.');
+                return redirect('/admin/review-management');
+            }
+        }
+    }
+
+
+
+
+
 }

@@ -47,7 +47,9 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        //
+           $user=User::find($id);
+        //dd($user);
+        return view("admin.user.show")->withUsers($user);
     }
 
     /**
@@ -58,7 +60,9 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user=User::find($id);
+        //dd($user);
+        return view("admin.user.edit")->withUsers($user);
     }
 
     /**
@@ -83,4 +87,32 @@ class UsersController extends Controller
     {
         //
     }
+
+    public function statuschange($id,Request $request)
+    {   //dd($id);
+        $customer =User::find($id);
+        //dd($customer);
+        if($customer->status == 'A'){
+    //dd($customer->status);
+            $customer->status = 'I';
+            if($customer->save()){
+                $request->session()->flash('success', 'User deactivated successfully.');
+                return redirect('/admin/users');
+            }
+        } else {
+            $customer->status = 'A';
+            if($customer->save()){
+                $request->session()->flash('success', 'User activated successfully.');
+                return redirect('/admin/users');
+            }
+        }
+    }
+
+
+
+
+
+
+
+
 }

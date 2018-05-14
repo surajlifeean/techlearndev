@@ -10,20 +10,20 @@
  <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
                 <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-home"></i> Home</a></li>
                 <li><a href="{{route('review-management.index')}}">Review Management</a></li>
-                <li><a href="{{route('review-management.create')}}">Add Review</a></li>
+                
                
               </ul>
 
  
                       <header class="panel-heading">
-                        <span class="h4">Add Review</span>
+                        <span class="h4">Show Review</span>
                       </header>
 
                       
                  
                      
                       <header class="panel-heading">
-                        <strong>Enter The Review Details</strong>
+                        <strong>Show The Review Details</strong>
                       </header>
                       {{Form::model($review,['route' =>['review-management.update',$review->id],'method'=>'PUT','files' => true, 'class'=>'form-horizontal course-form','data-parsley-validate'])}}
                       <div class="panel-body">                   
@@ -32,13 +32,14 @@
                           <div class="col-sm-9">
 <!--                             <input type="text" name="title" class="form-control"  data-required="true" placeholder="Course Title" required> -->   
 
-                          {!!Form::select('review_on',$reviewon,null,['class'=>'form-control'])!!}
+                          <!-- {!!Form::select('review_on',$reviewon,null,['class'=>'form-control'])!!} -->
+                          <input type="text" name="review_by"  value="@if($review->review_on==0) General @else{{$review->course->title}} @endif" class="form-control"  data-required="true" placeholder="Course Review" required readonly=""> 
                           </div>
                         </div>
                          <div class="form-group">
                           <label class="col-sm-3 control-label">Reviewer's Name</label>
                           <div class="col-sm-9">
-                            <input type="text" name="review_by"  value="{{$review->review_by}}" class="form-control"  data-required="true" placeholder="Course Review" required>   
+                            <input type="text" name="review_by"  value="{{$review->review_by}}" class="form-control"  data-required="true" placeholder="Course Review" required readonly="">   
                           </div>
                         </div>
                          <div class="line line-dashed line-lg pull-in"></div>
@@ -64,8 +65,11 @@
                         <div class="form-group">
                           <label class="col-sm-3 control-label">Set Featured</label>
                           <div class="col-sm-9">
+                            @if(($review->set_featured)=="Y")
                           Yes:{{Form::radio('set_featured', 'Y')}}
+                          @else
                           No:{{Form::radio('set_featured', 'N')}}
+                          @endif
 
                           </div>
                         </div>
@@ -75,7 +79,8 @@
                         <div class="form-group">
                           <label class="col-sm-3 control-label">Status</label>
                           <div class="col-sm-9">
-                         {!!Form::select('status',['A'=>'Active','I'=>'Inactive'],null,['placeholder'=>'select status'])!!}
+                         <!-- {!!Form::select('status',['A'=>'Active','I'=>'Inactive'],null,['placeholder'=>'select status'])!!} -->
+                         <input type="text" name="review_by"  value="@if($review->status=='A') Active @else Inactive @endif" class="form-control"  data-required="true" placeholder="Course Review" required readonly=""> 
 
                           </div>
                          </div>
@@ -91,19 +96,23 @@
             <div class="input_fields_wrap">
                 
                 
-                  <div style="margin-bottom:10px;">
+                  <!-- <div style="margin-bottom:10px;">
                        <input type="file" name="image_name" class="GalleryImage" id="img0"/> &nbsp 
-                  </div>
+                  </div> -->
+
+                  @if(count($review->image))
+                  <img src="{{asset('uploaded_images/reviewers/'.$review->image)}}" width="150">
+                  @endif
 
            </div>      
                        </div>
                      </div>
-                  <footer class="panel-footer text-right bg-light lter">
+                  <!-- <footer class="panel-footer text-right bg-light lter">
                        
                           <input type="submit" class="btn btn-success btn-s-xs" value="Submit"/>
 
                         <a href="{{url('/admin/course-management')}}" class="btn btn-danger">Cancel</a>
-                      </footer>
+                      </footer> -->
 
 
                      </div>
