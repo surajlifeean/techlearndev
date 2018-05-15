@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Course;
 use App\Review;
+use App\Banner;
 class HomeController extends Controller
 {
     /**
@@ -27,8 +28,9 @@ class HomeController extends Controller
 
        $courses=Course::all();
        $review=Review::all();
+        $banner=Banner::first();
         
-        return view('home')->withCourses($courses)->withReview($review);
+        return view('home')->withCourses($courses)->withReview($review)->withBanner($banner);
 
     }
 

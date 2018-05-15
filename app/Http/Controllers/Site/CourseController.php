@@ -55,13 +55,7 @@ class CourseController extends Controller
                 ->where('course_id','=',$course->id)
                 ->groupBy('level','topic_name','description')
                 ->get();
-        // $user_info = DB::table('usermetas')
-        //      ->select('browser', DB::raw('count(*) as total'))
-        //      ->groupBy('browser')
-        //      ->pluck('total','browser')->all();
 
-       // dd($course_video);
-        //dd($course);
         return view('courses.show')->withCourse($course)->withVideo($course_video);
         
     }

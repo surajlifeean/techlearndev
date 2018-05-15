@@ -87,6 +87,7 @@ class StudyDashboardController extends Controller
 
      public function downloadPDF($id){
 
+   // dd($id)
         
       $user = User::find($id);
       $pdf = PDF::loadView('invoice.create', compact('user'));

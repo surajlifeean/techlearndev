@@ -27,7 +27,7 @@ Route::get('/invoice', function () {
 });
 
 
-Route::get('/downloadPDF/{id}','Site\StudyDashboardController@downloadPDF');
+Route::get('/downloadPDF/{id}','Site\StudyDashboardController@downloadPDF')->name('pdf');
 
 // Route::get('/show', function () {
 	 
@@ -51,6 +51,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/aboutus', 'Site\CmsController@aboutus')->name('aboutus');
 
+Route::resource('education', 'Site\EducationController');
 
 Route::get('users/logout','Auth\LoginController@logout')->name('logout');
 

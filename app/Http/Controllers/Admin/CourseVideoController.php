@@ -105,9 +105,29 @@ class CourseVideoController extends Controller
     {
         $rec=CourseVideo::where('course_id','=',$id)->delete();
 
-       // $rec->delete();
 
-        //dd($rec);
+        $topic=$request['topic'];
+        $level=$request['level'];
+        $video_id=$request['video_id'];
+        $description=$request['description'];
+        $course_id=$request['course_id'];
+
+        
+            //dd($request);
+        foreach ($topic as $key => $value) {
+            # code...
+            $video_ids=$video_id[$key];
+            foreach ($video_ids as $k => $v) {
+                $course_video=new CourseVideo;
+                $course_video->topic_name=$value;
+                $course_video->description=$description[$key];
+                $course_video->level=$level[$key];
+                $course_video->course_id=$course_id;
+                $course_video->video_id=$v;
+                $course_video->save();
+                                    
+            }
+        }
         
     }
 
