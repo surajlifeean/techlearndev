@@ -141,13 +141,13 @@
                                     !!}
                                     {!! Form::submit('Submit') !!}
                                     {!! Form::close() !!}
-                        <a href="{{route('banner-management.show',$value->id)}}" data-toggle="tooltip" title="Villa Details" class="btn btn-info btn-rounded"><i class="fa fa-search-plus"></i></a>
+                        <a href="{{route('banner-management.show',$value->id)}}" data-toggle="tooltip" title="banner Details" class="btn btn-info btn-rounded"><i class="fa fa-search-plus"></i></a>
 
                             </td>
                            
                           </tr>
 
-                    {!! Form::open(['route'=>['banner-management.destroy',$value->id], 'method'=>'DELETE','class'=>'delete-villa','id'=>'delete'.$value->id])!!}
+                    {!! Form::open(['route'=>['banner-management.destroy',$value->id], 'method'=>'DELETE','class'=>'delete-banner','id'=>'delete'.$value->id])!!}
                     {!!Form::close()!!}
 
 

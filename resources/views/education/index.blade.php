@@ -5,6 +5,32 @@
 <link rel="stylesheet" type="text/css" href="{{asset('css/starrr.css')}}" />
 
 
+<style type="text/css">
+
+.modal-dialog {
+      max-width: 800px;
+      margin: 30px auto;
+  }
+
+
+
+.modal-body {
+  position:relative;
+  padding:0px;
+}
+.close {
+  position:absolute;
+  right:-30px;
+  top:0;
+  z-index:999;
+  font-size:2rem;
+  font-weight: normal;
+  color:#fff;
+  opacity:1;
+}
+
+</style>
+
 @endsection
 
 @section('content')
@@ -45,10 +71,26 @@
 					<p>{{$value->description}}</p>
 				 
 				</div>
+				 @php 
+				 $values=App\Helpers::getvideos($course->id,$value->level)
+				 @endphp
+
+		@foreach($values as $v)
+            @php
+
+                    $url = $v->video_link;
+                    $urlParts = explode("/", parse_url($url, PHP_URL_PATH));
+                    $videoId = (int)$urlParts[count($urlParts)-1];
+                    
+
+            @endphp
+                                      <button type="button" class="video-btn" data-toggle="modal" data-src="https://player.vimeo.com/video/{{$videoId}}?title=0&byline=0&portrait=0&transparent=0" data-target="#myModal">
+                                      <i class="fa fa-caret-square-o-right" aria-hidden="true"></i>
+                                      </button>
+
+          @endforeach
 				 
-				 
-				 
-			 </div>
+				 </div>
 			
 			 
 			</div>
@@ -83,7 +125,34 @@
 
 
   </div>
+
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      
+      <div class="modal-body">
+
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>        
+        <!-- 16:9 aspect ratio -->
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe class="embed-responsive-item" src="" id="video" frameborder="0" title="Funny Cat Videos For Kids" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" data-ready="true"></iframe>
+        </div>
+        
+        
+      </div>
+
+    </div>
+  </div>
+</div> 
+
+
 </section>
+
 
 
 
@@ -92,6 +161,47 @@
 @section('scripts')
 <script type="text/javascript" src="{{asset('js/starrr.js')}}"></script> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+   <script type="text/javascript">
+
+    $(document).ready(function() {
+
+    // Gets the video src from the data-src on each button
+
+    var $videoSrc;  
+    $('.video-btn').click(function() {
+    $videoSrc = $(this).data( "src" );
+    });
+    console.log($videoSrc);
+
+
+
+    // when the modal is opened autoplay it  
+    $('#myModal').on('shown.bs.modal', function (e) {
+
+    // set the video src to autoplay and not to show related video. Youtube related video is like a box of chocolates... you never know what you're gonna get
+    $("#video").attr('src',$videoSrc + "?rel=0&amp;showinfo=0&amp;modestbranding=1&amp;autoplay=1" ); 
+    })
+
+
+    // stop playing the youtube video when I close the modal
+    $('#myModal').on('hide.bs.modal', function (e) {
+    // a poor man's stop video
+    $("#video").attr('src',$videoSrc); 
+    }) 
+
+
+
+
+
+
+    // document ready  
+    });
+
+
+
+    </script>
+
 
 <script>
 	
@@ -168,5 +278,6 @@
         });
 
     </script>
+
 
 @endsection
