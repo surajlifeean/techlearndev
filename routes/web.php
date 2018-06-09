@@ -53,6 +53,8 @@ Route::get('/aboutus', 'Site\CmsController@aboutus')->name('aboutus');
 
 Route::resource('education', 'Site\EducationController');
 
+Route::resource('support', 'Site\SupportController');
+
 Route::get('users/logout','Auth\LoginController@logout')->name('logout');
 
 

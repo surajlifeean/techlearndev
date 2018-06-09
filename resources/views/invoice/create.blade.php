@@ -233,7 +233,7 @@ a[x-apple-data-detectors=true] {
                   
                     <div align="center" class="img-container center  autowidth  fullwidth " style="padding-right: 0px;  padding-left: 0px;">
 <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr style="line-height:0px;line-height:0px;"><td style="padding-right: 0px; padding-left: 0px;" align="center"><![endif]-->
-  <img class="center  autowidth  fullwidth" align="center" border="0" src="images/logo.jpg" alt="Image" title="Image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: 0;height: auto;float: none;width: 100%;max-width: 500px" width="500">
+  <img class="center  autowidth  fullwidth" align="center" border="0" src="{{asset('images/logo.png')}}" alt="Image" title="Image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: 0;height: auto;float: none;width: 50%;max-width: 200px" width="500">
 <!--[if mso]></td></tr></table><![endif]-->
 </div>
 
@@ -278,7 +278,7 @@ a[x-apple-data-detectors=true] {
                     <div class="">
   <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 10px; padding-left: 10px; padding-top: 10px; padding-bottom: 10px;"><![endif]-->
   <div style="color:#000000;line-height:120%;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif; padding-right: 10px; padding-left: 10px; padding-top: 10px; padding-bottom: 10px;">  
-    <div style="font-size:12px;line-height:14px;color:#000000;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;text-align:left;"><p style="margin: 0;font-size: 14px;line-height: 17px"><span style="line-height: 16px; font-size: 14px;"><strong>Name:&#160;&#160;</strong>Sweety Mandal</span></p><p style="margin: 0;font-size: 14px;line-height: 17px"><span style="line-height: 16px; font-size: 14px;"><strong>Adddress: </strong>Kolkata<strong><br></strong></span></p><p style="margin: 0;font-size: 14px;line-height: 17px"><span style="line-height: 16px; font-size: 14px;"><strong>Contact No.:</strong>&#160; &#160;9898989981</span><br><span style="line-height: 16px; font-size: 14px;"><strong>Registration Date:&#160; &#160;</strong> 20180408&#160;</span><br><span style="line-height: 16px; font-size: 14px;"><strong>Date of Birth:</strong> 19950115 00:00:00 <strong>Email Id</strong> surajskfgi@gmail.com</span><br></p></div>  
+    <div style="font-size:12px;line-height:14px;color:#000000;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;text-align:left;"><p style="margin: 0;font-size: 14px;line-height: 17px"><span style="line-height: 16px; font-size: 14px;"><strong>Name:&#160;&#160;</strong>{{$user->fname.' '.$user->lname}}</span></p><p style="margin: 0;font-size: 14px;line-height: 17px"><span style="line-height: 16px; font-size: 14px;"><strong>Address: </strong>{{$user->address}}<strong><br></strong></span></p><p style="margin: 0;font-size: 14px;line-height: 17px"><span style="line-height: 16px; font-size: 14px;"><strong>Contact No.:</strong>&#160; &#160;{{$user->contact_no}}</span><br><span style="line-height: 16px; font-size: 14px;"><strong>Registration Date:&#160; &#160;</strong>{{date('d-m-y',strtotime($user->created_at))}}&#160;</span><br><span style="line-height: 16px; font-size: 14px;"><strong>Date of Birth:</strong>{{date('d-m-y',strtotime($user->dob))}}</span><br><span style="line-height: 16px; font-size: 14px;"><strong>Email Id:</strong>{{$user->email}}</span><br></p></div>  
   </div>
   <!--[if mso]></td></tr></table><![endif]-->
 </div>
@@ -295,7 +295,7 @@ a[x-apple-data-detectors=true] {
                     <div class="">
   <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 10px; padding-left: 10px; padding-top: 10px; padding-bottom: 10px;"><![endif]-->
   <div style="color:#000000;line-height:120%;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif; padding-right: 10px; padding-left: 10px; padding-top: 10px; padding-bottom: 10px;">  
-    <div style="font-size:12px;line-height:14px;color:#000000;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;text-align:left;"><p style="margin: 0;font-size: 14px;line-height: 17px"><span style="font-size: 14px; line-height: 16px;"><strong>Name:&#160;&#160;</strong>Sweety Mandal</span></p><p style="margin: 0;font-size: 14px;line-height: 17px"><span style="font-size: 14px; line-height: 16px;"><strong>Adddress: </strong>Kolkata<strong><br></strong></span></p><p style="margin: 0;font-size: 14px;line-height: 17px"><span style="font-size: 14px; line-height: 16px;"><strong>Contact No.:</strong>&#160; &#160;9898989981</span><br><span style="font-size: 14px; line-height: 16px;"><strong>Registration Date:&#160; &#160;</strong> 20180408&#160;</span><br><span style="font-size: 14px; line-height: 16px;"><strong>Date of Birth:</strong> 19950115 00:00:00 <strong>Email Id</strong> surajskfgi@gmail.com</span><br></p></div>  
+    <div style="font-size:12px;line-height:14px;color:#000000;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;text-align:left;"><p style="margin: 0;font-size: 14px;line-height: 17px"><span style="font-size: 14px; line-height: 16px;"><strong>Name:&#160;&#160;</strong>{{$user->sponsor->fname.' '.$user->sponsor->lname  }}</span></p><p style="margin: 0;font-size: 14px;line-height: 17px"><span style="font-size: 14px; line-height: 16px;"><strong>Address: </strong>{{$user->sponsor->address}}<strong><br></strong></span></p><p style="margin: 0;font-size: 14px;line-height: 17px"><span style="font-size: 14px; line-height: 16px;"><strong>Contact No.:</strong>&#160; &#160;{{$user->sponsor->contact_no}}</span><br><span style="font-size: 14px; line-height: 16px;"><strong>Registration Date:&#160; &#160;</strong> {{date('d-m-y',strtotime($user->sponsor->created_at))}}&#160;</span><br><span style="font-size: 14px; line-height: 16px;"><strong>Date of Birth:</strong>{{date('d-m-y',strtotime($user->sponsor->dob))}}</span><br><strong>Email Id:</strong> {{$user->sponsor->email}}</span><br></p></div>  
   </div>
   <!--[if mso]></td></tr></table><![endif]-->
 </div>
@@ -454,6 +454,14 @@ a[x-apple-data-detectors=true] {
       </div>
     </div>   <!--[if (mso)|(IE)]></td></tr></table><![endif]-->
     </td>
+  </tr>
+  <tr><td>
+   <a style="width:30px;margin-left: 50%" href="javascript:void(0);" onclick="window.print();">
+    <img src="{{asset('images/print.ico')}}" title="Click to print" style="width: 27px; margin-top: 30px;"> 
+   </a>
+
+
+  </td>
   </tr>
   </tbody>
   </table>

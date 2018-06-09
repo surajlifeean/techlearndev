@@ -24,7 +24,7 @@
                    </div>  
                     
                    <div class="button-set">
-                       <a href="{{route('pdf',Auth::user()->id)}}"  class="button-small">Invoice</a>
+                       <a href="{{route('pdf',Auth::user()->id)}}"  class="button-small" target="_blank">Invoice</a>
                        <a href="{{route('education.index')}}"  class="button-small">Education</a>
                        <a href="#"  class="button-small">Business</a>
                    </div>     

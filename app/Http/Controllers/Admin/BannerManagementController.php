@@ -60,7 +60,8 @@ class BannerManagementController extends Controller
 
         // use $location='images/'.$filename; on a server
 
-        Image::make($image)->resize(1920,660)->save($location);
+        Image::make($image)->resize(1920,null)->save($location);
+        //660
         $banner->image=$filename;
         $banner->save();        
 

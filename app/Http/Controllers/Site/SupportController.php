@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Site;
+namespace App\Http\Controllers\site;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\User;
-use PDF;
+use App\SupportSubject;
 
-class StudyDashboardController extends Controller
+class SupportController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +15,9 @@ class StudyDashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard.index');
+        $support=SupportSubject::pluck('subject','id');
+        
+        return view('education.support')->withSupport($support);
     }
 
     /**
@@ -26,8 +27,8 @@ class StudyDashboardController extends Controller
      */
     public function create()
     {
-        dd("create") ;
-          }
+        //
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -37,7 +38,7 @@ class StudyDashboardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
     }
 
     /**
@@ -84,16 +85,4 @@ class StudyDashboardController extends Controller
     {
         //
     }
-
-     public function downloadPDF($id){
-
-   // dd($id)
-        
-      $user = User::find($id);
-      // $pdf = PDF::loadView('invoice.create', compact('user'));
-//      dd(compact('user'));
-      return view('invoice.create')->withUser($user);
-
-    }
-
 }

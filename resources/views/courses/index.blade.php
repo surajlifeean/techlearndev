@@ -32,7 +32,7 @@
 
 @section('content')
 
-     <section class="banner-sleek" style="background-image:url({{asset('images/banne-inner.jpg')}}); background-size: cover;">
+     <section class="banner-sleek" style="background-image:url({{asset('images/banner-inner.png')}}); background-size: cover;">
       
 	    <div class="banner-text text-center">
 		   <div class="banner-container">

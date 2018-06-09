@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Site;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Course;
+use App\User;
+use Auth;
 class StudentController extends Controller
 {
     /**
@@ -16,6 +18,8 @@ class StudentController extends Controller
     {
         // $courses=Course::all();
         // return view('courses.index')->withCourses($courses);
+            $id=Auth::user()->id;
+            $user = User::find($id);
             return view('student.profile');
     }
 

@@ -26,10 +26,10 @@
                             <li><a href="#">Business</a></li>
                         </ul>
                         <ul class="footer-links">
-                            <li><a href="#">About Us</a></li>
+                            <li><a href="{{url('/aboutus')}}">About Us</a></li>
                             <li><a href="#">Press</a></li>
-                            <li><a href="#">Terms of Use</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="{{url('/aboutus')}}">Terms of Use</a></li>
+                            <li><a href="{{url('/aboutus')}}">Privacy Policy</a></li>
                         </ul>
                         <ul class="footer-links">
                             <!-- <li><a href="#">Need Help?</a></li> -->

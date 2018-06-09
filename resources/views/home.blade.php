@@ -34,8 +34,9 @@
  @section('content')
   <section class="banner-sec" style="background-image:url({{asset('uploaded_images/banner/'.$banner->image)}})">
         <div class="banner-txt">
-            <h1>We are an awesome study guide...</h1>
-            <p>The interactive learning destination for aspiring students</p>
+            <!-- <h1>We are an awesome study guide...</h1>
+            <p>The interactive learning destination for aspiring students</p> -->
+            {!!$banner->banner_text!!}
             <div class="button-wrap">
                 <a class="button-common-white button-common" href="#">login</a>
                 <a class="button-common" href="#">Enroll</a>
