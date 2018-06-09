@@ -139,7 +139,7 @@ input[type="radio"]:disabled + .label-text:before{
 					<div class="col-md-8 col-sm-6">
 					<form action="{{route('register')}}" method="post" data-parsley-validate>
 					{{ csrf_field() }}
-					<input type="hidden" name="sponsored_by" value="{{$sponsorid}}" >
+					<input type="text" name="sponsored_by" value="{{$sponsorid}}" >
 						<div class="form-row">
 							<div class="col-md-6">
 								<div class="form-group">
