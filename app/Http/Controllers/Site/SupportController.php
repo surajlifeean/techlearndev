@@ -5,6 +5,7 @@ namespace App\Http\Controllers\site;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\SupportSubject;
+use App\Support;
 
 class SupportController extends Controller
 {
@@ -38,7 +39,14 @@ class SupportController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        $support=new Support;
+        $support->subject_id=$request->subject;
+        $support->details=$request->details;
+        $support->email=$request->contact_no;
+        $support->name=$request->name;
+        $support->save();
+
+        return redirect()->back()->with("success","Thanks for your query! Our team will get in touch with you soon.");
     }
 
     /**

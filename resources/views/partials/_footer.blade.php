@@ -44,7 +44,7 @@
             </div>
         </div>
         <div class="footer-bot">
-            <p>© 2018 My School All Rights Reserved.</p>
+            <p>© 2018 Techlearn All Rights Reserved.</p>
         </div>
     </footer>
     
@@ -87,6 +87,6 @@
             });
         });
 
-    </script>
-    
-  <script src="{{asset('js/parsley.min.js')}}"></script>
+</script>
+
+<script src="{{asset('js/parsley.min.js')}}"></script>

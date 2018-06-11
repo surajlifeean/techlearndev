@@ -61,22 +61,22 @@
                         </div>
 
                         
-                          <div class="form-group">
+<!--                           <div class="form-group">
                             <label class="col-sm-3 control-label">Nominee</label>
                             <div class="col-sm-9">
                         
                               <input type="text" name="nominee"   class="form-control" placeholder="Nominee" required>
 
                             </div>
-                          </div>
-                          <div class="form-group">
+                          </div> -->
+                          <!-- <div class="form-group">
                             <label class="col-sm-3 control-label">Relationship With Nominee</label>
                             <div class="col-sm-9">
                               
                               <input type="text" name="relation_with_nominee"  class="form-control" placeholder="Relationship With Nominee" required>
 
                             </div>
-                          </div>
+                          </div> -->
                           <div class="form-group">
                             <label class="col-sm-3 control-label">Contact No</label>
                             <div class="col-sm-9">
@@ -102,16 +102,16 @@
                             </div>
                           </div>
                           <div class="form-group">
-                            <label class="col-sm-3 control-label">Mode Of Correspondence</label>
+                            <!-- <label class="col-sm-3 control-label">Mode Of Correspondence</label>
                             <div class="col-sm-9">
-                              
+                             -->  
                              <!--  <input type="text" name="correspondence"   class="form-control" placeholder="Mode Of Correspondence" required> -->
-                              <select  name="correspondence" class="form-control" placeholder="Select correspondence">
+                              <!-- <select  name="correspondence" class="form-control" placeholder="Select correspondence">
                             <option value="Courier">Courier</option>
                             <option value="Speed Post">Speed Post</option>
                            
                           </select>
-
+ -->
                             </div>
                           </div>
                           <div class="form-group">
@@ -187,14 +187,14 @@ You have <input readonly type="text" name="countdown" size="3" value="100"> char
 
                             </div>
                           </div>
-                          <div class="form-group">
+<!--                           <div class="form-group">
                             <label class="col-sm-3 control-label">Placed Side</label>
                             <div class="col-sm-9">
                               
                               <input type="text" name="side"   class="form-control"  readonly="">
 
                             </div>
-                          </div>
+                          </div> -->
                           <div class="form-group">
                             <label class="col-sm-3 control-label">Course</label>
                             <div class="col-sm-9">
@@ -205,35 +205,35 @@ You have <input readonly type="text" name="countdown" size="3" value="100"> char
                             </div>
                           </div>
                           <div class="line line-dashed line-lg pull-in"></div>
-
+<!-- 
                           <header class="panel-heading">
                         <strong>Payment Details</strong>
-                      </header>                      
-                        <div class="form-group">
+                      </header>    -->                   
+                        <!-- <div class="form-group">
                             <label class="col-sm-3 control-label">Demand Draft No</label>
                             <div class="col-sm-9">
                              
                               <input type="text" name="ddno"   class="form-control" placeholder="Demand Draft No" required>
 
                             </div>
-                          </div>
-                          <div class="form-group">
+                          </div> -->
+                          <!-- <div class="form-group">
                             <label class="col-sm-3 control-label">Amount</label>
                             <div class="col-sm-9">
                              
                               <input type="password" name="amount"   class="form-control" placeholder="Amount" required>
 
                             </div>
-                          </div>
-                          <div class="form-group">
+                          </div> -->
+                          <!-- <div class="form-group">
                             <label class="col-sm-3 control-label">Issuing Bank</label>
                             <div class="col-sm-9">
                              
                               <input type="text" name="issuing_bank"   class="form-control" placeholder="Issuing Bank" required>
 
                             </div>
-                          </div>
-                          <div class="form-group">
+                          </div> -->
+                          <!-- <div class="form-group">
                             <label class="col-sm-3 control-label">Issuing Date</label>
                             <div class="col-sm-9">
                              
@@ -241,7 +241,7 @@ You have <input readonly type="text" name="countdown" size="3" value="100"> char
 
                             </div>
                           </div>
-
+ --><!-- 
                           <div class="form-group">
                             <label class="col-sm-3 control-label">Issuing Bank Branch</label>
                             <div class="col-sm-9">
@@ -249,7 +249,7 @@ You have <input readonly type="text" name="countdown" size="3" value="100"> char
                               <input type="text" name="bank_branch"  class="form-control" placeholder="Issuing Bank Branch" required>
 
                             </div>
-                          </div>
+                          </div> -->
                        
                     
                     <!-- <label for="">Issuing Bank Branch</label>

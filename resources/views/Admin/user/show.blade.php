@@ -72,14 +72,6 @@
                       
 
                           <div class="form-group">
-                            <label class="col-sm-3 control-label">Nominee</label>
-                            <div class="col-sm-9">
-                              <!-- <textarea class="summernote" name="requirement" class="form-control" required>{!!$users->requirement!!}</textarea>  -->
-                              <input type="text" name="price"  value="{{$users->nominee}}" class="form-control" placeholder="First Name" required>
-
-                            </div>
-                          </div>
-                          <div class="form-group">
                             <label class="col-sm-3 control-label">Relationship With Nominee</label>
                             <div class="col-sm-9">
                               <!-- <textarea class="summernote" name="requirement" class="form-control" required>{!!$users->requirement!!}</textarea>  -->
@@ -137,11 +129,28 @@
                           <div class="form-group">
                             <label class="col-sm-3 control-label">Landmark</label>
                             <div class="col-sm-9">
-                              <!-- <textarea class="summernote" name="requirement" class="form-control" required>{!!$users->requirement!!}</textarea>  -->
+                            
                               <input type="text" name="price"  value="{{$users->landmark}}" class="form-control" placeholder="Landmark" required>
 
                             </div>
                           </div>
+                          <div class="form-group">
+                            <label class="col-sm-3 control-label">Student id</label>
+                            <div class="col-sm-9">
+                            
+                              <input type="text" name="price"  value="{{$users->student_id}}" class="form-control" placeholder="student_id" disabled="true">
+
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-sm-3 control-label">Bussiness id</label>
+                            <div class="col-sm-9">
+                            
+                              <input type="text" name="price"  value="{{$users->business_id}}" class="form-control" placeholder="business_id" disabled="true">
+
+                            </div>
+                          </div>
+
                           <div class="line line-dashed line-lg pull-in"></div>
                         <header class="panel-heading">
                         <strong>Account Details</strong>

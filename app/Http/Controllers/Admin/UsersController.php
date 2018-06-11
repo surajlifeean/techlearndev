@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Course;
 use session;
+use Illuminate\Support\Facades\Hash;
+
 class UsersController extends Controller
 {
     /**
@@ -16,7 +18,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users=User::Paginate(5);
+        $users=User::orderBy('created_at')->Paginate(5);
         return view('Admin.user.index')->withUsers($users);
     }
 
@@ -65,32 +67,21 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {        // dd($request->ddno);
+    {         //dd($request);
                   $register= new User;
                   $register->title=$request->title;
                   $register->fname=$request->fname;
                   $register->lname=$request->lname;
-                  $register->nominee=$request->nominee;
-                  $register->relation_with_nominee=$request->relation_with_nominee;
                   $register->contact_no=$request->contact_no;
                   $register->email=$request->email;
                   $register->dob=$request->dob;
-                  $register->correspondence=$request->correspondence;
-                  //$register->guardian=$request->guardian;
                   $register->address=$request->limitedtextarea;
                   $register->landmark=$request->landmark;
                   $register->username=$request->username;
-                  $register->password=$request->password;
-                  $register->side=$request->side;
+                  $register->password=Hash::make($request->password);
                   $register->course=$request->course;
-                   $register->ddno=$request->ddno;
-                  $register->amount=$request->amount;
-                  $register->issuing_bank=$request->issuing_bank;
-                  $register->issuing_date=$request->issuing_date;
-                  $register->bank_branch=$request->bank_branch;
-                  $register->business_id='B-'.strtotime((date('Ymd His'))).rand(0,20);
-                  $register->student_id='S-'.strtotime((date('Ymd His'))).rand(0,20);
-                  $register->email_token=base64_encode($request->email);
+                  $register->student_id='B-'.strtotime((date('is'))).rand(10,99);
+                  $register->business_id='S-'.strtotime((date('is'))).rand(10,99);
                   $register->save();
                   $request->session()->flash('success', 'The Registration Has Been  Successfully Done By You!');
             //session::flash('success', 'The Category Has Been Added Successfully!');

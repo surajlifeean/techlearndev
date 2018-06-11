@@ -86,11 +86,15 @@
 
         
                           <tr>
-
+                            @if(!isset($value->sponsor_id))
+                            <td>
+                              <img src="{{asset('images/root.png')}}" style="width: 20px">
+                            </td>
+                            @else
                             <td><input type="checkbox" name="del[]" value="{{$value->id}}" id="checked"></td>
-
+                            @endif
                             <td>{{$value->title}}</td>
-                            <td>{{$value->fname}}{{$value->lname}}</td>
+                            <td>{{$value->fname}} {{$value->lname}}</td>
                             <td>{{$value->address}}</td>
                             <td>{{$value->userCourse->title}}</td>                       
                             <td>{{date('jS M, Y', strtotime($value->created_at))}}</td>

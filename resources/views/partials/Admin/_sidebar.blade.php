@@ -21,6 +21,14 @@
                             <span>User List</span>
                           </a>
                         </li>
+
+                        <li >
+                          <a href="{{url('admin/users/create')}}" >                                                        
+                            <i class="fa fa-angle-right"></i>
+                            <span>Root User</span>
+                          </a>
+                        </li>
+
                       </ul>
                     </li>
                     <li >
@@ -116,6 +124,16 @@
 
                       </ul>
                     </li>
+                    
+                    <li >
+                      <a href="{{url('admin/support-management')}}"  >
+                        <i class="fa fa-envelope-o icon">
+                          <b class="bg-primary dker"></b>
+                        </i>
+                        <span>Support Queries</span>
+                      </a>
+                    </li>
+
 
                     
                   </ul>
