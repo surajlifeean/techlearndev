@@ -52,7 +52,7 @@
         
       		<hr>
 			
-			<h3> Course Overview</h3>
+			<h3> Course Content</h3>
 			
 			@foreach($video as $value)
 			<div class="courseoverview">

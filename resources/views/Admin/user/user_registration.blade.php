@@ -23,8 +23,12 @@
                  
                      
                       
+                      @if(isset($rootdetails))
+                        {{Form::model($rootdetails,['route' =>['users.update',$rootdetails->id],'method' =>'PUT', 'files' => true, 'class'=>'form-horizontal course-form','data-parsley-validate'])}}
+                      @else
+                        {{Form::open(['route' => 'users.store','files' => true, 'class'=>'form-horizontal course-form','data-parsley-validate'])}}
+                      @endif
 
-                      {{Form::open(['route' => 'users.store','files' => true, 'class'=>'form-horizontal course-form','data-parsley-validate'])}}
                       <div class="line line-dashed line-lg pull-in"></div>
                       <header class="panel-heading">
                         <strong>Personal Information Of Students</strong>
@@ -34,12 +38,9 @@
 
                           <label class="col-sm-3 control-label">User Title</label>
                           <div class="col-sm-9">
-                           <!--  <input type="text" name="title" class="form-control"  data-required="true" placeholder="User Title"> --> 
-                          <select  name="title" class="form-control" placeholder="Select Title">
-                            <option value="Mr">Mr</option>
-                            <option value="Miss">Miss</option>
-                            <option value="Mrs">Mrs</option>
-                          </select>
+                           
+                          {{Form::select('title',["Mr","Miss","Mrs"],null,['placeholder'=>'Select Title','class'=>'form-control','required'=>'true'])}}
+
 
                           </div>
                         </div>
@@ -47,41 +48,27 @@
                         <div class="form-group">
                           
                           <label class="col-sm-3 control-label">First Name</label>
-                          <div class="col-sm-3">
+                          <!-- <div class="col-sm-3">
                             <input type="text" name="fname"  class="form-control" placeholder="First Name" required>
+                          </div> -->
+                          <div class="col-sm-3">
+                          {{Form::text('fname',null,['class'=>'form-control','placeholder'=>'First name', 'required'=>true])}}
                           </div>
-
-
                           <label class="col-sm-3 control-label">Last Name</label>
                           <div class="col-sm-3">
-                            <input type="text" name="lname"   class="form-control" placeholder="Last Name" required>
+                          {{Form::text('lname',null,['class'=>'form-control','placeholder'=>'Last name', 'required'=>true])}}
                           </div>
                          
 
                         </div>
 
-                        
-<!--                           <div class="form-group">
-                            <label class="col-sm-3 control-label">Nominee</label>
-                            <div class="col-sm-9">
-                        
-                              <input type="text" name="nominee"   class="form-control" placeholder="Nominee" required>
-
-                            </div>
-                          </div> -->
-                          <!-- <div class="form-group">
-                            <label class="col-sm-3 control-label">Relationship With Nominee</label>
-                            <div class="col-sm-9">
-                              
-                              <input type="text" name="relation_with_nominee"  class="form-control" placeholder="Relationship With Nominee" required>
-
-                            </div>
-                          </div> -->
+                      
                           <div class="form-group">
                             <label class="col-sm-3 control-label">Contact No</label>
                             <div class="col-sm-9">
                               
-                              <input type="text" name="contact_no"   class="form-control" placeholder="Contact No" required>
+<!--                               <input type="text" name="contact_no"   class="form-control" placeholder="Contact No" required> -->
+                              {{Form::text('contact_no',null,['class'=>'form-control','placeholder'=>'Contact No.', 'required'=>true])}}
 
                             </div>
                           </div>
@@ -89,7 +76,8 @@
                             <label class="col-sm-3 control-label">Email Id</label>
                             <div class="col-sm-9">
                               
-                              <input type="email" name="email"   class="form-control" placeholder="Email" required>
+                             <!--  <input type="email" name="email"   class="form-control" placeholder="Email" required> -->
+                            {{Form::text('email',null,['class'=>'form-control','placeholder'=>'Email', 'required'=>true])}}
 
                             </div>
                           </div>
@@ -97,28 +85,22 @@
                             <label class="col-sm-3 control-label">Date Of Birth</label>
                             <div class="col-sm-9">
                              
-                              <input type="date" name="dob"   class="form-control" placeholder="Date Of Birth" required>
+<!--                               <input type="date" name="dob"   class="form-control" placeholder="Date Of Birth" required>
+ -->
+                              {{Form::text('dob',date('m/d/Y',strtotime($rootdetails->dob)),['class'=>'form-control','placeholder'=>'Date of birth', 'required'=>true])}}
 
                             </div>
                           </div>
                           <div class="form-group">
-                            <!-- <label class="col-sm-3 control-label">Mode Of Correspondence</label>
-                            <div class="col-sm-9">
-                             -->  
-                             <!--  <input type="text" name="correspondence"   class="form-control" placeholder="Mode Of Correspondence" required> -->
-                              <!-- <select  name="correspondence" class="form-control" placeholder="Select correspondence">
-                            <option value="Courier">Courier</option>
-                            <option value="Speed Post">Speed Post</option>
-                           
-                          </select>
- -->
+                      
                             </div>
                           </div>
                           <div class="form-group">
                             <label class="col-sm-3 control-label">Name of Father/Guardian</label>
                             <div class="col-sm-9">
                              
-                              <input type="text" name="guardian"  class="form-control" placeholder="Name of Father/Guardian"  required>
+                              <!-- <input type="text" name="guardian"  class="form-control" placeholder="Name of Father/Guardian"  required> -->
+                             {{Form::text('guardian',null,['class'=>'form-control','placeholder'=>'Guardian', 'required'=>true])}}
 
                             </div>
                           </div>
@@ -126,44 +108,20 @@
                           <label class="col-sm-3 control-label"> Address</label>
                           <div class="col-sm-9">
                           
-                            <!-- <textarea  name="address" class="form-control" required></textarea>  -->
                             <textarea name="limitedtextarea"  class="form-control" onKeyDown="limitText(this.form.limitedtextarea,this.form.countdown,100);" 
-onKeyUp="limitText(this.form.limitedtextarea,this.form.countdown,100);">
+onKeyUp="limitText(this.form.limitedtextarea,this.form.countdown,100);">                      @if(isset($rootdetails)) {{$rootdetails->address}} @endif
 </textarea><br>
 <font size="1">(Maximum characters: 100)<br>
 You have <input readonly type="text" name="countdown" size="3" value="100"> characters left.</font>
                           </div>
                         </div>
                             
-
-
-                         <!--  <div class="form-group">
-                          <label class="col-sm-3 control-label"> Address</label>
-                          <div class="col-sm-9">
-                          
-                            <textarea id="message" class="form-control" maxlength="150" onkeyup="countChar(this)"
-          placeholder="Type your message ..." >
-                            </textarea>
-
-                            <input id="display_count" class="input-mini uneditable-input"
-                                   placeholder="0 Chars" readonly />
-                            
-                            <input id="word_left" class="input-medium uneditable-input"
-                                    readonly /> 
-                          </div>
-                        </div> -->
-
-                     <!--   <textarea id="word_count" class="form-control"></textarea>
-                         <input id="text-character" class="input-mini uneditable-input"
-                                   placeholder="0 Chars" readonly />
-                                    <input id="text-character" class="input-mini uneditable-input"
-                                   placeholder="0 Chars" readonly /> -->
-                       
                           <div class="foountrm-group">
                             <label class="col-sm-3 control-label">Landmark</label>
                             <div class="col-sm-9">
                              
-                              <input type="text" name="landmark"  class="form-control" placeholder="Landmark" required>
+<!--                               <input type="text" name="landmark"  class="form-control" placeholder="Landmark" required> -->
+                          {{Form::text('landmark',null,['class'=>'form-control','placeholder'=>'Landmark', 'required'=>true])}}
 
                             </div>
                           </div>
@@ -175,7 +133,7 @@ You have <input readonly type="text" name="countdown" size="3" value="100"> char
                             <label class="col-sm-3 control-label">User Name</label>
                             <div class="col-sm-9">
                              
-                              <input type="text" name="username"   class="form-control" placeholder="User Name" required>
+                          {{Form::text('username',null,['class'=>'form-control','placeholder'=>'username', 'required'=>true])}}
 
                             </div>
                           </div>
@@ -183,7 +141,8 @@ You have <input readonly type="text" name="countdown" size="3" value="100"> char
                             <label class="col-sm-3 control-label">Password</label>
                             <div class="col-sm-9">
                              
-                              <input type="password" name="password"   class="form-control" placeholder="Password" required>
+<!--                               <input type="password" name="password"   class="form-control" placeholder="Password" required> -->
+                              {{Form::text('password',null,['class'=>'form-control','placeholder'=>'First name', 'required'=>true])}}
 
                             </div>
                           </div>
@@ -205,56 +164,7 @@ You have <input readonly type="text" name="countdown" size="3" value="100"> char
                             </div>
                           </div>
                           <div class="line line-dashed line-lg pull-in"></div>
-<!-- 
-                          <header class="panel-heading">
-                        <strong>Payment Details</strong>
-                      </header>    -->                   
-                        <!-- <div class="form-group">
-                            <label class="col-sm-3 control-label">Demand Draft No</label>
-                            <div class="col-sm-9">
-                             
-                              <input type="text" name="ddno"   class="form-control" placeholder="Demand Draft No" required>
 
-                            </div>
-                          </div> -->
-                          <!-- <div class="form-group">
-                            <label class="col-sm-3 control-label">Amount</label>
-                            <div class="col-sm-9">
-                             
-                              <input type="password" name="amount"   class="form-control" placeholder="Amount" required>
-
-                            </div>
-                          </div> -->
-                          <!-- <div class="form-group">
-                            <label class="col-sm-3 control-label">Issuing Bank</label>
-                            <div class="col-sm-9">
-                             
-                              <input type="text" name="issuing_bank"   class="form-control" placeholder="Issuing Bank" required>
-
-                            </div>
-                          </div> -->
-                          <!-- <div class="form-group">
-                            <label class="col-sm-3 control-label">Issuing Date</label>
-                            <div class="col-sm-9">
-                             
-                              <input type="Date" name="issuing_date"  class="form-control" placeholder="Issuing Date" required>
-
-                            </div>
-                          </div>
- --><!-- 
-                          <div class="form-group">
-                            <label class="col-sm-3 control-label">Issuing Bank Branch</label>
-                            <div class="col-sm-9">
-                             
-                              <input type="text" name="bank_branch"  class="form-control" placeholder="Issuing Bank Branch" required>
-
-                            </div>
-                          </div> -->
-                       
-                    
-                    <!-- <label for="">Issuing Bank Branch</label>
-                    <input type="text" name="bank_branch" class="form-control" required> -->
-                      
 
                        <div class="line line-dashed line-lg pull-in"></div>
                        

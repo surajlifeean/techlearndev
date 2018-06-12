@@ -49,7 +49,8 @@ class UsersController extends Controller
             Session::flash('error','No Student with the entered ID exists.');
             return redirect()->back();
             }*/
-
+             $rootuser=User::where('side',NULL)->first();
+             //dd($rootuser);
              $course=Course::all();
                 $coursearray=array();
                 foreach ($course as $key => $value) {
@@ -57,7 +58,8 @@ class UsersController extends Controller
                         $coursearray[$value->id]=$value->title;
 
                 }
-                return view('Admin.user.user_registration')->withCourse($coursearray);
+
+                return view('Admin.user.user_registration')->withCourse($coursearray)->withRootdetails($rootuser);
     }
 
     /**
@@ -129,7 +131,27 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+       // dd($request);
+         $register= User::find($id);
+                  $register->title=$request->title;
+                  $register->fname=$request->fname;
+                  $register->lname=$request->lname;
+                  $register->contact_no=$request->contact_no;
+                  $register->email=$request->email;
+                  $register->dob=date('Y-m-d',strtotime($request->dob));
+                  $register->address=$request->limitedtextarea;
+                  $register->landmark=$request->landmark;
+                  $register->username=$request->username;
+                  //$register->password=Hash::make($request->password);
+                  $register->course=$request->course;
+                  //$register->student_id='B-'.strtotime((date('is'))).rand(10,99);
+                  //$register->business_id='S-'.strtotime((date('is'))).rand(10,99);
+                  $register->save();
+                  $request->session()->flash('success', 'The Registration Has Been  Successfully Done By You!');
+            //session::flash('success', 'The Category Has Been Added Successfully!');
+           return redirect('/admin/users');
+
+
     }
 
     /**
