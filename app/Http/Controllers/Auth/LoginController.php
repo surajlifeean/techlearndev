@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\User;
 
 class LoginController extends Controller
 {
@@ -46,5 +47,33 @@ class LoginController extends Controller
     {
     return 'username';
     }
+    public function existsusername(){
 
+        $username=$_REQUEST['username'];
+        $user=User::select('username')->where('username','=',$username)->first();
+        if(is_null($user)){
+            echo '0';
+        }
+        else{
+            echo '1';
+        }
+
+    }
+    public function existsunamensid(){
+
+        $username=$_REQUEST['username'];
+        $sid=$_REQUEST['sid'];
+        $user=User::select('username')
+        ->where([
+                ['username','=',$username],
+                ['id','=',$sid]
+            ])->first();
+        if(is_null($user)){
+            echo '0';
+        }
+        else{
+            echo '1';
+        }
+
+    }
 }

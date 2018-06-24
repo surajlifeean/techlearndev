@@ -154,7 +154,7 @@ input[type="radio"]:disabled + .label-text:before{
 							<div class="col-md-6">
 							  <div class="form-group">
 									<label for="">First Name</label>
-								  	<input type="text" name="fname" placeholder="Enter first name" class="form-control" required>
+								  	<input type="text" name="fname" placeholder="Enter First Name" class="form-control" required>
 							  </div>	
 							</div>	
 						</div>
@@ -162,13 +162,13 @@ input[type="radio"]:disabled + .label-text:before{
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="">Last Name</label>
-								  	<input type="text" name="lname" placeholder="Enter lastname" class="form-control" required>
+								  	<input type="text" name="lname" placeholder="Enter Last Name" class="form-control" required>
 							  	</div>
 							</div>
 							<div class="col-md-6">
 							  <div class="form-group">
 									<label for="">Nominee</label>
-								  	<input type="text" name="nominee" class="form-control" required>
+								  	<input type="text" name="nominee" placeholder="Nominee" class="form-control" required>
 							  </div>	
 							</div>	
 						</div>
@@ -188,7 +188,7 @@ input[type="radio"]:disabled + .label-text:before{
 							<div class="col-md-6">
 							  <div class="form-group">
 									<label for="">Contact No</label>
-								  	<input type="tel" name="contact_no"  class="form-control" required>
+								  	<input type="tel" name="contact_no" placeholder="Contact no"  class="form-control" required>
 							  </div>	
 							</div>	
 						</div>
@@ -196,13 +196,13 @@ input[type="radio"]:disabled + .label-text:before{
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="">Email Id</label>
-								  	<input type="text" name="email" class="form-control" required>
+								  	<input type="text" name="email" placeholder="Email id" class="form-control" required>
 							  	</div>
 							</div>
 							<div class="col-md-6">
 							  <div class="form-group">
 									<label for="">Date Of Birth</label>
-								  	<input type="date" name="dob" class="form-control" required>
+								  	<input type="date" name="dob" class="form-control" placeholder="Date of Birth" required>
 							  </div>	
 							</div>	
 						</div>
@@ -210,13 +210,16 @@ input[type="radio"]:disabled + .label-text:before{
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="">Mode Of Correspondence</label>
-								  	<input type="text" name="correspondence" class="form-control" required>
+								  	<!-- <input type="text" name="correspondence" class="form-control"  required>
+								  	 -->
+								  	 {{Form::select('correspondence',['courier'=>'courier','Speed Post'=>'Speed Post'],null,['placeholder'=>'Mode of correspondence','class'=>'form-control','required'=>'true'])}}
+
 							  	</div>
 							</div>
 							<div class="col-md-6">
 							  <div class="form-group">
 									<label for="">Name of Father/Guardian</label>
-								  	<input type="text" name="guardian" class="form-control" required>
+								  	<input type="text" name="guardian" class="form-control" placeholder="Guardian" required>
 							  </div>	
 							</div>	
 						</div>
@@ -224,13 +227,13 @@ input[type="radio"]:disabled + .label-text:before{
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="">Address</label>
-								  	<input type="text" name="address" id="address" onFocus="initAutocomplete();" class="form-control" required>
+								  	<input type="text" name="address" id="address" onFocus="initAutocomplete();" placeholder="Address" class="form-control" required>
 							  	</div>
 							</div>
 							<div class="col-md-6">
 							  <div class="form-group">
 									<label for="">Landmark</label>
-								  	<input type="text" name="landmark" class="form-control" required>
+								  	<input type="text" name="landmark" class="form-control" placeholder="landmark" required>
 							  </div>	
 							</div>	
 						</div>
@@ -244,13 +247,13 @@ input[type="radio"]:disabled + .label-text:before{
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="">User Name</label>
-								  	<input type="text" name="username" class="form-control" required>
+								  	<input type="text" name="username" class="form-control" placeholder="Username" required>
 							  	</div>
 							</div>
 							<div class="col-md-6">
 							  <div class="form-group">
 									<label for="">Password</label>
-								  	<input type="password" name="password" class="form-control" required>
+								  	<input type="password" name="password" placeholder="Password"  class="form-control" required>
 							  </div>	
 							</div>	
 						</div>
@@ -287,13 +290,13 @@ input[type="radio"]:disabled + .label-text:before{
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="">Demand Draft No</label>
-								  	<input type="text" name="ddno" class="form-control" required>
+								  	<input type="text" name="ddno" class="form-control" placeholder="Demand Draft No" required>
 							  	</div>
 							</div>
 							<div class="col-md-6">
 							  <div class="form-group">
 									<label for="">Amount</label>
-								  	<input type="text" name="amount" class="form-control" required>
+								  	<input type="text" name="amount" class="form-control" placeholder="Amount" required>
 							  </div>	
 							</div>	
 						</div>
@@ -302,13 +305,13 @@ input[type="radio"]:disabled + .label-text:before{
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="">Issuing Bank</label>
-								  	<input type="text" name="issuing_bank" class="form-control" required>
+								  	<input type="text" name="issuing_bank" placeholder="Issuing bank" class="form-control" required>
 							  	</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="">Issuing Date</label>
-								  	<input type="date" name="issuing_date" class="form-control" required>
+								  	<input type="date" name="issuing_date" placeholder="Issuing Date" class="form-control" required>
 							  	</div>
 							</div>
 								
@@ -317,7 +320,7 @@ input[type="radio"]:disabled + .label-text:before{
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="">Issuing Bank Branch</label>
-								  	<input type="text" name="bank_branch" class="form-control" required>
+								  	<input type="text" name="bank_branch" placeholder="Issuing Bank Branch" class="form-control" required>
 							  	</div>
 							</div>
 							

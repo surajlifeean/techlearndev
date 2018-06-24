@@ -14,7 +14,7 @@
                     <ul class="top-menu">
                         <li><a href="{{url('/learn')}}">Learn</a></li>
                         <li><a href="#">Business</a></li>
-                        <li><a href="#">Support</a></li>
+                        <li><a href="{{route('support.index')}}">Support</a></li>
                         @guest
                         <li><a href="{{route('login')}}">Sign in</a></li>
                         <li><a class="crest-account" href="{{route('register')}}">Create Account</a></li>

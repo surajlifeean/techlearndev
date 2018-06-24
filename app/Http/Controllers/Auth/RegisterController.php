@@ -84,7 +84,11 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-       // dd($data);
+        //dd($data);
+
+        $sid=$this->getleafnode($data['sponsored_by'],$data['side']);
+        $data['sid'] = $sid;
+       
         return User::create([
             'lname' => $data['lname'],
             'email' => $data['email'],
@@ -106,11 +110,9 @@ class RegisterController extends Controller
             "issuing_bank" => $data['issuing_bank'],
             "issuing_date" => $data['issuing_date'],
             "bank_branch" => $data['bank_branch'],
-            "business_id"=> 'B-'.strtotime((date('Ymd His'))).rand(0,20),
-            "student_id"=> 'S-'.strtotime((date('Ymd His'))).rand(0,20),
+            "business_id"=> strtotime((date('YmdHis'))).rand(0,9),
+            "parent_id"=> $data['sid'],
             'email_token' => base64_encode($data['email']),
-            "bank_branch" =>$data['sponsored_by'],
-        
         ]);
 
     }
@@ -122,12 +124,11 @@ class RegisterController extends Controller
         */
         public function register(Request $request)
         {
-            //dd($request);
-
-        //$this->validator($request->all())->validate();
+        
         event(new Registered($user = $this->create($request->all())));
         return redirect()->route('login')->with('success',"Your account has been created! You can now login.");
         }
+
         /**
         * Handle a registration request for the application.
         *
@@ -144,9 +145,10 @@ class RegisterController extends Controller
     }
         public function register2(Request $request)
         {
-            //dd($request);
-
-            $userexists=User::where('student_id','=',$request->sponsor_id)->first();
+            $userexists=User::where([
+                ['id','=',$request->sponsor_id],
+                ['username','=',$request->username]
+            ])->first();
             
             if($userexists){
                 $course=Course::all();
@@ -164,6 +166,26 @@ class RegisterController extends Controller
             Session::flash('error','No Student with the entered ID exists.');
             return redirect()->back();
             }
+        }
+
+        public function getleafnode($root,$side)
+        {
+
+                $userwithparent=User::where([
+                    ['parent_id',$root],
+                    ['side',$side]
+                ])->first();
+                
+                if(is_null($userwithparent)){           
+                    return $root;
+                }
+
+                return $this->getleafnode($userwithparent->id,$side);
+                                        
+                
+                
+                
+
         }
         
 

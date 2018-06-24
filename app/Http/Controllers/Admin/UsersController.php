@@ -82,8 +82,8 @@ class UsersController extends Controller
                   $register->username=$request->username;
                   $register->password=Hash::make($request->password);
                   $register->course=$request->course;
-                  $register->student_id='B-'.strtotime((date('is'))).rand(10,99);
-                  $register->business_id='S-'.strtotime((date('is'))).rand(10,99);
+                  $register->business_id=strtotime((date('YmdHis'))).rand(0,9);
+                  // $register->business_id='S-'.strtotime((date('is'))).rand(10,99);
                   $register->save();
                   $request->session()->flash('success', 'The Registration Has Been  Successfully Done By You!');
             //session::flash('success', 'The Category Has Been Added Successfully!');
@@ -146,6 +146,7 @@ class UsersController extends Controller
                   $register->course=$request->course;
                   //$register->student_id='B-'.strtotime((date('is'))).rand(10,99);
                   //$register->business_id='S-'.strtotime((date('is'))).rand(10,99);
+                  $register->business_id=strtotime((date('YmdHis'))).rand(0,9);
                   $register->save();
                   $request->session()->flash('success', 'The Registration Has Been  Successfully Done By You!');
             //session::flash('success', 'The Category Has Been Added Successfully!');
@@ -220,6 +221,10 @@ public function usersearch()
         
         return view('Admin.user.index')->withUsers($users);
     }
+// public function getleafnode(root,side)
+// {
+//     $userwithparent=User::  
+// }
 
 
 

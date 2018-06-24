@@ -138,12 +138,12 @@
                             <label class="col-sm-3 control-label">Student id</label>
                             <div class="col-sm-9">
                             
-                              <input type="text" name="price"  value="{{$users->student_id}}" class="form-control" placeholder="student_id" disabled="true">
+                              <input type="text" name="price"  value="{{$users->id}}" class="form-control" placeholder="student_id" disabled="true">
 
                             </div>
                           </div>
                           <div class="form-group">
-                            <label class="col-sm-3 control-label">Bussiness id</label>
+                            <label class="col-sm-3 control-label">Business id</label>
                             <div class="col-sm-9">
                             
                               <input type="text" name="price"  value="{{$users->business_id}}" class="form-control" placeholder="business_id" disabled="true">
@@ -189,41 +189,41 @@
                           </div>
                           <div class="line line-dashed line-lg pull-in"></div>
 
-                          <header class="panel-heading">
+<!--                           <header class="panel-heading">
                         <strong>Payment Details</strong>
-                      </header>                      
-                        <div class="form-group">
+                      </header>   -->                    
+                        <!-- <div class="form-group">
                             <label class="col-sm-3 control-label">Demand Draft No</label>
                             <div class="col-sm-9">
-                              <!-- <textarea class="summernote" name="requirement" class="form-control" required>{!!$users->requirement!!}</textarea>  -->
+                              <textarea class="summernote" name="requirement" class="form-control" required>{!!$users->requirement!!}</textarea> 
                               <input type="text" name="price"  value="{{$users->ddno}}" class="form-control" placeholder="Demand Draft No" required>
 
                             </div>
-                          </div>
-                          <div class="form-group">
+                          </div> -->
+                          <!-- <div class="form-group">
                             <label class="col-sm-3 control-label">Amount</label>
                             <div class="col-sm-9">
-                              <!-- <textarea class="summernote" name="requirement" class="form-control" required>{!!$users->requirement!!}</textarea>  -->
+                              <textarea class="summernote" name="requirement" class="form-control" required>{!!$users->requirement!!}</textarea> 
                               <input type="password" name="price"  value="{{$users->amount}}" class="form-control" placeholder="Amount" required>
 
                             </div>
-                          </div>
-                          <div class="form-group">
+                          </div> -->
+                         <!--  <div class="form-group">
                             <label class="col-sm-3 control-label">Issuing Bank</label>
                             <div class="col-sm-9">
-                              <!-- <textarea class="summernote" name="requirement" class="form-control" required>{!!$users->requirement!!}</textarea>  -->
+                              <textarea class="summernote" name="requirement" class="form-control" required>{!!$users->requirement!!}</textarea> 
                               <input type="text" name="price"  value="{{$users->issuing_bank}}" class="form-control" placeholder="Issuing Bank" required>
 
                             </div>
-                          </div>
-                          <div class="form-group">
+                          </div> -->
+<!--                           <div class="form-group">
                             <label class="col-sm-3 control-label">Issuing Date</label>
                             <div class="col-sm-9">
-                              <!-- <textarea class="summernote" name="requirement" class="form-control" required>{!!$users->requirement!!}</textarea>  -->
+                              <textarea class="summernote" name="requirement" class="form-control" required>{!!$users->requirement!!}</textarea> 
                               <input type="text" name="price"  value="{{date('jS M, Y', strtotime($users->issuing_date))}}" class="form-control" placeholder="Issuing Date" required>
 
                             </div>
-                          </div>
+                          </div> -->
                         <!-- <div class="form-group">
                           <label class="col-sm-3 control-label">Description</label>
                           <div class="col-sm-9">

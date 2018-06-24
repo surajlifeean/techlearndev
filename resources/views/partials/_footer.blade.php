@@ -5,12 +5,12 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="logo-footer">
-                            <a href="index.html">
+                            <a href="{{url('/')}}">
                                 <img src="{{asset('images/logo.png')}}" />
                             </a>
                         </div>
                         <p class="footer-txt">Code School teaches web technologies in the comfort of your browser with video lessons, coding challenges, and screencasts. We strive to help you learn by doing.
-                            <a href="#">Learn More</a>
+                            <!-- <a href="#">Learn More</a> -->
                         </p>
                         <ul class="footer-social">
                             <li><a href="#"><img src="{{asset('images/f.png')}}"></a></li>
@@ -33,7 +33,7 @@
                         </ul>
                         <ul class="footer-links">
                             <!-- <li><a href="#">Need Help?</a></li> -->
-                            <li><a href="#">Contact Us</a></li><!-- 
+                            <li><a href="{{route('support.index')}}">Support</a></li><!-- 
                             <li><a href="#">Knowledge Base</a></li> -->
                             <li><a href="#">Register</a></li>
                             <li><a href="#">Login</a></li>

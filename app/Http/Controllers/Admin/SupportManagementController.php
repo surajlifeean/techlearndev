@@ -20,7 +20,7 @@ class SupportManagementController extends Controller
      */
     public function index()
     {
-         $support=Support::paginate(5);
+         $support=Support::paginate(10);
          //dd($support);
          return view('Admin.support.index')->withSupports($support);
         
@@ -128,22 +128,16 @@ class SupportManagementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id,Request $request)
+    public function destroy($id)
     {
-         $customer =Banner::find($id);
-         //dd($request);
-         //$customer =Banner::find($id);
-         //dd($customer);
-    
-           // "sourav";
-        // if($customer->delete()){
-       if(Banner::find($id)->delete()){
-            $request->session()->flash('success', 'Banner deletded successfully.');
-            return redirect('/admin/banner-management');
+        //dd("here");
+        $query = Support::find($id);
+       
+       if($query->delete()){
+            return redirect()->back()->with('success', 'Query deleted successfully.');
         } else {
-            $request->session()->flash('error', 'Banner not deletded.');
-            return redirect('/admin/banner-management');
-        }
+            return redirect()->back()->with('error', 'Query can not be deleted.');
+                }
     }
 
 

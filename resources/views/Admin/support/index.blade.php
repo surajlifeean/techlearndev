@@ -114,16 +114,30 @@
                					</a> -->  <!-- delete icon that submits the form -->
                                              
              					 
+<!-- 
+                        <a href="{{route('support-management.edit',$value->id)}}" data-toggle="tooltip" title="query Details" class="btn btn-info btn-rounded"><i class="fa fa-edit"></i></a>  -->   
+                        <button class="btn btn-danger btn-rounded formConfirm" data-form="#frmDelete-{{$value->id}}" data-title="Delete banner" data-message="Are you sure, you want to delete this course ?" >
+                        <i title="Delete" style="margin-right: 0;" class="fa fa-trash-o" aria-hidden="true"></i>
+                        </button>
+                          {!! Form::open(array(
+                                            'url' =>route('support-management.destroy', array($value->id)),
+                                            'method' => 'Delete',
+                                            'style' => 'display:none',
+                                            'id' => 'frmDelete-'.$value->id
+                                        ))
+                                    !!}
+                                    {!! Form::submit('Submit') !!}
+                                    {!! Form::close() !!}
 
-                        <a href="{{route('support-management.edit',$value->id)}}" data-toggle="tooltip" title="Villa Details" class="btn btn-info btn-rounded"><i class="fa fa-edit"></i></a>    
 
                             </td>
                            
                           </tr>
 
-                    {!! Form::open(['route'=>['users.destroy',$value->id], 'method'=>'DELETE','class'=>'delete-villa','id'=>'delete'.$value->id])!!}
+<!--                     {!!Form::open(['route'=>['support.destroy',$value->id],'method'=>'DELETE','class'=>'delete-query','style' => 'display:none','id' => 'frmDelete-'.$value->id])!!}
+                    {!! Form::submit('Submit') !!}
                     {!!Form::close()!!}
-
+ -->
 
 
                           @endforeach

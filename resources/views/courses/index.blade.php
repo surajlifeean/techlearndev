@@ -43,7 +43,7 @@
 experienced developers 
 			  </p> 
 			   <div class="button-set">
-			   	<a href="#" class="button-common-white button-common">Enroll Now</a>
+			   	<a href="{{route('register')}}" class="button-common-white button-common">Enroll Now</a>
 			   </div>
 		   </div> 
 	    </div>

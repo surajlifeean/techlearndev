@@ -78,9 +78,4 @@ Together, our goal is to democratize professional technology learning, making it
       </section>
 
 
-
-
-
-
-
 @endsection

@@ -1,8 +1,5 @@
 @extends('adminmain')
-
 @section('content')
-
-
 <section id="content">
 <section class="vbox">
 <section class="scrollable padder">
@@ -38,8 +35,15 @@
 
                           <label class="col-sm-3 control-label">User Title</label>
                           <div class="col-sm-9">
-                           
-                          {{Form::select('title',["Mr","Miss","Mrs"],null,['placeholder'=>'Select Title','class'=>'form-control','required'=>'true'])}}
+                            @php
+                                $old_title=null
+                              @endphp
+                           @if(isset($rootdetails))
+                            @php
+                                $old_title=$rootdetails->title
+                            @endphp
+                           @endif
+                          {{Form::select('title',["Mr"=>"Mr","Miss"=>"Miss","Mrs"=>"Mrs"],$old_title,['placeholder'=>'Select Title','class'=>'form-control','required'=>'true'])}}
 
 
                           </div>
@@ -85,10 +89,21 @@
                             <label class="col-sm-3 control-label">Date Of Birth</label>
                             <div class="col-sm-9">
                              
-<!--                               <input type="date" name="dob"   class="form-control" placeholder="Date Of Birth" required>
- -->
-                              {{Form::text('dob',date('m/d/Y',strtotime($rootdetails->dob)),['class'=>'form-control','placeholder'=>'Date of birth', 'required'=>true])}}
 
+                                  @php
+                                    $old_dob=null
+                                  @endphp
+                               @if(isset($rootdetails))
+                                  @php
+                                    $old_dob=date('m/d/Y',strtotime($rootdetails->dob))
+                                  @endphp
+                               @endif                                
+
+                               <input type="date" name="dob" value="{{$old_dob}}"  class="form-control" placeholder="Date Of Birth" required>
+
+
+                              <!-- {{Form::text('dob',$old_dob,['class'=>'form-control','placeholder'=>'Date of birth','required'=>true])}}
+ -->
                             </div>
                           </div>
                           <div class="form-group">
@@ -97,12 +112,12 @@
                           </div>
                           <div class="form-group">
                             <label class="col-sm-3 control-label">Name of Father/Guardian</label>
-                            <div class="col-sm-9">
+                            <!-- <div class="col-sm-9">
                              
-                              <!-- <input type="text" name="guardian"  class="form-control" placeholder="Name of Father/Guardian"  required> -->
+                              <input type="text" name="guardian"  class="form-control" placeholder="Name of Father/Guardian"  required>
                              {{Form::text('guardian',null,['class'=>'form-control','placeholder'=>'Guardian', 'required'=>true])}}
 
-                            </div>
+                            </div> -->
                           </div>
                           <div class="form-group">
                           <label class="col-sm-3 control-label"> Address</label>
@@ -137,15 +152,17 @@ You have <input readonly type="text" name="countdown" size="3" value="100"> char
 
                             </div>
                           </div>
+                          @if(!isset($rootdetails))
                           <div class="form-group">
                             <label class="col-sm-3 control-label">Password</label>
                             <div class="col-sm-9">
                              
 <!--                               <input type="password" name="password"   class="form-control" placeholder="Password" required> -->
-                              {{Form::text('password',null,['class'=>'form-control','placeholder'=>'First name', 'required'=>true])}}
+                              {{Form::password('password',['class'=>'form-control','placeholder'=>'Password', 'required'=>true])}}
 
                             </div>
                           </div>
+                          @endif
 <!--                           <div class="form-group">
                             <label class="col-sm-3 control-label">Placed Side</label>
                             <div class="col-sm-9">

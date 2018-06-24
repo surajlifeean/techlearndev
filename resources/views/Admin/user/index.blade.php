@@ -139,7 +139,7 @@
                                              
              					 
 
-                        <a href="{{route('users.show',$value->id)}}" data-toggle="tooltip" title="Villa Details" class="btn btn-info btn-rounded"><i class="fa fa-search-plus"></i></a>    
+                        <a href="{{route('users.show',$value->id)}}" data-toggle="tooltip" title="User Details" class="btn btn-info btn-rounded"><i class="fa fa-search-plus"></i></a>    
 
                             </td>
                            
