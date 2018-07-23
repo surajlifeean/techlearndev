@@ -81,27 +81,34 @@
                                 @endphp
 
                                     <div class="hv-item-child">
-                                        
+                                        @if($values2[0]->side=='left')
                                         <div class="person">
                                             <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="">
                                             <p class="name">
                                                 
-                                            {{$values2[0]->username}} <b>/ {{$values2[0]->id}}</b>
+                                                {{$values2[0]->username}} <b>/ {{$values2[0]->id}}</b>
                                                 
                                             </p>
                                         </div>
+                                        @endif
 
-                                        
+
                                     </div>
                                     <div class="hv-item-child">
+                                        
                                         <div class="person">
                                             <img src="https://randomuser.me/api/portraits/women/18.jpg" alt="">
                                             <p class="name">
+                                            @if(count($values2)==2)
                                             
-                                            {{$values2[1]->username}} <b>/ {{$values2[1]->id}}</b>
+                                                {{$values2[1]->username}} <b>/ {{$values2[1]->id}}</b>
+                                            @else
+                                                {{$values2[0]->username}} <b>/ {{$values2[0]->id}}</b>
+                                            @endif
                                                 
                                             </p>
                                         </div>
+                                        
                                     </div>
                                     @endif
                                 </div>
@@ -132,17 +139,20 @@
 
                                 <div class="hv-item">
                                 <div class="hv-item-parent">
+                                    
                                     <div class="person">
                                         <img src="https://randomuser.me/api/portraits/women/50.jpg" alt="">
                                         <p class="name">
                                             {{$values[1]->username}}<b>/ {{$values[1]->id}}</b>
                                         </p>
                                     </div>
+
                                 </div>
 
                                 <div class="hv-item-children">
-
                                     <div class="hv-item-child">
+                                        @if($values2[0]->side=='left')
+                            
                                         <div class="person">
                                             <img src="https://randomuser.me/api/portraits/men/41.jpg" alt="">
                                             <p class="name">
@@ -150,6 +160,9 @@
                                                 
                                             </p>
                                         </div>
+
+                                        @endif
+
                                     </div>
 
 
@@ -157,8 +170,13 @@
                                         <div class="person">
                                             <img src="https://randomuser.me/api/portraits/men/90.jpg" alt="">
                                             <p class="name">
-                                            {{$values2[1]->username}} <b>/ {{$values2[1]->id}}</b>
-                                               
+                                            @if(count($values2)==2)
+
+                                                {{$values2[1]->username}} <b>/ {{$values2[1]->id}}</b>
+                                            @else
+                                                {{$values2[0]->username}} <b>/ {{$values2[0]->id}}</b>
+                                                
+                                            @endif 
                                             </p>
                                         </div>
                                     </div>
