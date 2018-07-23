@@ -295,7 +295,9 @@ a[x-apple-data-detectors=true] {
                     <div class="">
   <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 10px; padding-left: 10px; padding-top: 10px; padding-bottom: 10px;"><![endif]-->
   <div style="color:#000000;line-height:120%;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif; padding-right: 10px; padding-left: 10px; padding-top: 10px; padding-bottom: 10px;">  
+    @if(isset($user->sponsor->fname))
     <div style="font-size:12px;line-height:14px;color:#000000;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;text-align:left;"><p style="margin: 0;font-size: 14px;line-height: 17px"><span style="font-size: 14px; line-height: 16px;"><strong>Name:&#160;&#160;</strong>{{$user->sponsor->fname.' '.$user->sponsor->lname  }}</span></p><p style="margin: 0;font-size: 14px;line-height: 17px"><span style="font-size: 14px; line-height: 16px;"><strong>Address: </strong>{{$user->sponsor->address}}<strong><br></strong></span></p><p style="margin: 0;font-size: 14px;line-height: 17px"><span style="font-size: 14px; line-height: 16px;"><strong>Contact No.:</strong>&#160; &#160;{{$user->sponsor->contact_no}}</span><br><span style="font-size: 14px; line-height: 16px;"><strong>Registration Date:&#160; &#160;</strong> {{date('d-m-y',strtotime($user->sponsor->created_at))}}&#160;</span><br><span style="font-size: 14px; line-height: 16px;"><strong>Date of Birth:</strong>{{date('d-m-y',strtotime($user->sponsor->dob))}}</span><br><strong>Email Id:</strong> {{$user->sponsor->email}}</span><br></p></div>  
+@endif
   </div>
   <!--[if mso]></td></tr></table><![endif]-->
 </div>

@@ -196,9 +196,14 @@ input[type="radio"]:disabled + .label-text:before{
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="">Email Id</label>
-								  	<input type="text" name="email" placeholder="Email id" class="form-control" required>
+								  	<input type="text" name="email" placeholder="Email id" id="email" class="form-control" required>
 							  	</div>
-							</div>
+	  						  	<span class="help-block-un" style="color:red; display:none;">
+						                <strong>
+						                    Email is taken! Try something else.
+						                </strong>
+								</span>
+								</div>
 							<div class="col-md-6">
 							  <div class="form-group">
 									<label for="">Date Of Birth</label>
@@ -210,8 +215,6 @@ input[type="radio"]:disabled + .label-text:before{
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="">Mode Of Correspondence</label>
-								  	<!-- <input type="text" name="correspondence" class="form-control"  required>
-								  	 -->
 								  	 {{Form::select('correspondence',['courier'=>'courier','Speed Post'=>'Speed Post'],null,['placeholder'=>'Mode of correspondence','class'=>'form-control','required'=>'true'])}}
 
 							  	</div>
@@ -247,8 +250,14 @@ input[type="radio"]:disabled + .label-text:before{
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="">User Name</label>
-								  	<input type="text" name="username" class="form-control" placeholder="Username" required>
+								  	<input type="text" name="username" id="username" class="form-control" data-parsley-minlength="6" placeholder="Username" required>
 							  	</div>
+							  	<span class="help-block-un" style="color:red; display:none;">
+                                        <strong>
+                                            Username is taken! Try something else.
+                                        </strong>
+                        		</span>
+
 							</div>
 							<div class="col-md-6">
 							  <div class="form-group">
@@ -330,7 +339,7 @@ input[type="radio"]:disabled + .label-text:before{
 						
 						
 						<div class="buttonset text-center">
-						 <button type="submit" class="button-common">Submit</button>
+						 <button type="submit" id="login" class="button-common">Submit</button>
 						
 						</div>
 						
@@ -364,6 +373,82 @@ input[type="radio"]:disabled + .label-text:before{
               //fillInAddress(id);                
           })
     }
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        
+          $('#login').prop('disabled', true);
+
+    });
+
+    $("#email").keyup(function(){
+
+    var username=$("#email").val();
+    console.log("console--"+username);
+    var len=username.length;
+    if(len>6){
+    $.ajax({
+    url: "{{route('email.exists')}}",
+    dataType: "json",
+    data: {username:username},
+    type: 'get',
+    success: function(data) {
+        if(data){
+            $('#login').prop('disabled',true);
+            $('.help-block-un').show();
+        }
+        else{
+            $('.help-block-un').hide();
+            $('#login').prop('disabled',false);
+        }
+    },
+
+});
+
+}
+
+
+});
+</script>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        
+          $('#login').prop('disabled', true);
+
+    });
+
+    $("#username").keyup(function(){
+
+    var username=$("#username").val();
+    console.log("console--"+username);
+    var len=username.length;
+    if(len>6){
+    $.ajax({
+    url: "{{route('username.exists')}}",
+    dataType: "json",
+    data: {username:username},
+    type: 'get',
+    success: function(data) {
+        if(data){
+            $('#login').prop('disabled',true);
+            $('.help-block-un').show();
+        }
+        else{
+            $('.help-block-un').hide();
+            $('#login').prop('disabled',false);
+        }
+    },
+
+});
+
+}
+
+
+});
 </script>
 
 @endsection

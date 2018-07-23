@@ -111,7 +111,7 @@
                             </div>
                           </div>
                           <div class="form-group">
-                            <label class="col-sm-3 control-label">Name of Father/Guardian</label>
+                            <!-- <label class="col-sm-3 control-label">Name of Father/Guardian</label> -->
                             <!-- <div class="col-sm-9">
                              
                               <input type="text" name="guardian"  class="form-control" placeholder="Name of Father/Guardian"  required>

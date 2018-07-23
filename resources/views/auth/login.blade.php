@@ -16,7 +16,7 @@
                         {{ csrf_field() }}
                     <div class="form-group">
                         <label for="">User Name</label>
-                        <input type="text" class="form-control" name="username" id="username"value="{{old('username')}}" placeholder="Enter Username" required>
+                        <input type="text" class="form-control" name="username" id="username" value="{{old('username')}}" placeholder="Enter Username" required>
                         <span class="help-block-un" style="color:red; display:none;">
                                         <strong>
                                             Username Does Not Exists

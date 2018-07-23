@@ -2,6 +2,8 @@
 
 namespace App;
 use App\CourseVideo;
+use DB;
+use App\User;
 
 class Helpers {
    public static function getvideos($course_id,$level)
@@ -14,6 +16,13 @@ class Helpers {
     	$videos=Video::whereIn('id',$vid)->get();
     	//dd($videos);
     	return $videos;
+    }
+
+    public static function getChildren($uid)
+    {
+
+        $user=User::select('id',DB::raw('CONCAT(fname," ",lname) as full_name'),'contact_no','username','side','parent_id')->where('parent_id','=',$uid)->get();
+        return $user;
     }
 }
 ?>

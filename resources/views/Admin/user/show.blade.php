@@ -62,12 +62,19 @@
 
                         </div>
 
-                        <!-- <div class="form-group">
-                          <label class="col-sm-3 control-label">Demo Video Link</label>
+                        <div class="form-group">
+                          <label class="col-sm-3 control-label">Sponsor ID</label>
                           <div class="col-sm-9">
-                            <input type="text" name="video_link" class="form-control"  data-required="true" value="{{$users->video_link}}" placeholder="Video Link" required>   
+                            <input type="text" name="sponsor_id" class="form-control"  data-required="true" value="{{$users->sponsor_id}}" placeholder="sponsor_id" required>   
                           </div>
-                        </div> -->
+                        </div>
+
+                        <div class="form-group">
+                          <label class="col-sm-3 control-label">Parent ID</label>
+                          <div class="col-sm-9">
+                            <input type="text" name="parent_id" class="form-control"  data-required="true" value="{{$users->parent_id}}" required>   
+                          </div>
+                        </div>
 
                       
 

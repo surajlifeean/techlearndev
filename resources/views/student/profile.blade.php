@@ -10,7 +10,7 @@
                      </div>
                      <div class="pro-details">
                        <ul>
-                         <li><span>Student Id - </span>{{Auth::user()->student_id}}</li>
+                         <li><span>Student Id - </span>{{Auth::user()->id}}</li>
                          <li><span>Name  - </span>{{Auth::user()->fname.' '.Auth::user()->lname}}</li>
                          <li><span>Course  - </span>{{Auth::user()->userCourse->title}}</li>  
 

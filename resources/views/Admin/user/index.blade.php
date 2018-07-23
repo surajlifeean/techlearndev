@@ -68,7 +68,7 @@
                           <tr>
                             <th width="20"><input type="checkbox" value="" class="checkAll"></th>
                             <!-- <th width="20"></th> -->
-                            <th>Title</th>
+                            <th>SID</th>
                             
                             <th>Name</th>
                             <th>Address</th>
@@ -86,15 +86,11 @@
 
         
                           <tr>
-                            @if(!isset($value->sponsor_id))
-                            <td>
-                              <img src="{{asset('images/root.png')}}" style="width: 20px">
-                            </td>
-                            @else
+
                             <td><input type="checkbox" name="del[]" value="{{$value->id}}" id="checked"></td>
-                            @endif
-                            <td>{{$value->title}}</td>
-                            <td>{{$value->fname}} {{$value->lname}}</td>
+
+                            <td>{{$value->id}}</td>
+                            <td>{{$value->fname}}{{$value->lname}}</td>
                             <td>{{$value->address}}</td>
                             <td>{{$value->userCourse->title}}</td>                       
                             <td>{{date('jS M, Y', strtotime($value->created_at))}}</td>
@@ -139,13 +135,13 @@
                                              
              					 
 
-                        <a href="{{route('users.show',$value->id)}}" data-toggle="tooltip" title="User Details" class="btn btn-info btn-rounded"><i class="fa fa-search-plus"></i></a>    
+                        <a href="{{route('users.show',$value->id)}}" data-toggle="tooltip" title="user Details" class="btn btn-info btn-rounded"><i class="fa fa-search-plus"></i></a>    
 
                             </td>
                            
                           </tr>
 
-                    {!! Form::open(['route'=>['users.destroy',$value->id], 'method'=>'DELETE','class'=>'delete-villa','id'=>'delete'.$value->id])!!}
+                    {!! Form::open(['route'=>['users.destroy',$value->id], 'method'=>'DELETE','class'=>'delete-user','id'=>'delete'.$value->id])!!}
                     {!!Form::close()!!}
 
 

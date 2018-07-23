@@ -42,6 +42,8 @@ Route::get('/downloadPDF/{id}','Site\StudyDashboardController@downloadPDF')->nam
 
 Route::resource('profile','Site\StudentController');
 
+Route::resource('my-geneology','Site\GeneologyController');
+
 
 Route::get('/', 'HomeController@index')->name('home');
 
@@ -63,7 +65,10 @@ Route::post('/register/step-2','Auth\RegisterController@register2')->name('regis
 Route::resource('learn','Site\CourseController');
 
 Route::resource('dashboard','Site\StudyDashboardController');
+Route::get('emailexists', 'Auth\LoginController@existsemail')->name('email.exists');
+
 Route::get('usernameexists', 'Auth\LoginController@existsusername')->name('username.exists');
+
 Route::get('existsunamensid', 'Auth\LoginController@existsunamensid')->name('unamensid.exists');
 
 Auth::routes();

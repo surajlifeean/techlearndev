@@ -76,4 +76,17 @@ class LoginController extends Controller
         }
 
     }
+        public function existsemail(){
+
+        $username=$_REQUEST['username'];
+        $user=User::select('email')->where('email','=',$username)->first();
+        if(is_null($user)){
+            echo '0';
+        }
+        else{
+            echo '1';
+        }
+
+    }
+
 }

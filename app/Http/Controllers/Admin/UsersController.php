@@ -106,7 +106,7 @@ class UsersController extends Controller
     {
            $user=User::find($id);
         //dd($user);
-        return view("admin.user.show")->withUsers($user);
+        return view("Admin.user.show")->withUsers($user);
     }
 
     /**
