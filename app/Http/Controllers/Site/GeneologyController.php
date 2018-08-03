@@ -50,10 +50,30 @@ class GeneologyController extends Controller
     public function show($id)
     {
         //dd($id);
-        $uid=Auth::user()->id;
+        // $uid=Auth::user()->id;
         $user=User::select('id',DB::raw('CONCAT(fname," ",lname) as full_name'),'contact_no','username','side')->where('id',$id)->get();
+        $lc=User::select('id',DB::raw('CONCAT(fname," ",lname) as full_name'),'contact_no','username','side')->where([
+            ['parent_id',$id],
+            ['side','=','left']
+        ])->first();
+        $rc=User::select('id',DB::raw('CONCAT(fname," ",lname) as full_name'),'contact_no','username','side')->where([
+            ['parent_id',$id],
+            ['side','=','right']
+        ])->first();
         // dd($user);
-        return view('geneology.show')->withUser($user);
+
+        $ts=$this->getteamsize($id);
+        if(isset($lc))
+            $lc=$this->getteamsize($lc->id)+1;
+        else
+            $lc=0;
+        
+        if(isset($rc)) 
+            $rc=$this->getteamsize($rc->id)+1;
+        else
+            $rc=0;
+        // dd($ts);
+        return view('geneology.show')->withUser($user)->withTeamsize($ts)->withLeftsize($lc)->withRightsize($rc);
     }
 
     /**
@@ -88,5 +108,21 @@ class GeneologyController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    function getteamsize($id)
+    {
+        $user=User::select('id','username','side','parent_id')->where('parent_id','=',$id)->get();
+        $noofchild=count($user);
+
+        if($noofchild==0){
+            return 0;
+        }
+        else{
+            if($noofchild==2)
+            return $noofchild+$this->getteamsize($user[0]->id)+$this->getteamsize($user[1]->id);
+            else
+            return $noofchild+$this->getteamsize($user[0]->id);
+        }
     }
 }

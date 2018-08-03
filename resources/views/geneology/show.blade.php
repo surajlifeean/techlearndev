@@ -21,6 +21,9 @@
         <h1> 1. Management Hierarchy</h1> -->
         <div class="hv-container">
             <div class="hv-wrapper">
+{{dump($teamsize)}}
+{{dump($leftsize)}}
+{{dump($rightsize)}}
 
                 <!-- Key component -->
                 <div class="hv-item">
@@ -92,35 +95,45 @@
 
                                     <div class="hv-item-child">
                                         @if($values2[0]->side=='left')
+
                                         <div class="person">
                                             <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="">
                                             <p class="name">
                                                 <a href="{{route('my-geneology.show',$values2[0]->id)}}">
-                                                {{$values2[0]->username}} <b>/ {{$values2[0]->id}}</b>
+                                                {{$values2[0]->username}} <b>/ jokok{{$values2[0]->id}}</b>
                                                 </a>
                                             </p>
                                         </div>
                                         @endif
-
-
                                     </div>
                                     <div class="hv-item-child">
                                         
-                                        <div class="person">
+
+
+                                            @if(count($values2)==2)
+                                            <div class="person">
                                             <img src="https://randomuser.me/api/portraits/women/18.jpg" alt="">
                                             <p class="name">
-                                            @if(count($values2)==2)
                                                 <a href="{{route('my-geneology.show',$values2[1]->id)}}">
                                                 {{$values2[1]->username}} <b>/ {{$values2[1]->id}}</b>
                                                </a>
-                                            @else
-                                            <a href="{{route('my-geneology.show',$values2[0]->id)}}">
-                                                {{$values2[0]->username}} <b>/ {{$values2[0]->id}}</b>
-                                            </a>
-                                            @endif
-                                                
+
                                             </p>
-                                        </div>
+                                            </div>
+                                            @endif
+                                            @if(count($values2)==1 && $values2[0]->side=='right')
+                                            <div class="person">
+                                            <img src="https://randomuser.me/api/portraits/women/18.jpg" alt="">
+                                            <p class="name">
+                                                <a href="{{route('my-geneology.show',$values2[1]->id)}}">
+                                                {{$values2[1]->username}} <b>/ {{$values2[1]->id}}</b>
+                                               </a>
+
+                                            </p>
+                                            </div>
+                                            @endif
+
+
                                         
                                     </div>
                                     @endif
@@ -139,16 +152,16 @@
                             @endif
 
                             @if(count(App\Helpers::getChildren($values[1]->id))==0)
-
+                                  @if($values[1]->side=='right')
                                     <div class="person">
                                         <img src="https://randomuser.me/api/portraits/men/3.jpg" alt="">
                                         <p class="name">
                                             <a href="{{route('my-geneology.show',$values[1]->id)}}">
-                                            {{$values[1]->username}} <b>/ {{$values[1]->id}}</b>
+                                            {{$values[1]->username}} <b>/{{$values[1]->id}}</b>
                                         </a>
                                         </p>
                                     </div>
-                                
+                                    @endif
                                 @else
                                 
                                 @php
@@ -177,7 +190,7 @@
                                             <img src="https://randomuser.me/api/portraits/men/41.jpg" alt="">
                                             <p class="name">
                                                 <a href="{{route('my-geneology.show',$values2[0]->id)}}">
-                                            {{$values2[0]->username}} <b>/ {{$values2[0]->id}}</b>
+                                                 {{$values2[0]->username}} <b>/ {{$values2[0]->id}}</b>
                                                 </a>
                                             </p>
                                         </div>
