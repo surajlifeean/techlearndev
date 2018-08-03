@@ -51,8 +51,8 @@ class GeneologyController extends Controller
     {
         //dd($id);
         $uid=Auth::user()->id;
-        $user=User::select('id',DB::raw('CONCAT(fname," ",lname) as full_name'),'contact_no','username','side')->where('parent_id','=',$uid)->orwhere('id',$id)->get();
-
+        $user=User::select('id',DB::raw('CONCAT(fname," ",lname) as full_name'),'contact_no','username','side')->where('id',$id)->get();
+        // dd($user);
         return view('geneology.show')->withUser($user);
     }
 
