@@ -1185,3 +1185,129 @@ ul.courser-filter a:hover
 .demo-course .row:nth-child(even) {
     flex-direction: row-reverse;
 }
+
+.dashboard-menu {
+    width: 400px;
+    border-right: 1px solid #e9ecef;
+}
+
+.user-avatar {
+    width: 100%;
+	margin-bottom: 20px;
+	text-align: center;
+}
+.user-avatar .pro-pic {
+    width: 89px;
+    height: 89px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: 0 auto;
+    margin-bottom: 12px;
+}
+.user-avatar .pro-pic img{
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+
+.user-avatar h5 {
+    font-size: 15px;
+    color: #1040a3;
+    font-weight: bold;
+}
+
+.dashboard-section
+{
+	display: flex;
+	flex-direction: row;
+	align-items: stretch;
+	position: relative;
+	min-height: 900px;
+}
+
+.dash-menu-inner {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 10px;
+    flex-direction: column;
+    padding-left: 148px;
+	padding-top: 33px;
+	position: relative;
+}
+.dashboard-menu-items ul {
+    padding: 00px;
+}
+
+.dashboard-menu-items ul li {
+    font-size: 18px;
+    margin-bottom: 40px;
+}
+.dashboard-menu-items ul li a i {
+    font-size: 20px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 7px;
+}
+.dashboard-menu-items ul li a:hover,
+.dashboard-menu-items ul li.active a
+{
+	color: #000;
+}
+
+
+.dashboard-area {
+    width: calc(100% - 400px);
+}
+
+.dashboard-area-top {
+    padding: 24px 39px;
+    border-bottom: 1px solid #efefef;
+}
+
+.card-group {
+    padding: 30px;
+    background: #f6f6fc;
+    border: 1px solid #d3d3d3;
+}
+
+.dashboard-area .card {
+    padding: 0;
+}
+.dashboard-area .card .counter {
+    color: #1040a3;
+    font-size: 35px;
+    margin-bottom: 0;
+}
+.dashboard-area .card span 
+{
+	color: #919191;
+}
+
+.dashboard-area .card img {
+    max-height: 56px;
+}
+
+.card-wrap {
+    background: #f6f6fc;
+    margin: 16px 22px;
+    border: 1px solid #e9ecef;
+}
+
+.dashboard-area .card-body {
+    background: white;
+    box-shadow: 5px 4px 24px #dee2e6;
+    border-radius: 10px;
+}
+
+
+.dashboard-close {
+    display: none;
+    border: 1px solid #1040a3;
+    position: absolute;
+    top: 9px;
+    left: 11px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+}

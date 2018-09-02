@@ -55,10 +55,11 @@ Route::get('/aboutus', 'Site\CmsController@aboutus')->name('aboutus');
 
 Route::resource('education', 'Site\EducationController');
 
+Route::resource('business', 'Site\BusinessController');
+
 Route::resource('support', 'Site\SupportController');
 
 Route::get('users/logout','Auth\LoginController@logout')->name('logout');
-
 
 Route::post('/register/step-2','Auth\RegisterController@register2')->name('register.step2');
 

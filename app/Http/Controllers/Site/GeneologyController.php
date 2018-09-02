@@ -4,12 +4,15 @@ namespace App\Http\Controllers\Site;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Traits\BrandsTrait;
 use App\User;
 use Auth;
 use DB;
 
 class GeneologyController extends Controller
 {
+
+    use BrandsTrait;
     /**
      * Display a listing of the resource.
      *
@@ -52,16 +55,17 @@ class GeneologyController extends Controller
         //dd($id);
         // $uid=Auth::user()->id;
         $user=User::select('id',DB::raw('CONCAT(fname," ",lname) as full_name'),'contact_no','username','side')->where('id',$id)->get();
-        $lc=User::select('id',DB::raw('CONCAT(fname," ",lname) as full_name'),'contact_no','username','side')->where([
-            ['parent_id',$id],
-            ['side','=','left']
-        ])->first();
-        $rc=User::select('id',DB::raw('CONCAT(fname," ",lname) as full_name'),'contact_no','username','side')->where([
-            ['parent_id',$id],
-            ['side','=','right']
-        ])->first();
+        // $lc=User::select('id',DB::raw('CONCAT(fname," ",lname) as full_name'),'contact_no','username','side')->where([
+        //     ['parent_id',$id],
+        //     ['side','=','left']
+        // ])->first();
+        // $rc=User::select('id',DB::raw('CONCAT(fname," ",lname) as full_name'),'contact_no','username','side')->where([
+        //     ['parent_id',$id],
+        //     ['side','=','right']
+        // ])->first();
         // dd($user);
-
+        $lc=$this->getleftchild($id);
+        $rc=$this->getrightchild($id);
         $ts=$this->getteamsize($id);
         if(isset($lc))
             $lc=$this->getteamsize($lc->id)+1;
@@ -125,4 +129,20 @@ class GeneologyController extends Controller
             return $noofchild+$this->getteamsize($user[0]->id);
         }
     }
+    // function getleftchild($id){
+
+    //      $lc=User::select('id',DB::raw('CONCAT(fname," ",lname) as full_name'),'contact_no','username','side')->where([
+    //         ['parent_id',$id],
+    //         ['side','=','left']
+    //     ])->first();
+
+    //      return $lc;
+    // }
+    // function getrightchild($id){
+    //         $rc=User::select('id',DB::raw('CONCAT(fname," ",lname) as full_name'),'contact_no','username','side')->where([
+    //         ['parent_id',$id],
+    //         ['side','=','right']
+    //     ])->first();
+    //     return $rc;
+    // }
 }

@@ -1,7 +1,8 @@
 @extends('main')
 
 @section('content')
-
+<!-- {{dump($salesreport['ds'])}}
+ -->
 <section class="dashboard-section">
         <div class="dashboard-menu">
             <div class="dash-menu-inner">
@@ -11,7 +12,7 @@
 
                 <div class="user-avatar">
                     <div class="pro-pic">
-                        <img src="images/user.jpg" alt="">
+                        <img src="{{asset('images/user.jpg')}}" alt="">
                     </div>
 
                     <h5>John Smith</h5>
@@ -57,7 +58,7 @@
                                             <div>
                                                 <h3><i class="icon-screen-desktop"></i></h3>
                                                 <p class="text-muted">
-                                                    <img src="images/incomw.png" alt="">
+                                                    <img src="{{asset('images/incomw.png')}}" alt="">
                                                 </p>
                                             </div>
                                             <div class="ml-auto text-right">
@@ -76,11 +77,11 @@
                                             <div>
                                                 <h3><i class="icon-screen-desktop"></i></h3>
                                                 <p class="text-muted">
-                                                    <img src="images/growth-income.png" alt="">
+                                                    <img src="{{asset('images/growth-income.png')}}" alt="">
                                                 </p>
                                             </div>
                                             <div class="ml-auto text-right">
-                                                <h2 class="counter">1548</h2>
+                                                <h2 class="counter">{{$salesreport['ds']}}</h2>
                                                 <span>Direct Sales</span>
                                          </div>     
                                   </div> 
@@ -95,11 +96,11 @@
                                             <div>
                                                 <h3><i class="icon-screen-desktop"></i></h3>
                                                 <p class="text-muted">
-                                                    <img src="images/total-sale.png" alt="">
+                                                    <img src="{{asset('images/total-sale.png')}}" alt="">
                                                 </p>
                                             </div>
                                             <div class="ml-auto text-right">
-                                                <h2 class="counter">1548</h2>
+                                                <h2 class="counter">{{$salesreport['ts']}}</h2>
                                                 <span>Total Sales</span>
                                          </div>     
                                   </div> 
@@ -116,11 +117,11 @@
                                                 <div>
                                                     <h3><i class="icon-screen-desktop"></i></h3>
                                                     <p class="text-muted">
-                                                        <img src="images/total-sale.png" alt="">
+                                                        <img src="{{asset('images/total-sale.png')}}" alt="">
                                                     </p>
                                                 </div>
                                                 <div class="ml-auto text-right">
-                                                    <h2 class="counter">1548</h2>
+                                                    <h2 class="counter">{{$salesreport['ls']}}</h2>
                                                     <span>Left Sales</span>
                                              </div>     
                                       </div> 
@@ -135,11 +136,11 @@
                                                 <div>
                                                     <h3><i class="icon-screen-desktop"></i></h3>
                                                     <p class="text-muted">
-                                                        <img src="images/growth-income.png" alt="">
+                                                        <img src="{{asset('images/growth-income.png')}}" alt="">
                                                     </p>
                                                 </div>
                                                 <div class="ml-auto text-right">
-                                                    <h2 class="counter">1548</h2>
+                                                    <h2 class="counter">{{$salesreport['rs']}}</h2>
                                                     <span>Right Sales</span>
                                              </div>     
                                       </div> 
@@ -154,7 +155,7 @@
                                                 <div>
                                                     <h3><i class="icon-screen-desktop"></i></h3>
                                                     <p class="text-muted">
-                                                        <img src="images/total-png.png" alt="">
+                                                        <img src="{{asset('images/total-png.png')}}" alt="">
                                                     </p>
                                                 </div>
                                                 <div class="ml-auto text-right">
@@ -171,14 +172,14 @@
                    </div>
 
                    <div class="row justify-content-around">
-                    <div class="col-lg-3 col-md-4">
+                   <!--  <div class="col-lg-3 col-md-4">
                             <div class="card">
                                 <div class="card-body">
                                         <div class="d-flex no-block align-items-center">
                                                 <div>
                                                     <h3><i class="icon-screen-desktop"></i></h3>
                                                     <p class="text-muted">
-                                                        <img src="images/group.jpg" alt="">
+                                                        <img src="{{asset('images/group.jpg')}}" alt="">
                                                     </p>
                                                 </div>
                                                 <div class="ml-auto text-right">
@@ -190,7 +191,25 @@
                             </div>
 
                            
-                         </div>
+                         </div> -->
+                         <div class="col-lg-3 col-md-4">
+                            <div class="card">
+                                <div class="card-body">
+                                        <div class="d-flex no-block align-items-center">
+                                                <div>
+                                                    <h3><i class="icon-screen-desktop"></i></h3>
+                                                    <p class="text-muted">
+                                                        <img src="{{asset('images/total-png.png')}}" alt="">
+                                                    </p>
+                                                </div>
+                                                <div class="ml-auto text-right">
+                                                    <h2 class="counter">1548</h2>
+                                                    <span>Right Dormant Sales</span>
+                                             </div>     
+                                      </div> 
+                                </div>
+                            </div>
+                       </div>
 
                          <div class="col-lg-3 col-md-4">
                             <div class="card">
@@ -199,7 +218,7 @@
                                                 <div>
                                                     <h3><i class="icon-screen-desktop"></i></h3>
                                                     <p class="text-muted">
-                                                        <img src="images/sale.png" alt="">
+                                                        <img src="{{asset('images/sale.png')}}" alt="">
                                                     </p>
                                                 </div>
                                                 <div class="ml-auto text-right">
@@ -217,7 +236,7 @@
                                                 <div>
                                                     <h3><i class="icon-screen-desktop"></i></h3>
                                                     <p class="text-muted">
-                                                        <img src="images/sale.png" alt="">
+                                                        <img src="{{asset('images/sale.png')}}" alt="">
                                                     </p>
                                                 </div>
                                                 <div class="ml-auto text-right">

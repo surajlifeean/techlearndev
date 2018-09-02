@@ -24,7 +24,36 @@
 	.card h3 {
     	font-size: 23px;
 	}
+
+	.dash-menu-inner
+	{
+		padding-left: 65px;
+	}
 	
+	.dashboard-area {
+		width: calc(100%);
+
+	}
+
+	.dashboard-menu {
+		width: 309px;
+		position: absolute;
+		z-index: 9;
+		background: #fff;
+		top: 0;
+		bottom: 0;
+		transform: translateX(-100%);
+		transition: all 0.2s;
+	}
+
+	.dashboard-menu.dashboard-expand
+	{
+		transform: translateX(0);
+	}
+	
+	.dashboard-close {
+		display: inline-block;
+	}
 }
 @media only screen and (min-width:992px) and (max-width:1104px) {
 	.course-single-block .row
@@ -123,6 +152,7 @@
 	.img-flex img{
 		width: 100%;
 	}
+
 }
 @media only screen and (max-width:768px)
 {

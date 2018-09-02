@@ -6,6 +6,16 @@ $(document).ready(function(){
 		
 		$('body').toggleClass('menu-open');
 	});
+
+	$('.dashboard-collapse').click(function(){
+		$(".dashboard-menu").toggleClass('dashboard-expand');
+	});
+
+	$('.dashboard-close').click(function(){
+		$(".dashboard-menu").removeClass('dashboard-expand');
+	});
+
+	
 	
 	$(window).resize(function(){
 		
@@ -15,6 +25,8 @@ $(document).ready(function(){
 			}
 		
 	});
+
+  
 	
 	
 });
