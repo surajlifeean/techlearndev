@@ -13,6 +13,7 @@ class StudyDashboardController extends Controller
 {
 
     use BrandsTrait;
+  
 
     /**
      * Display a listing of the resource.
@@ -26,6 +27,10 @@ class StudyDashboardController extends Controller
     public function index()
     {
         $id=Auth::user()->id;
+
+        $this->getallchilds($id);
+    
+
         $ds=count($this->direct_sales($id));
         $ts=$this->getteamsize($id);
         $lc=$this->getleftchild($id);
@@ -40,8 +45,15 @@ class StudyDashboardController extends Controller
         else
             $rs=0;
 
+        $ldor=$this->getDormantCount($lc->id);
+        if($lc->status=='I')
+            $ldor++;
+        $rdor=$this->getDormantCount($rc->id);
+        if($rc->status=='I')
+            $rdor++;
 
-        $sales_report=['ds'=>$ds,'ts'=>$ts,'ls'=>$ls,'rs'=>$rs];
+        
+        $sales_report=['ds'=>$ds,'ts'=>$ts,'ls'=>$ls,'rs'=>$rs,'ldor'=>$ldor,'rdor'=>$rdor];
         return view('dashboard.index')->withSalesreport($sales_report);
     }
 
@@ -149,5 +161,36 @@ class StudyDashboardController extends Controller
         }
     }
 
+   
+    public function getallchilds($id){
+        $leftids=0;
+        $user=User::select('id','side')->where('parent_id','=',$id)->get();
 
+        if(!isset($user))
+            dd($leftids);
+
+        foreach ($user as $key => $value) {
+            if($value->side=='left')
+                $leftids=$this->getleftids($value->id);
+
+        }
+
+    }
+
+    public function getleftids($id){
+
+        static $leftids=array();
+
+        $user=User::select('id')->where('parent_id','=',$id)->get()->toArray();
+        // dd($user);
+
+        if(count($user)==0){
+            return $leftids;
+        }
+        array_push($leftids,$user);
+        $this->getallchilds($id);
+
+        }
+
+    
 }

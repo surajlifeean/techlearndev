@@ -21,9 +21,9 @@
         <h1> 1. Management Hierarchy</h1> -->
         <div class="hv-container">
             <div class="hv-wrapper">
-{{dump($teamsize)}}
+<!-- {{dump($teamsize)}}
 {{dump($leftsize)}}
-{{dump($rightsize)}}
+{{dump($rightsize)}} -->
 
                 <!-- Key component -->
                 <div class="hv-item">

@@ -83,11 +83,9 @@
                             <span>List</span>
                           </a>
                         </li>
-
-
-                        
-                      </ul>
+                       </ul>
                     </li>
+
                     <li >
                       <a href="{{route('review-management.index')}}"  >
                         <i class="fa fa-envelope-o icon">
@@ -124,6 +122,35 @@
 
                       </ul>
                     </li>
+
+                     <li >
+                      <a href="#pages"  >
+                        <i class="fa fa-file-text icon">
+                          <b class="bg-primary"></b>
+                        </i>
+                        <span class="pull-right">
+                          <i class="fa fa-angle-down text"></i>
+                          <i class="fa fa-angle-up text-active"></i>
+                        </span>
+                        <span>Commission Mngt.</span>
+                      </a>
+                      <ul class="nav lt">
+                        <li >
+                          <a href="{{route('commission.index')}}" >                                                        
+                            <i class="fa fa-angle-right"></i>
+                            <span>Add/Update Commission</span>
+                          </a>
+                        </li>
+                         <li >
+                          <a href="{{route('commission.index')}}" >                                                        
+                            <i class="fa fa-angle-right"></i>
+                            <span>List</span>
+                          </a>
+                        </li>
+                       </ul>
+                    </li>
+
+
                     
                     <li >
                       <a href="{{url('admin/support-management')}}"  >

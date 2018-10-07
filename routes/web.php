@@ -55,6 +55,7 @@ Route::get('/aboutus', 'Site\CmsController@aboutus')->name('aboutus');
 
 Route::resource('education', 'Site\EducationController');
 
+
 Route::resource('business', 'Site\BusinessController');
 
 Route::resource('support', 'Site\SupportController');
@@ -81,6 +82,7 @@ Route::get('banner-status', 'Admin\BannerManagementController@bannerstatus')->na
 /* end*/
 
 
+Route::resource('commission', 'Admin\ComissionControlController');
 // start support
 Route::resource('support-management','Admin\SupportManagementController');
 Route::any('support-search','Admin\SupportManagementController@supportsearch')->name('support-search');
