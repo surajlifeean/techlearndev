@@ -26,11 +26,21 @@ class StudyDashboardController extends Controller
 
     public function index()
     {
+
         $id=Auth::user()->id;
 
         $this->getallchilds($id);
-    
+        $lids=$GLOBALS['lids'];
+        $rids=$GLOBALS['rids'];
 
+        //AN ASSOCIATE WILL BE ELIGIBLE FOR COMMISSION AFTER THIS MANY DAYS
+        $commission_duration = env('COMMISSION_DURATION','');
+        // DD($commission_duration);
+
+        
+
+
+    
         $ds=count($this->direct_sales($id));
         $ts=$this->getteamsize($id);
         $lc=$this->getleftchild($id);
@@ -161,36 +171,26 @@ class StudyDashboardController extends Controller
         }
     }
 
-   
+   //get ids of all the children in the team
     public function getallchilds($id){
-        $leftids=0;
-        $user=User::select('id','side')->where('parent_id','=',$id)->get();
-
-        if(!isset($user))
-            dd($leftids);
+        Static $lids=array();
+        Static $rids=array();
+        
+        $user=User::select('id','side','status','created_at')->where('parent_id','=',$id)->get();
 
         foreach ($user as $key => $value) {
-            if($value->side=='left')
-                $leftids=$this->getleftids($value->id);
+            
+                if($value->side=='left')
+                        array_push($lids,$value->id.",".$value->status.",".$value->created_at);
+                if($value->side=='right')
+                        array_push($rids,$value->id.",".$value->status.",".$value->created_at);
+                
+                $this->getallchilds($value->id);
 
         }
+        $GLOBALS['lids']=$lids;
+        $GLOBALS['rids']=$rids;
 
+            
     }
-
-    public function getleftids($id){
-
-        static $leftids=array();
-
-        $user=User::select('id')->where('parent_id','=',$id)->get()->toArray();
-        // dd($user);
-
-        if(count($user)==0){
-            return $leftids;
-        }
-        array_push($leftids,$user);
-        $this->getallchilds($id);
-
-        }
-
-    
 }
