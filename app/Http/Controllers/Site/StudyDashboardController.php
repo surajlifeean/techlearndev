@@ -8,6 +8,9 @@ use App\Http\Traits\BrandsTrait;
 use App\User;
 use PDF;
 use Auth;
+use DateTime;
+use App\CommissionedSale;
+
 
 class StudyDashboardController extends Controller
 {
@@ -33,13 +36,16 @@ class StudyDashboardController extends Controller
         $lids=$GLOBALS['lids'];
         $rids=$GLOBALS['rids'];
 
+
         //AN ASSOCIATE WILL BE ELIGIBLE FOR COMMISSION AFTER THIS MANY DAYS
-        $commission_duration = env('COMMISSION_DURATION','');
         // DD($commission_duration);
 
+        $CommissionedSale=CommissionedSale::where('receiver_id',$id)->get();
+
+
+
+        $this->getCommissionRatio($id);
         
-
-
     
         $ds=count($this->direct_sales($id));
         $ts=$this->getteamsize($id);
@@ -62,9 +68,11 @@ class StudyDashboardController extends Controller
         if($rc->status=='I')
             $rdor++;
 
+
         
+
         $sales_report=['ds'=>$ds,'ts'=>$ts,'ls'=>$ls,'rs'=>$rs,'ldor'=>$ldor,'rdor'=>$rdor];
-        return view('dashboard.index')->withSalesreport($sales_report);
+        return view('dashboard.index')->withSalesreport($sales_report)->withCommissionedsales(count($CommissionedSale));
     }
 
     /**
@@ -175,15 +183,18 @@ class StudyDashboardController extends Controller
     public function getallchilds($id){
         Static $lids=array();
         Static $rids=array();
+
         
-        $user=User::select('id','side','status','created_at')->where('parent_id','=',$id)->get();
+        $now = date("Y-m-d H:i:s");
+        $commission_duration = env('COMMISSION_DURATION','');
+        $user=User::select('id','side','status','created_at')->where('parent_id','=',$id)->whereRaw('DATEDIFF("'.$now.'",created_at) >'.$commission_duration)->get();
 
         foreach ($user as $key => $value) {
             
                 if($value->side=='left')
-                        array_push($lids,$value->id.",".$value->status.",".$value->created_at);
+                        array_push($lids,(object)['id'=>$value->id,'status'=>$value->status,'created_at'=>$value->created_at]);
                 if($value->side=='right')
-                        array_push($rids,$value->id.",".$value->status.",".$value->created_at);
+                        array_push($rids,(object)['id'=>$value->id,'status'=>$value->status,'created_at'=>$value->created_at]);
                 
                 $this->getallchilds($value->id);
 

@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Traits;
 use App\User;
+use App\CommissionedSale;
 use DB;
 
 
@@ -45,8 +46,18 @@ trait BrandsTrait {
 
 
     }
-    // public function getallchilds($id){
 
-    // }
+     public function getCommissionRatio($id){
 
+            //$tag=CommissionedSale::where('receiver_id',$id)->get();
+        $tag=DB::table('commissioned_sales')
+        ->select('tag',DB::raw('count(*) as cnt'))
+        ->where('receiver_id','=',$id)
+        ->groupBy('tag')
+        ->get();
+
+        dd($tag);
+
+
+    }
 }

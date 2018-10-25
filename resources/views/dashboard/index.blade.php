@@ -222,7 +222,7 @@
                                                     </p>
                                                 </div>
                                                 <div class="ml-auto text-right">
-                                                    <h2 class="counter">1548</h2>
+                                                    <h2 class="counter">{{$commissionedsales}}</h2>
                                                     <span>Total Commission Sales</span>
                                              </div>     
                                       </div> 
