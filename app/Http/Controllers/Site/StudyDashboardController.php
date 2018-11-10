@@ -46,6 +46,14 @@ class StudyDashboardController extends Controller
 
         $this->getCommissionRatio($id);
         
+        $this->getChildsArray($id);
+
+        $larray=$GLOBALS['larray'];
+        $rarray=$GLOBALS['rarray'];
+
+        print_r($larray);
+        dd($rarray);
+
     
         $ds=count($this->direct_sales($id));
         $ts=$this->getteamsize($id);
@@ -82,7 +90,7 @@ class StudyDashboardController extends Controller
      */
     public function create()
     {
-        dd("create") ;
+        // dd("create") ;
           }
 
     /**

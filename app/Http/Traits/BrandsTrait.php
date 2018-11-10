@@ -56,8 +56,48 @@ trait BrandsTrait {
         ->groupBy('tag')
         ->get();
 
-        dd($tag);
+        // dd($tag);
 
 
+    }
+    public function getChildsArray($id){
+        Static $larray=array();
+        Static $rarray=array();
+
+        $l=0;
+        $r=0;
+        // $now = date("Y-m-d H:i:s");
+        // $commission_duration = env('COMMISSION_DURATION','');
+        $user=User::select('id','side','status','created_at')->where('parent_id','=',$id)->get();
+
+        //push empty value for the field absent
+        foreach ($user as $key => $value) {
+            
+            if($value->side=='left')
+                $l++;
+            else 
+                $r++;
+
+        }
+        if($l==0 && $r>0)
+             array_push($larray,['Empty',$id,'']);
+        if($r==0 && $l>0)
+              array_push($rarray,['Empty',$id,'']);
+
+        foreach ($user as $key => $value) {
+            
+                if($value->side=='left')
+                        array_push($larray,[$value->id,$id,'']);
+
+                if($value->side=='right')
+                        array_push($rarray,[$value->id,$id,'']);
+                
+                $this->getChildsArray($value->id);
+
+        }
+        $GLOBALS['larray']=$larray;
+        $GLOBALS['rarray']=$rarray;
+
+            
     }
 }
