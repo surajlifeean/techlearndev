@@ -79,25 +79,40 @@ trait BrandsTrait {
                 $r++;
 
         }
+
+        $rs=$this->RandomString();
+
         if($l==0 && $r>0)
-             array_push($larray,['Empty',strval($id),'']);
+             array_push($larray,[(object)['v'=>$rs,'f'=>'Empty'],strval($id),'L']);
         if($r==0 && $l>0)
-              array_push($rarray,['Empty',strval($id),'']);
+              array_push($rarray,[(object)['v'=>$rs,'f'=>'Empty'],strval($id),'R']);
 
         foreach ($user as $key => $value) {
             
                 if($value->side=='left')
-                        array_push($larray,[strval($value->id),strval($id),'']);
+                        array_push($larray,[(object)['v'=>strval($value->id),'f'=>strval($value->id)],strval($id),'L']);
 
                 if($value->side=='right')
-                        array_push($rarray,[strval($value->id),strval($id),'']);
+                        array_push($rarray,[(object)['v'=>strval($value->id),'f'=>strval($value->id)],strval($id),'R']);
                 
                 $this->getChildsArray($value->id);
 
         }
+
         $GLOBALS['larray']=$larray;
         $GLOBALS['rarray']=$rarray;
 
             
     }
+
+function RandomString($length = 6) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
+
 }

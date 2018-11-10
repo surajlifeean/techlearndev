@@ -85,9 +85,17 @@ class GeneologyController extends Controller
 
         $teamarray=array_merge($larray,$rarray);
 
-        // dd($teamarray);
+        $sortedarray=$this->bubble_Sort($teamarray);
+        
+        // foreach ($teamarray as $key => $value) {
+                
+        //         // $arr=(array)$value[0];
+        //         echo($value[0]->v);
+                
+        // }
 
-        return view('geneology.show')->withUser($user)->withTeamsize($ts)->withLeftsize($lc)->withRightsize($rc)->withTeamArray($teamarray);
+
+        return view('geneology.show')->withUser($user)->withTeamsize($ts)->withLeftsize($lc)->withRightsize($rc)->withTeamArray($sortedarray);
     }
 
     /**
@@ -155,4 +163,29 @@ class GeneologyController extends Controller
     //     ])->first();
     //     return $rc;
     // }
+    function bubble_Sort($my_array )
+{
+    do
+    {
+        $swapped = false;
+        for( $i = 0, $c = count( $my_array ) - 1; $i < $c; $i++ )
+        {
+            // $value[0]->v
+            $value=$my_array[$i];
+            $nextvalue=$my_array[$i + 1];
+            if( $value[1] > $nextvalue[1])
+            {
+                list( $my_array[$i + 1], $my_array[$i] ) =
+                        array( $my_array[$i], $my_array[$i + 1] );
+                $swapped = true;
+            }
+        }
+    }
+    while( $swapped );
+return $my_array;
+}
+
+
+
+
 }
