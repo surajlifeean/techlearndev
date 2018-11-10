@@ -41,7 +41,13 @@
         data.addColumn('string', 'Manager');
         data.addColumn('string', 'ToolTip');
 
-        var dataarray=[
+
+        var jArray= <?php echo json_encode($teamArray); ?>;
+
+        console.log(jArray);
+
+        var dataarray=jArray;
+        var dataarray1=[
           [{v:'A', f:'A<img src="{{asset('/images/user.jpg')}}" style="border-radius: 50%; width:80px;height:auto;">'},'', 'The President'],
           [{v:'B', f:'Bjkjlk<img src="{{asset('/images/user.jpg')}}" style="border-radius: 50%; width:80px;height:auto;">'},'A', 'VP'],
           [{v:'C', f:'C<img src="{{asset('/images/user.jpg')}}" style="border-radius: 50%; width:80px;height:auto;">'}, 'A', ''],
@@ -58,6 +64,9 @@
           [{v:'L', f:'L<img src="{{asset('/images/user.jpg')}}" style="border-radius: 50%; width:80px;height:auto;">'}, 'F', ''],
          [{v:'M', f:'M<img src="{{asset('/images/user.jpg')}}" style="border-radius: 50%; width:80px;height:auto;">'}, 'F', '']];
         // For each orgchart box, provide the name, manager, and tooltip to show.
+
+        console.log(dataarray1);
+
         data.addRows(dataarray);
 
         // Create the chart.

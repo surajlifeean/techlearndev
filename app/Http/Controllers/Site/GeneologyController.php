@@ -64,6 +64,7 @@ class GeneologyController extends Controller
         //     ['side','=','right']
         // ])->first();
         // dd($user);
+
         $lc=$this->getleftchild($id);
         $rc=$this->getrightchild($id);
         $ts=$this->getteamsize($id);
@@ -77,7 +78,16 @@ class GeneologyController extends Controller
         else
             $rc=0;
         // dd($ts);
-        return view('geneology.show')->withUser($user)->withTeamsize($ts)->withLeftsize($lc)->withRightsize($rc);
+
+        $this->getChildsArray($id);
+        $larray=$GLOBALS['larray'];
+        $rarray=$GLOBALS['rarray'];
+
+        $teamarray=array_merge($larray,$rarray);
+
+        // dd($teamarray);
+
+        return view('geneology.show')->withUser($user)->withTeamsize($ts)->withLeftsize($lc)->withRightsize($rc)->withTeamArray($teamarray);
     }
 
     /**

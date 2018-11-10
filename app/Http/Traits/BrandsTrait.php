@@ -80,17 +80,17 @@ trait BrandsTrait {
 
         }
         if($l==0 && $r>0)
-             array_push($larray,['Empty',$id,'']);
+             array_push($larray,['Empty',strval($id),'']);
         if($r==0 && $l>0)
-              array_push($rarray,['Empty',$id,'']);
+              array_push($rarray,['Empty',strval($id),'']);
 
         foreach ($user as $key => $value) {
             
                 if($value->side=='left')
-                        array_push($larray,[$value->id,$id,'']);
+                        array_push($larray,[strval($value->id),strval($id),'']);
 
                 if($value->side=='right')
-                        array_push($rarray,[$value->id,$id,'']);
+                        array_push($rarray,[strval($value->id),strval($id),'']);
                 
                 $this->getChildsArray($value->id);
 

@@ -51,8 +51,6 @@ class StudyDashboardController extends Controller
         $larray=$GLOBALS['larray'];
         $rarray=$GLOBALS['rarray'];
 
-        print_r($larray);
-        dd($rarray);
 
     
         $ds=count($this->direct_sales($id));

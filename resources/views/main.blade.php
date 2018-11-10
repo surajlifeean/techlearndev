@@ -6,6 +6,8 @@
 @include('partials._navbar')
  
 <div>@include('partials._message')</div>
+
+
 @yield('content')
 
 
