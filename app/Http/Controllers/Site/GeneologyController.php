@@ -77,8 +77,8 @@ class GeneologyController extends Controller
             $rc=$this->getteamsize($rc->id)+1;
         else
             $rc=0;
-        // dd($ts);
-
+        
+         $val=$this->getActiveLevelCount($id);
         $this->getChildsArray($id);
         $larray=$GLOBALS['larray'];
         $rarray=$GLOBALS['rarray'];
@@ -87,6 +87,8 @@ class GeneologyController extends Controller
 
         $sortedarray=$this->bubble_Sort($teamarray);
         
+
+        $sortedarray=array_slice($sortedarray,0,$val);
         // foreach ($teamarray as $key => $value) {
                 
         //         // $arr=(array)$value[0];
@@ -185,7 +187,92 @@ class GeneologyController extends Controller
 return $my_array;
 }
 
+    // function getActiveLevelCount($id)
+    // {
+    //     Static $level=0;
 
+    //     $user=User::select('id','username','side','parent_id')->where('parent_id','=',$id)->get();   
 
+    //     $noofchild=count($user);
+    //     if($level>15){
+    //         return 0;
+    //     }
+
+    //     if($noofchild==0){
+    //         return 0;
+    //     }
+    //     else{
+    //         $level=$level+1;
+    //         if($noofchild==2)
+    //             return $noofchild+$this->getActiveLevelCount($user[0]->id)+$this->getActiveLevelCount($user[1]->id);
+    //         else
+    //         $level=$level+1;
+    //         return $noofchild+$this->getActiveLevelCount($user[0]->id);
+
+    //     }
+    // }
+
+    function getActiveLevelCount($id)
+    {   
+        $c=0;
+        $child=array();
+        $level_2_children=array();
+        $level_3_children=array();
+
+        $ch1=$this->getImmediateChild($id);
+        
+        array_push($child,$ch1);
+
+        if(isset($ch1))
+        foreach ($ch1 as $key => $value) {
+         if($value!='Empty'){
+         $ch1=$this->getImmediateChild($value);
+         array_push($child,$ch1);
+         array_push($level_2_children,$ch1);
+            }
+        }
+
+        if(isset($ch1))
+        foreach ($level_2_children as $key => $value) {
+            foreach ($value as $k => $v) {
+                if($value!='Empty'){
+                $ch1=$this->getImmediateChild($v);
+                array_push($child,$ch1);
+                array_push($level_3_children,$ch1);
+                }
+            }
+
+        }
+
+        foreach($child as $key => $value) {
+            if($value!=null)
+            foreach ($value as $k => $v) {     
+                    $c++ ;              
+                }            
+            }
+
+        return $c;
+    }
+
+    function getImmediateChild($id)
+    {
+         $user_arr=array();
+         $user=User::select('id')->where('parent_id','=',$id)->get();
+         $noofchild=count($user);
+
+        if($noofchild!=0)
+        {
+            foreach ($user as $key => $value) {
+                array_push($user_arr,$value->id);
+            }
+
+            if($noofchild==2)
+                return $user_arr;
+            else{
+                array_push($user_arr,'Empty');
+                return $user_arr;
+            }
+        }
+    }
 
 }
