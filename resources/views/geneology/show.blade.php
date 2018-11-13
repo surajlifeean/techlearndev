@@ -47,8 +47,9 @@
         console.log(jArray);
 
         var dataarray=jArray;
+
         var dataarray1=[
-          [{v:'A', f:'A<img src="{{asset('/images/user.jpg')}}" style="border-radius: 50%; width:80px;height:auto;">'},'', 'The President'],
+          [{v:'A', f:'<a href={{route("my-geneology.show",1025)}}>A</a><img src="{{asset('/images/user.jpg')}}" style="border-radius: 50%; width:80px;height:auto;">'},'', 'The President'],
           [{v:'B', f:'Bjkjlk<img src="{{asset('/images/user.jpg')}}" style="border-radius: 50%; width:80px;height:auto;">'},'A', 'VP'],
           [{v:'C', f:'C<img src="{{asset('/images/user.jpg')}}" style="border-radius: 50%; width:80px;height:auto;">'}, 'A', ''],
           [{v:'D', f:'Dkjlkj<img src="{{asset('/images/user.jpg')}}" style="border-radius: 50%; width:80px;height:auto;">'}, 'B', 'Bob Sponge'],
@@ -65,7 +66,7 @@
          [{v:'M', f:'M<img src="{{asset('/images/user.jpg')}}" style="border-radius: 50%; width:80px;height:auto;">'}, 'F', '']];
         // For each orgchart box, provide the name, manager, and tooltip to show.
 
-        console.log(dataarray1);
+        // console.log(dataarray1);
 
         data.addRows(dataarray);
 

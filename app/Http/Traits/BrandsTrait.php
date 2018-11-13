@@ -3,7 +3,7 @@ namespace App\Http\Traits;
 use App\User;
 use App\CommissionedSale;
 use DB;
-
+use Redirect;
 
 trait BrandsTrait {
      public function getleftchild($id){
@@ -87,14 +87,19 @@ trait BrandsTrait {
         if($r==0 && $l>0)
               array_push($rarray,[(object)['v'=>$rs,'f'=>'Empty'],strval($id),'R']);
 
-        foreach ($user as $key => $value) {
-            
-                if($value->side=='left')
-                        array_push($larray,[(object)['v'=>strval($value->id),'f'=>strval($value->id)],strval($id),'L']);
+          // asset('/images/user.jpg');
+          $img=url('').'/public/images/user.jpg';
 
-                if($value->side=='right')
-                        array_push($rarray,[(object)['v'=>strval($value->id),'f'=>strval($value->id)],strval($id),'R']);
+        foreach ($user as $key => $value) {
                 
+                 $url=route('my-geneology.show',$value->id);
+                if($value->side=='left'){
+                        array_push($larray,[(object)['v'=>strval($value->id),'f'=>'<img src="'.$img.'" style="border-radius: 50%; width:80px;height:auto;"><a href='.$url.'>'.strval($value->id).'</a>'],strval($id),'L']);
+                    }
+
+                if($value->side=='right'){
+                        array_push($rarray,[(object)['v'=>strval($value->id),'f'=>'<img src="'.$img.'" style="border-radius: 50%; width:80px;height:auto;"><a href='.$url.'>'.strval($value->id).'</a>'],strval($id),'R']);
+                }
                 $this->getChildsArray($value->id);
 
         }
@@ -102,7 +107,7 @@ trait BrandsTrait {
         $GLOBALS['larray']=$larray;
         $GLOBALS['rarray']=$rarray;
 
-            
+          // <a href={{route("my-geneology.show",1025)}}>  
     }
 
 function RandomString($length = 6) {
