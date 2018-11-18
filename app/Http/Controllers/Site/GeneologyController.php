@@ -55,15 +55,8 @@ class GeneologyController extends Controller
         //dd($id);
         // $uid=Auth::user()->id;
         $user=User::select('id',DB::raw('CONCAT(fname," ",lname) as full_name'),'contact_no','username','side')->where('id',$id)->get();
-        // $lc=User::select('id',DB::raw('CONCAT(fname," ",lname) as full_name'),'contact_no','username','side')->where([
-        //     ['parent_id',$id],
-        //     ['side','=','left']
-        // ])->first();
-        // $rc=User::select('id',DB::raw('CONCAT(fname," ",lname) as full_name'),'contact_no','username','side')->where([
-        //     ['parent_id',$id],
-        //     ['side','=','right']
-        // ])->first();
-        // dd($user);
+        $value=User::select('id',DB::raw('CONCAT(fname," ",lname) as full_name'),'status','created_at','side','username')->where('id',$id)->get();
+        
 
         $lc=$this->getleftchild($id);
         $rc=$this->getrightchild($id);
@@ -79,16 +72,25 @@ class GeneologyController extends Controller
             $rc=0;
         
          $val=$this->getActiveLevelCount($id);
+
         $this->getChildsArray($id);
         $larray=$GLOBALS['larray'];
         $rarray=$GLOBALS['rarray'];
 
         $teamarray=array_merge($larray,$rarray);
 
+        // array_push($teamarray,$ch1);
+         $img=url('').'/public/images/user.jpg';
+         $url=route('my-geneology.show',$id);
+
+         
+         array_push($teamarray,[(object)['v'=>strval($id),'f'=>'<img src="'.$img.'" style="border-radius: 50%; width:80px;height:auto;"><a href='.$url.'>'.strval($value[0]->username).'</a>'],null,'L']);
+
+
         $sortedarray=$this->bubble_Sort($teamarray);
         
 
-        $sortedarray=array_slice($sortedarray,0,$val);
+        $sortedarray=array_slice($sortedarray,0,$val+1);
         // foreach ($teamarray as $key => $value) {
                 
         //         // $arr=(array)$value[0];

@@ -68,7 +68,9 @@ trait BrandsTrait {
         $r=0;
         // $now = date("Y-m-d H:i:s");
         // $commission_duration = env('COMMISSION_DURATION','');
-        $user=User::select('id','side','status','created_at')->where('parent_id','=',$id)->get();
+        // $user=User::select('id','side','status','created_at')->where('parent_id','=',$id)->get();
+
+        $user=User::select('id',DB::raw('CONCAT(fname," ",lname) as full_name'),'status','created_at','side','username')->where('parent_id','=',$id)->get();
 
         //push empty value for the field absent
         foreach ($user as $key => $value) {
@@ -94,11 +96,11 @@ trait BrandsTrait {
                 
                  $url=route('my-geneology.show',$value->id);
                 if($value->side=='left'){
-                        array_push($larray,[(object)['v'=>strval($value->id),'f'=>'<img src="'.$img.'" style="border-radius: 50%; width:80px;height:auto;"><a href='.$url.'>'.strval($value->id).'</a>'],strval($id),'L']);
+                        array_push($larray,[(object)['v'=>strval($value->id),'f'=>'<img src="'.$img.'" style="border-radius: 50%; width:80px;height:auto;"><a href='.$url.'>'.strval($value->username).'</a>'],strval($id),'L']);
                     }
 
                 if($value->side=='right'){
-                        array_push($rarray,[(object)['v'=>strval($value->id),'f'=>'<img src="'.$img.'" style="border-radius: 50%; width:80px;height:auto;"><a href='.$url.'>'.strval($value->id).'</a>'],strval($id),'R']);
+                        array_push($rarray,[(object)['v'=>strval($value->id),'f'=>'<img src="'.$img.'" style="border-radius: 50%; width:80px;height:auto;"><a href='.$url.'>'.strval($value->username).'</a>'],strval($id),'R']);
                 }
                 $this->getChildsArray($value->id);
 

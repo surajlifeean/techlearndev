@@ -1,7 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('main')
 
-<head>
+@section('stylesheets')
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -10,13 +10,23 @@
     <link rel="stylesheet" href="{{asset('css/hierarchy-view.css')}}">
     <link rel="stylesheet" href="{{asset('css/main.css')}}">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-</head>
+@endsection
 
-<body>
-
+@section('content')
     <!--Basic style-->    
 
     <!--Management Hierarchy-->
+
+<section class="dashboard-section">
+
+@include('partials._sidenav')
+
+<div class="dashboard-area">
+            <div class="dashboard-area-top">
+                <a href="javascript:void(0);" class="dashboard-collapse"><i class="fa fa-long-arrow-left" aria-hidden="true"></i> &nbsp; &nbsp;Dashboard</a>
+            </div>
+
+<div class="p-3 card-wrap">
     <section class="management-hierarchy">
         <!-- 
         <h1> 1. Management Hierarchy</h1> -->
@@ -31,6 +41,13 @@
         </div>
 
     </section>
+    </div>
+</div>
+</section>
+@endsection
+
+@section('scripts')
+
 <script type="text/javascript">
           google.charts.load('current', {packages:["orgchart"]});
       google.charts.setOnLoadCallback(drawChart);
@@ -76,6 +93,6 @@
         chart.draw(data, {allowHtml:true});
       }
 </script>
-</body>
 
-</html>
+
+@endsection
