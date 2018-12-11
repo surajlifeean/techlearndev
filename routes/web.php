@@ -40,6 +40,8 @@ Route::get('/downloadPDF/{id}','Site\StudyDashboardController@downloadPDF')->nam
 // });
 
 
+Route::resource('account','Site\AccountController');
+
 Route::resource('profile','Site\StudentController');
 
 Route::resource('my-geneology','Site\GeneologyController');
