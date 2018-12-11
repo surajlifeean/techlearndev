@@ -29,13 +29,32 @@ class StudyDashboardController extends Controller
 
     public function index()
     {
-
+        $now = date("Y-m-d H:i:s");
+        $commission_duration = env('COMMISSION_DURATION','');
         $id=Auth::user()->id;
 
-        $this->getallchilds($id);
+        // $luser=User::select('id','username','side')->where([['parent_id',$id],['side','left']])->first();
+        // $ruser=User::select('id','username','side')->where([['parent_id',$id],['side','right']])->first();       
+        // dd($ruser);
+        $luser=User::select('id','side','status','created_at')->where([['parent_id',$id],['side','left']])->whereRaw('DATEDIFF("'.$now.'",created_at) >'.$commission_duration)->first();
+
+
+
+
+        $ruser=User::select('id','side','status','created_at')->where([['parent_id',$id],['side','right']])->whereRaw('DATEDIFF("'.$now.'",created_at) >'.$commission_duration)->first();
+
+
+
+
+        $this->getlchilds($luser->id);
+        $this->getrchilds($ruser->id);
+
         $lids=$GLOBALS['lids'];
         $rids=$GLOBALS['rids'];
+        array_push($lids,(object)['id'=>$luser->id,'status'=>$luser->status,'created_at'=>$luser->created_at,'side'=>'left']);
+        array_push($rids,(object)['id'=>$ruser->id,'status'=>$ruser->status,'created_at'=>$ruser->created_at,'side'=>'right']);
 
+        // dd($rids);
 
         //AN ASSOCIATE WILL BE ELIGIBLE FOR COMMISSION AFTER THIS MANY DAYS
         // DD($commission_duration);
@@ -43,14 +62,17 @@ class StudyDashboardController extends Controller
         $CommissionedSale=CommissionedSale::where('receiver_id',$id)->get();
 
 
-
-        $this->getCommissionRatio($id);
-        
+    //done on 12th dec --- order by date remaining
+        $ratio=$this->getCommissionRatio($id);
         $this->getChildsArray($id);
 
         $larray=$GLOBALS['larray'];
         $rarray=$GLOBALS['rarray'];
 
+        // dd(array_chunk($lids,2));
+        $comlist=array_merge(array_slice($rids,0,2),array_slice($lids,0,2));    
+
+        dd($comlist);
 
     
         $ds=count($this->direct_sales($id));
@@ -186,8 +208,32 @@ class StudyDashboardController extends Controller
     }
 
    //get ids of all the children in the team
-    public function getallchilds($id){
+    public function getlchilds($id){
         Static $lids=array();
+        // Static $rids=array();
+
+        
+        $now = date("Y-m-d H:i:s");
+        $commission_duration = env('COMMISSION_DURATION','');
+        $user=User::select('id','side','status','created_at')->where('parent_id','=',$id)->whereRaw('DATEDIFF("'.$now.'",created_at) >'.$commission_duration)->get();
+
+        foreach ($user as $key => $value) {
+            
+                // if($value->side=='left')
+              array_push($lids,(object)['id'=>$value->id,'status'=>$value->status,'created_at'=>$value->created_at,'side'=>'left']);
+                // if($value->side=='right')
+                //         array_push($rids,(object)['id'=>$value->id,'status'=>$value->status,'created_at'=>$value->created_at,'side'=>'right']);
+                
+                $this->getlchilds($value->id);
+
+        }
+        $GLOBALS['lids']=$lids;
+        // $GLOBALS['rids']=$rids;
+
+            
+    }
+    public function getrchilds($id){
+        // Static $lids=array();
         Static $rids=array();
 
         
@@ -197,17 +243,18 @@ class StudyDashboardController extends Controller
 
         foreach ($user as $key => $value) {
             
-                if($value->side=='left')
-                        array_push($lids,(object)['id'=>$value->id,'status'=>$value->status,'created_at'=>$value->created_at]);
-                if($value->side=='right')
-                        array_push($rids,(object)['id'=>$value->id,'status'=>$value->status,'created_at'=>$value->created_at]);
+                // if($value->side=='left')
+              array_push($rids,(object)['id'=>$value->id,'status'=>$value->status,'created_at'=>$value->created_at,'side'=>'right']);
+                // if($value->side=='right')
+                //         array_push($rids,(object)['id'=>$value->id,'status'=>$value->status,'created_at'=>$value->created_at,'side'=>'right']);
                 
-                $this->getallchilds($value->id);
+                $this->getrchilds($value->id);
 
         }
-        $GLOBALS['lids']=$lids;
         $GLOBALS['rids']=$rids;
+        // $GLOBALS['rids']=$rids;
 
             
     }
+
 }

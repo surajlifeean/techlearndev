@@ -17,7 +17,6 @@ trait BrandsTrait {
     public function getrightchild($id){
             $rc=User::select('id',DB::raw('CONCAT(fname," ",lname) as full_name'),'contact_no','username','side','status')->where([
             ['parent_id',$id],
-            ['side','=','right']
         ])->first();
         return $rc;
     }
@@ -56,8 +55,10 @@ trait BrandsTrait {
         ->groupBy('tag')
         ->get();
 
-        // dd($tag);
-
+        if(isset($tag))
+            return 2;
+        else
+            return 2;
 
     }
     public function getChildsArray($id){
