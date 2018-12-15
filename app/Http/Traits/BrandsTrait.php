@@ -53,12 +53,16 @@ trait BrandsTrait {
         ->select('tag',DB::raw('count(*) as cnt'))
         ->where('receiver_id','=',$id)
         ->groupBy('tag')
-        ->get();
+        ->first();
 
-        if(isset($tag))
+    
+        // dd($tag);
+
+        if($tag->tag=='CA' && $tag->cnt<9)
             return 2;
-        else
-            return 2;
+         else
+            return 6;
+
 
     }
     public function getChildsArray($id){

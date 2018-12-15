@@ -64,16 +64,35 @@ class StudyDashboardController extends Controller
 
     //done on 12th dec --- order by date remaining
         $ratio=$this->getCommissionRatio($id);
+        dd($ratio);
         $this->getChildsArray($id);
 
         $larray=$GLOBALS['larray'];
         $rarray=$GLOBALS['rarray'];
 
         // dd(array_chunk($lids,2));
-        $comlist=array_merge(array_slice($rids,0,2),array_slice($lids,0,2));    
+        $comlist=array_merge(array_slice($rids,0,$ratio),array_slice($lids,0,$ratio));    
 
-        dd($comlist);
+        $sortedarr=$this->bubble_Sort($comlist);
 
+
+
+        $consider=0;
+        if($ratio==2)
+            $consider=3;
+
+        $sortedarr=array_slice($sortedarr,0,$consider);
+        
+        //insert the commissioned sales into the db
+
+
+        foreach ($sortedarr as $key => $value) {
+        $Commissionedsale=new Commissionedsale;
+        $Commissionedsale->receiver_id=Auth::user()->id;
+        $Commissionedsale->commissioned_id=$value->id;
+        $Commissionedsale->save();
+        }
+        //insert ends
     
         $ds=count($this->direct_sales($id));
         $ts=$this->getteamsize($id);
@@ -256,5 +275,27 @@ class StudyDashboardController extends Controller
 
             
     }
+
+function bubble_Sort($my_array )
+{
+    do
+    {
+        $swapped = false;
+        for( $i = 0, $c = count( $my_array ) - 1; $i < $c; $i++ )
+        {
+            // $value[0]->v
+            $value=$my_array[$i];
+            $nextvalue=$my_array[$i + 1];
+            if($value->created_at > $nextvalue->created_at)
+            {
+                list( $my_array[$i + 1], $my_array[$i] ) =
+                        array( $my_array[$i], $my_array[$i + 1] );
+                $swapped = true;
+            }
+        }
+    }
+    while( $swapped );
+return $my_array;
+}
 
 }
