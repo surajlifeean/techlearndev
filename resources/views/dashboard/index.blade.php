@@ -203,7 +203,7 @@
                                                     </p>
                                                 </div>
                                                 <div class="ml-auto text-right">
-                                                    <h2 class="counter">1548</h2>
+                                                    <h2 class="counter">{{$salesreport['ts']-$commissionedsales}}</h2>
                                                     <span>Total Non Commission
                                                         Sales </span>
                                             </div>     

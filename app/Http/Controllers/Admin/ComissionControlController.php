@@ -51,12 +51,9 @@ class ComissionControlController extends Controller
         foreach ($request->request as $key => $value) {
 
             if($key!='_token'){
-
             $commission_chart=new CommissionChart;
-
             $commission_chart->tag_name=$key;
             $commission_chart->commission=$value;
-
             $commission_chart->save();
                 }
         }

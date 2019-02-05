@@ -37,46 +37,28 @@ class StudyDashboardController extends Controller
         // $ruser=User::select('id','username','side')->where([['parent_id',$id],['side','right']])->first();       
         // dd($ruser);
         $luser=User::select('id','side','status','created_at')->where([['parent_id',$id],['side','left']])->whereRaw('DATEDIFF("'.$now.'",created_at) >'.$commission_duration)->first();
-
-
-
-
         $ruser=User::select('id','side','status','created_at')->where([['parent_id',$id],['side','right']])->whereRaw('DATEDIFF("'.$now.'",created_at) >'.$commission_duration)->first();
-
-
-
-
         $this->getlchilds($luser->id);
         $this->getrchilds($ruser->id);
-
         $lids=$GLOBALS['lids'];
         $rids=$GLOBALS['rids'];
         array_push($lids,(object)['id'=>$luser->id,'status'=>$luser->status,'created_at'=>$luser->created_at,'side'=>'left']);
         array_push($rids,(object)['id'=>$ruser->id,'status'=>$ruser->status,'created_at'=>$ruser->created_at,'side'=>'right']);
 
-        // dd($rids);
 
         //AN ASSOCIATE WILL BE ELIGIBLE FOR COMMISSION AFTER THIS MANY DAYS
-        // DD($commission_duration);
+        $CommissionedSale=CommissionedSale::select('commissioned_id')->where('receiver_id',$id)->get();
+        $already_commissioned_ids=$this->objectToArray($CommissionedSale);
+        $this->removeIdFromArray($already_commissioned_ids,$lids);
 
-        $CommissionedSale=CommissionedSale::where('receiver_id',$id)->get();
+        // remove already_commissioned_ids from lids & rids
 
 
-    //done on 12th dec --- order by date remaining
-        $ratio=$this->getCommissionRatio($id);
-        dd($ratio);
-        $this->getChildsArray($id);
-
-        $larray=$GLOBALS['larray'];
-        $rarray=$GLOBALS['rarray'];
-
-        // dd(array_chunk($lids,2));
+        //done on 12th dec --- order by date remaining
+        $ratio=$this->getCommissionRatio($id); //it returns the ration to be considered for commission
+        //remove from the IDs the once which are already commissioned.
         $comlist=array_merge(array_slice($rids,0,$ratio),array_slice($lids,0,$ratio));    
-
         $sortedarr=$this->bubble_Sort($comlist);
-
-
-
         $consider=0;
         if($ratio==2)
             $consider=3;
@@ -84,7 +66,6 @@ class StudyDashboardController extends Controller
         $sortedarr=array_slice($sortedarr,0,$consider);
         
         //insert the commissioned sales into the db
-
 
         foreach ($sortedarr as $key => $value) {
         $Commissionedsale=new Commissionedsale;
@@ -94,6 +75,9 @@ class StudyDashboardController extends Controller
         }
         //insert ends
     
+        $this->getChildsArray($id);
+        $larray=$GLOBALS['larray'];
+        $rarray=$GLOBALS['rarray'];
         $ds=count($this->direct_sales($id));
         $ts=$this->getteamsize($id);
         $lc=$this->getleftchild($id);
@@ -114,9 +98,6 @@ class StudyDashboardController extends Controller
         $rdor=$this->getDormantCount($rc->id);
         if($rc->status=='I')
             $rdor++;
-
-
-        
 
         $sales_report=['ds'=>$ds,'ts'=>$ts,'ls'=>$ls,'rs'=>$rs,'ldor'=>$ldor,'rdor'=>$rdor];
         return view('dashboard.index')->withSalesreport($sales_report)->withCommissionedsales(count($CommissionedSale));
@@ -247,10 +228,9 @@ class StudyDashboardController extends Controller
 
         }
         $GLOBALS['lids']=$lids;
-        // $GLOBALS['rids']=$rids;
-
-            
+        // $GLOBALS['rids']=$rids;            
     }
+    
     public function getrchilds($id){
         // Static $lids=array();
         Static $rids=array();
@@ -276,26 +256,46 @@ class StudyDashboardController extends Controller
             
     }
 
-function bubble_Sort($my_array )
-{
-    do
+    function bubble_Sort($my_array )
     {
-        $swapped = false;
-        for( $i = 0, $c = count( $my_array ) - 1; $i < $c; $i++ )
+        do
         {
-            // $value[0]->v
-            $value=$my_array[$i];
-            $nextvalue=$my_array[$i + 1];
-            if($value->created_at > $nextvalue->created_at)
+            $swapped = false;
+            for( $i = 0, $c = count( $my_array ) - 1; $i < $c; $i++ )
             {
-                list( $my_array[$i + 1], $my_array[$i] ) =
-                        array( $my_array[$i], $my_array[$i + 1] );
-                $swapped = true;
+                // $value[0]->v
+                $value=$my_array[$i];
+                $nextvalue=$my_array[$i + 1];
+                if($value->created_at > $nextvalue->created_at)
+                {
+                    list( $my_array[$i + 1], $my_array[$i] ) =
+                            array( $my_array[$i], $my_array[$i + 1] );
+                    $swapped = true;
+                }
             }
         }
+        while( $swapped );
+    return $my_array;
     }
-    while( $swapped );
-return $my_array;
-}
+
+    public static function objectToArray(&$object)
+  {
+    $ids=[];
+       foreach ($object as $key => $value) {
+         $ids[$key]=$value['commissioned_id'];
+       }
+
+    return $ids;
+  }
+   public static function removeIdFromArray($comids,$Array){
+
+    foreach ($comids as $idkey => $id) {
+      
+      foreach ($Array as $key => $value) {
+        
+      
+      }
+    }
+  }
 
 }

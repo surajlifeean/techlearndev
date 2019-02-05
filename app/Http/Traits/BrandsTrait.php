@@ -60,7 +60,9 @@ trait BrandsTrait {
 
         if($tag->tag=='CA' && $tag->cnt<9)
             return 2;
-         else
+         else if($tag->tag=='C' && $tag->cnt%36)
+            return 3;
+         else   
             return 6;
 
 
