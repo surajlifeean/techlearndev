@@ -468,7 +468,7 @@ section.banner-sec {
 }
 ul.how-works-list {
 	float: left;
-	width: 100%;
+	width: 100%; 
 	position: relative;
 }
 ul.how-works-list:before {

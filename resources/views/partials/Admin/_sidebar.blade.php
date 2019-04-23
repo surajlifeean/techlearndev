@@ -151,6 +151,35 @@
                     </li>
 
 
+                     <li >
+                      <a href="#pages"  >
+                        <i class="fa fa-file-text icon">
+                          <b class="bg-primary"></b>
+                        </i>
+                        <span class="pull-right">
+                          <i class="fa fa-angle-down text"></i>
+                          <i class="fa fa-angle-up text-active"></i>
+                        </span>
+                        <span>Exam Category Mngt.</span>
+                      </a>
+                      <ul class="nav lt">
+                        <li >
+                          <a href="{{route('exam-category.index')}}" >                                                        
+                            <i class="fa fa-angle-right"></i>
+                            <span>List</span>
+                          </a>
+                        </li>
+                         <li >
+                          <a href="{{route('exam-category.create')}}" >                                                        
+                            <i class="fa fa-angle-right"></i>
+                            <span>Add</span>
+                          </a>
+                        </li>
+                       </ul>
+                    </li>
+
+
+
                     
                     <li >
                       <a href="{{url('admin/support-management')}}"  >

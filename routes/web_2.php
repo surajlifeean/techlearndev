@@ -41,7 +41,6 @@ Route::get('/downloadPDF/{id}','Site\StudyDashboardController@downloadPDF')->nam
 
 
 Route::resource('account','Site\AccountController');
-Route::post('SaveAccount', 'Site\AccountController@store')->name('SaveAccount');
 
 Route::resource('profile','Site\StudentController');
 
@@ -102,7 +101,6 @@ Route::resource('course-management','Admin\CourseManagementController');
 Route::get('course-video/create/{id}','Admin\CourseVideoController@create')->name('course-video.create');
 Route::resource('course-video-management','Admin\CourseVideoController');
 
-Route::resource('exam-category','Admin\ExamCategoryController');
 
 
 Route::any('video-search','Admin\VideoManagementController@videosearch')->name('video-search');

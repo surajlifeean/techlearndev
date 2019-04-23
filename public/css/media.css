@@ -190,9 +190,10 @@
 	li.right-style,
 	li.left-style {
 		display: flex;
-		width: 50%;
+		width: 100%;
 		justify-content: space-around;
 	}
+	/*width changed from 50% to 100%*/
 }
 	
 @media only screen and (max-width:767px)

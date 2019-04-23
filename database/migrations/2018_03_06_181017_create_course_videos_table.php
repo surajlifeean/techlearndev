@@ -19,9 +19,11 @@ class CreateCourseVideosTable extends Migration
             $table->integer('video_id');
             $table->integer('course_id');  
             $table->string('description');   
-            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
-            $table->foreign('video_id')->references('id')->on('videos')->onDelete('cascade'); 
+            $table->string('topic_name');   
+            $table->foreign('course_id',10)->references('id')->on('courses')->onDelete('cascade');
+            $table->foreign('video_id',10)->references('id')->on('videos')->onDelete('cascade'); 
             $table->timestamps();
+
         });
     }
 

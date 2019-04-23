@@ -19,7 +19,7 @@
                             <a href="#"><i class="fa fa-home" aria-hidden="true"></i>Dashboard </a>
                         </li>
                         <li>
-                            <a href="{{url('/account')}}"><i class="fa fa-user-circle-o " aria-hidden="true"></i>My Account </a>
+                            <a href="#"><i class="fa fa-user-circle-o" aria-hidden="true"></i>My Account </a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-line-chart" aria-hidden="true"></i>My Income Report </a>
