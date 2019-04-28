@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Course;
+use App\ExamCategory;
+use Session;
+
 
 class ExamCategoryController extends Controller
 {
@@ -14,7 +18,13 @@ class ExamCategoryController extends Controller
      */
     public function index()
     {
-        dd("category-list");
+        // dd("category-list");
+                $examCategory=ExamCategory::paginate(10);
+        
+        // dd(property_exists($course,'title'));
+        //dd($course);
+        return view('Admin.exam.index')->withCourses($examCategory);
+
     }
 
     /**
@@ -35,6 +45,16 @@ class ExamCategoryController extends Controller
      */
     public function store(Request $request)
     {
+
+        $examCategory=new ExamCategory;
+        $examCategory->title=$request['title'];
+        $examCategory->description=$request['description'];
+        $examCategory->status=$request['status'];
+        $examCategory->save();        
+
+        session::flash('success', 'The Exam category Has Been Added Successfully!');
+         return redirect()->route('exam-category.index');
+
 
     }
 
@@ -82,4 +102,40 @@ class ExamCategoryController extends Controller
     {
         //
     }
+
+     public function statuschange($id,Request $request)
+    {   //dd($id);
+        $examCategory =ExamCategory::find($id);
+        //dd($customer);
+        if($examCategory->status == 'A'){
+    //dd($customer->status);
+            $examCategory->status = 'I';
+            if($examCategory->save()){
+                $request->session()->flash('success', 'course deactivated successfully.');
+                return redirect('/admin/exam-category');
+            }
+        } else {
+            $examCategory->status = 'A';
+            if($examCategory->save()){
+                $request->session()->flash('success', 'course activated successfully.');
+                return redirect('/admin/exam-category');
+            }
+        }
+    }
+
+    public function delete($id,Request $request)
+    {   //dd($id);
+        $examCategory =ExamCategory::find($id);
+        //dd($customer);
+         if(ExamCategory::find($id)->delete()){
+            $request->session()->flash('success', 'Category deletded successfully.');
+            return redirect('/admin/exam-category');
+        } else {
+            $request->session()->flash('error', 'Course not deletded.');
+            return redirect('/admin/exam-category');
+        }
+    }
+
+
+
 }

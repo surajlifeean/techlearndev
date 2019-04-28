@@ -16,12 +16,12 @@ class CreateCourseVideosTable extends Migration
         Schema::create('course_videos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('level');
-            $table->integer('video_id');
-            $table->integer('course_id');  
+            $table->integer('video_id')->unsigned();
+            $table->integer('course_id')->unsigned();  
             $table->string('description');   
             $table->string('topic_name');   
-            $table->foreign('course_id',10)->references('id')->on('courses')->onDelete('cascade');
-            $table->foreign('video_id',10)->references('id')->on('videos')->onDelete('cascade'); 
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
+            $table->foreign('video_id')->references('id')->on('videos')->onDelete('cascade'); 
             $table->timestamps();
 
         });

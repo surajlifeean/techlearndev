@@ -25,7 +25,7 @@
                       <header class="panel-heading">
                         <strong>Enter The Course Details</strong>
                       </header>
-                      {{Form::open(['route' => 'course-management.store','files' => true, 'class'=>'form-horizontal course-form','data-parsley-validate'])}}
+                      {{Form::open(['route' => 'exam-category.store','files' => true, 'class'=>'form-horizontal course-form','data-parsley-validate'])}}
                       <div class="panel-body">                   
                         <div class="form-group">
                           <label class="col-sm-3 control-label">Course Title</label>

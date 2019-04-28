@@ -103,6 +103,8 @@ Route::get('course-video/create/{id}','Admin\CourseVideoController@create')->nam
 Route::resource('course-video-management','Admin\CourseVideoController');
 
 Route::resource('exam-category','Admin\ExamCategoryController');
+Route::get('exam-category/statuschange/{id}', array('as' => 'admin.exam-category.statuschange', 'uses' => 'Admin\ExamCategoryController@statuschange'));
+Route::get('exam-category/delete/{id}', array('as' => 'admin.exam-category.delete', 'uses' => 'Admin\ExamCategoryController@delete'));
 
 
 Route::any('video-search','Admin\VideoManagementController@videosearch')->name('video-search');
