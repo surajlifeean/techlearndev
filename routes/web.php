@@ -91,6 +91,7 @@ Route::resource('support-management','Admin\SupportManagementController');
 Route::any('support-search','Admin\SupportManagementController@supportsearch')->name('support-search');
 // end support
 
+Route::resource('exam-list', 'Admin\ExamListController');
 
 Route::any('course-search','Admin\CourseManagementController@coursesearch')->name('course-search');
 Route::get('delete-course', 'Admin\CourseManagementController@deletecourse')->name('delete-course');

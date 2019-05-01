@@ -77,7 +77,8 @@ class ExamCategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $examCategory=ExamCategory::find($id);
+        return view('Admin.exam.edit')->withExamCategory($examCategory);
     }
 
     /**
@@ -89,7 +90,16 @@ class ExamCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         // $examCategory=new ExamCategory;
+        $examCategory=ExamCategory::find($id);
+        $examCategory->title=$request['title'];
+        $examCategory->description=$request['description'];
+        $examCategory->status=$request['status'];
+        $examCategory->save();        
+
+        session::flash('success', 'The Exam category Has Been updated Successfully!');
+         return redirect()->route('exam-category.index');
+
     }
 
     /**

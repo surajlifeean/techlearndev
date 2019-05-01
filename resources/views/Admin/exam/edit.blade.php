@@ -10,13 +10,13 @@
  <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
                 <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-home"></i> Home</a></li>
                 <li><a href="{{route('course-management.index')}}">Exam management</a></li>
-                <li><a href="{{route('course-management.create')}}">Add Exam Category</a></li>
+                <li><a href="{{route('course-management.create')}}">Edit Exam Category</a></li>
                
               </ul>
 
  
                       <header class="panel-heading">
-                        <span class="h4">Add Exam Category</span>
+                        <span class="h4">Edit Exam Category</span>
                       </header>
 
                       
@@ -25,12 +25,14 @@
                       <header class="panel-heading">
                         <strong>Enter The Course Details</strong>
                       </header>
-                      {{Form::open(['route' => 'exam-category.store','files' => true, 'class'=>'form-horizontal course-form','data-parsley-validate'])}}
+
+                       {{Form::model($examCategory,['route' =>['exam-category.update',$examCategory->id],'method' =>'PUT', 'files' => true, 'class'=>'form-horizontal course-form','data-parsley-validate'])}}
+
                       <div class="panel-body">                   
                         <div class="form-group">
-                          <label class="col-sm-3 control-label">Exam Category Title</label>
+                          <label class="col-sm-3 control-label">Course Title</label>
                           <div class="col-sm-9">
-                            <input type="text" name="title" class="form-control"  data-required="true" placeholder="Course Title" required>   
+                            <input type="text" name="title" class="form-control" value="{{$examCategory->title}}" data-required="true" placeholder="Course Title" required>   
                           </div>
                         </div>
 <!--                          <div class="form-group">
@@ -49,7 +51,7 @@
                           <label class="col-sm-3 control-label">Description</label>
                           <div class="col-sm-9">
                             <!-- <input type="text" name="description" class="form-control"  data-required="true" placeholder="Description" required> -->  
-                            <textarea class="summernote" name="description" class="form-control" required></textarea> 
+                            <textarea class="summernote" name="description" class="form-control" required>{!!$examCategory->description!!}</textarea> 
                           </div>
                         </div>
 
@@ -73,11 +75,12 @@
                         <div class="form-group">
                           <label class="col-sm-3 control-label">Status</label>
                           <div class="col-sm-9">
-                            <select name="status" required>
+                           <!--  <select name="status" required>
                          <option value="">select</option>
                          <option value="A">Active</option>
                          <option value="I">Inactive</option>
-                           </select>
+                           </select> -->
+                             {!!Form::select('status', ['A' => 'Active', 'I' => 'Inactive'],null, ['placeholder' => 'Select'])!!}
 
                           </div>
                          </div>

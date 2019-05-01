@@ -9,36 +9,36 @@
 
  <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
                 <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-home"></i> Home</a></li>
-                <li><a href="{{route('course-management.index')}}">Exam management</a></li>
-                <li><a href="{{route('course-management.create')}}">Add Exam Category</a></li>
+                <li><a href="{{route('exam-list.index')}}">Exam List management</a></li>
+                <li><a href="{{route('exam-list.create')}}">Add Exam Item</a></li>
                
               </ul>
 
  
                       <header class="panel-heading">
-                        <span class="h4">Add Exam Category</span>
+                        <span class="h4">Add Exam Item</span>
                       </header>
 
                       
                  
                      
                       <header class="panel-heading">
-                        <strong>Enter The Course Details</strong>
+                        <strong>Enter The Exam Item Details</strong>
                       </header>
-                      {{Form::open(['route' => 'exam-category.store','files' => true, 'class'=>'form-horizontal course-form','data-parsley-validate'])}}
+                      {{Form::open(['route' => 'exam-list.store','files' => true, 'class'=>'form-horizontal exam-form','data-parsley-validate'])}}
                       <div class="panel-body">                   
                         <div class="form-group">
-                          <label class="col-sm-3 control-label">Exam Category Title</label>
+                          <label class="col-sm-3 control-label">exam Title</label>
                           <div class="col-sm-9">
-                            <input type="text" name="title" class="form-control"  data-required="true" placeholder="Course Title" required>   
+                            <input type="text" name="title" class="form-control"  data-required="true" placeholder="exam Title" required>   
                           </div>
                         </div>
-<!--                          <div class="form-group">
-                          <label class="col-sm-3 control-label">Course Caption</label>
+                        <div class="form-group">
+                          <label class="col-sm-3 control-label">exam Category</label>
                           <div class="col-sm-9">
-                            <input type="text" name="caption" class="form-control"  data-required="true" placeholder="Course Caption" required>   
+                              {{Form::select('exam_categories_id',$examCategory)}}  
                           </div>
-                        </div> -->
+                        </div>
                          <div class="line line-dashed line-lg pull-in"></div>
                        
 
@@ -94,7 +94,7 @@
                        
                           <input type="submit" class="btn btn-success btn-s-xs" value="Submit"/>
 
-                        <a href="{{url('/admin/course-management')}}" class="btn btn-danger">Cancel</a>
+                        <a href="{{url('/admin/exam-list')}}" class="btn btn-danger">Cancel</a>
                       </footer>
 
 

@@ -55,7 +55,7 @@ class StudyDashboardController extends Controller
 
 
         //done on 12th dec --- order by date remaining
-        $ratio=$this->getCommissionRatio($id); //it returns the ration to be considered for commission
+        $ratio=$this->getCommissionRatio($id); //it returns the ratio to be considered for commission
         //remove from the IDs the once which are already commissioned.
         $comlist=array_merge(array_slice($rids,0,$ratio),array_slice($lids,0,$ratio));    
         $sortedarr=$this->bubble_Sort($comlist);

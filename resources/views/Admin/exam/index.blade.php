@@ -40,7 +40,7 @@
                       <a href="{{route('exam-category.create')}}" class="btn btn-sm btn-default"><i class="fa fa-plus"></i>Add New Category</a>
                     </div>
 
-                    <form action="{{route('course-search')}}" method="get">
+<!--                     <form action="{{route('course-search')}}" method="get">
                     <div class="col-sm-4 m-b-xs">
                       <div class="input-group">
                    
@@ -53,7 +53,7 @@
                       
                       </div>
                     </div>
-                    </form>
+                    </form> -->
                   </div>
                 </header>
 
@@ -129,7 +129,7 @@
 
                     <!-- 
                      {!! Html::LinkRoute('course-management.edit',null,array($value->id),array('class'=>"fa fa-pencil-square-o",'data-toggle'=>"tooltip",'title'=>"Edit Course"))!!} -->
-                      <a href="{{route('course-management.edit',$value->id)}}" class="btn btn-info btn-rounded"><i class="fa fa-pencil-square-o"></i></a>
+                      <a href="{{route('exam-category.edit',$value->id)}}" class="btn btn-info btn-rounded"><i class="fa fa-pencil-square-o"></i></a>
 
 
                         <!-- <a href="#" class="delete-icon" id="{{$value->id}}" aria-label="Left Align" data-toggle="tooltip" title="Delete Course">
