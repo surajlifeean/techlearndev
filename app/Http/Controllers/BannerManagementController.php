@@ -81,4 +81,38 @@ class BannerManagementController extends Controller
     {
         //
     }
+
+         public function statuschange($id,Request $request)
+    {   //dd($id);
+        $examCategory =ExamCategory::find($id);
+        //dd($customer);
+        if($examCategory->status == 'A'){
+    //dd($customer->status);
+            $examCategory->status = 'I';
+            if($examCategory->save()){
+                $request->session()->flash('success', 'course deactivated successfully.');
+                return redirect('/admin/exam-category');
+            }
+        } else {
+            $examCategory->status = 'A';
+            if($examCategory->save()){
+                $request->session()->flash('success', 'course activated successfully.');
+                return redirect('/admin/exam-category');
+            }
+        }
+    }
+
+    public function delete($id,Request $request)
+    {   //dd($id);
+        $examCategory =ExamCategory::find($id);
+        //dd($customer);
+         if(ExamCategory::find($id)->delete()){
+            $request->session()->flash('success', 'Category deletded successfully.');
+            return redirect('/admin/exam-category');
+        } else {
+            $request->session()->flash('error', 'Course not deletded.');
+            return redirect('/admin/exam-category');
+        }
+    }
+    
 }

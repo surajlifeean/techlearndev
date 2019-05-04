@@ -93,6 +93,10 @@ Route::any('support-search','Admin\SupportManagementController@supportsearch')->
 
 Route::resource('exam-list', 'Admin\ExamListController');
 
+Route::get('exam-list/statuschange/{id}', array('as' => 'admin.exam-list.statuschange', 'uses' => 'Admin\ExamListController@statuschange'));
+Route::get('exam-list/delete/{id}', array('as' => 'admin.exam-list.delete', 'uses' => 'Admin\ExamListController@delete'));
+
+
 Route::any('course-search','Admin\CourseManagementController@coursesearch')->name('course-search');
 Route::get('delete-course', 'Admin\CourseManagementController@deletecourse')->name('delete-course');
 Route::get('bulk-course-status', 'Admin\CourseManagementController@bulkcoursestatus')->name('bulk-course-status');
@@ -102,6 +106,7 @@ Route::resource('course-management','Admin\CourseManagementController');
 
 Route::get('course-video/create/{id}','Admin\CourseVideoController@create')->name('course-video.create');
 Route::resource('course-video-management','Admin\CourseVideoController');
+
 
 Route::resource('exam-category','Admin\ExamCategoryController');
 Route::get('exam-category/statuschange/{id}', array('as' => 'admin.exam-category.statuschange', 'uses' => 'Admin\ExamCategoryController@statuschange'));

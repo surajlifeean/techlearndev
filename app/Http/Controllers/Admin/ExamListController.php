@@ -22,7 +22,7 @@ class ExamListController extends Controller
 
         $examList = ExamList::join('exam_categories', 'exam_categories.id', '=', 'exam_lists.exam_categories_id')
             ->select('exam_lists.*', 'exam_categories.title as category')
-            ->get();
+            ->paginate();
 
        // dd($examList);
 
@@ -80,7 +80,9 @@ class ExamListController extends Controller
      */
     public function edit($id)
     {
-        //
+        $examCategory=ExamList::find($id);
+        $category=ExamCategory::where('status','A')->orderBy('title')->pluck('title', 'id');
+        return view('Admin.examList.edit')->withExamCategory($examCategory)->withCategory($category);
     }
 
     /**
@@ -92,7 +94,15 @@ class ExamListController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $examCategory=ExamList::find($id);
+        $examCategory->title=$request['title'];
+        $examCategory->exam_categories_id=$request['exam_categories_id'];
+        $examCategory->description=$request['description'];
+        $examCategory->status=$request['status'];
+        $examCategory->save();        
+
+        session::flash('success', 'The Exam List Has Been updated Successfully!');
+         return redirect()->route('exam-list.index');
     }
 
     /**
@@ -104,5 +114,38 @@ class ExamListController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+         public function statuschange($id,Request $request)
+    {   
+        $examCategory =ExamList::find($id);
+        //dd($customer);
+        if($examCategory->status == 'A'){
+    //dd($customer->status);
+            $examCategory->status = 'I';
+            if($examCategory->save()){
+                $request->session()->flash('success', 'Item deactivated successfully.');
+                return redirect('/admin/exam-list');
+            }
+        } else {
+            $examCategory->status = 'A';
+            if($examCategory->save()){
+                $request->session()->flash('success', 'Item activated successfully.');
+                return redirect('/admin/exam-list');
+            }
+        }
+    }
+
+    public function delete($id,Request $request)
+    {   //dd($id);
+        $examCategory =ExamList::find($id);
+        //dd($examCategory);
+         if($examCategory->delete()){
+            $request->session()->flash('success', 'Item deletded successfully.');
+            return redirect('/admin/exam-list');
+        } else {
+            $request->session()->flash('error', 'item not deletded.');
+            return redirect('/admin/exam-list');
+        }
     }
 }
