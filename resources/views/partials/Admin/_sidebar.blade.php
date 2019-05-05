@@ -178,6 +178,62 @@
                        </ul>
                     </li>
 
+                    <li >
+                      <a href="#pages"  >
+                        <i class="fa fa-file-text icon">
+                          <b class="bg-primary"></b>
+                        </i>
+                        <span class="pull-right">
+                          <i class="fa fa-angle-down text"></i>
+                          <i class="fa fa-angle-up text-active"></i>
+                        </span>
+                        <span>Exam List Mngt.</span>
+                      </a>
+                      <ul class="nav lt">
+                        <li >
+                          <a href="{{route('exam-list.index')}}" >                                                        
+                            <i class="fa fa-angle-right"></i>
+                            <span>List</span>
+                          </a>
+                        </li>
+                         <li >
+                          <a href="{{route('exam-list.create')}}" >                                                        
+                            <i class="fa fa-angle-right"></i>
+                            <span>Add</span>
+                          </a>
+                        </li>
+                       </ul>
+                    </li>
+
+
+                     <li >
+                      <a href="#pages"  >
+                        <i class="fa fa-file-text icon">
+                          <b class="bg-primary"></b>
+                        </i>
+                        <span class="pull-right">
+                          <i class="fa fa-angle-down text"></i>
+                          <i class="fa fa-angle-up text-active"></i>
+                        </span>
+                        <span>Question Mngt.</span>
+                      </a>
+                      <ul class="nav lt">
+                        <li >
+                          <a href="{{route('question.index')}}" >                                                        
+                            <i class="fa fa-angle-right"></i>
+                            <span>List</span>
+                          </a>
+                        </li>
+                         <li >
+                          <a href="{{route('question.create')}}" >                                                        
+                            <i class="fa fa-angle-right"></i>
+                            <span>Add</span>
+                          </a>
+                        </li>
+                       </ul>
+                    </li>
+
+
 
 
                     

@@ -45,7 +45,8 @@ class ExamCategoryController extends Controller
      */
     public function store(Request $request)
     {
-
+        // dd($request);
+        
         $examCategory=new ExamCategory;
         $examCategory->title=$request['title'];
         $examCategory->description=$request['description'];

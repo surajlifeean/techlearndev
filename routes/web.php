@@ -96,6 +96,10 @@ Route::resource('exam-list', 'Admin\ExamListController');
 Route::get('exam-list/statuschange/{id}', array('as' => 'admin.exam-list.statuschange', 'uses' => 'Admin\ExamListController@statuschange'));
 Route::get('exam-list/delete/{id}', array('as' => 'admin.exam-list.delete', 'uses' => 'Admin\ExamListController@delete'));
 
+Route::resource('question', 'Admin\QuestionController');
+Route::get('question/statuschange/{id}', array('as' => 'admin.question.statuschange', 'uses' => 'Admin\QuestionController@statuschange'));
+Route::get('question/delete/{id}', array('as' => 'admin.question.delete', 'uses' => 'Admin\QuestionController@delete'));
+
 
 Route::any('course-search','Admin\CourseManagementController@coursesearch')->name('course-search');
 Route::get('delete-course', 'Admin\CourseManagementController@deletecourse')->name('delete-course');
