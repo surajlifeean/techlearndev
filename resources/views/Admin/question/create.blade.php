@@ -68,7 +68,7 @@
                           </div>
 
                           <label class="col-sm-3 control-label">Check for correctness</label>
-                          {{Form::checkbox('solution', '0', false)}}
+                          {{Form::checkbox('solution', '0', false,['required'=>'required'])}}
                         </div>
 
                         <div class="line line-dashed line-lg pull-in"></div>
@@ -78,7 +78,7 @@
                             <textarea class="summernote" name="Option[]" class="form-control" required></textarea> 
                           </div>
                         <label class="col-sm-3 control-label">Check for correctness</label>
-                      {{Form::checkbox('solution', '1', false)}}
+                      {{Form::checkbox('solution', '1', false,['required'=>'required'])}}
                         </div>
 
                         <div class="line line-dashed line-lg pull-in"></div>
@@ -88,7 +88,7 @@
                             <textarea class="summernote" name="Option[]" class="form-control" required></textarea> 
                           </div>
                         <label class="col-sm-3 control-label">Check for correctness</label>
-                        {{Form::checkbox('solution', '2', false)}}  
+                        {{Form::checkbox('solution', '2', false,['required'=>'required'])}}  
                         </div>
 
                         <div class="line line-dashed line-lg pull-in"></div>
@@ -97,7 +97,7 @@
                           <div class="col-sm-9">
                             <textarea class="summernote" name="Option[]" class="form-control" required></textarea> 
                           </div>
-                        <label class="col-sm-3 control-label">Check for correctness</label>{{Form::checkbox('solution', '3', False)}}  
+                        <label class="col-sm-3 control-label">Check for correctness</label>{{Form::checkbox('solution', '3', False,['required'=>'required'])}}  
                         </div>
 
 

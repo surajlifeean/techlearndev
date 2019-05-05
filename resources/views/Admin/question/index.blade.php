@@ -35,10 +35,19 @@
                   &nbsp;&nbsp;
                   <a href="javascript:void(0)" class="inactive-status" aria-label="Left Align" onclick="changebulkstatus('I')"  title="Activate course">
                        <i class="fa fa-unlock" aria-hidden="true"></i>
-                      </a>
-                      </div>
+                  </a>
+                  </div>
                       <a href="{{route('question.create')}}" class="btn btn-sm btn-default"><i class="fa fa-plus"></i>Add Question</a>
-                    </div>
+                  </div>
+                  <div>
+<!--                      <a href="javascript:void(0)" class="btn btn-primary btn-sm btn-default" aria-label="Left Align" onclick="addQuestiontoTest()"  title="Activate course">
+                       <i class="fa fa-plus" aria-hidden="true"></i>
+                  Create test</a> -->
+
+                  <a href="" class="btn btn-primary btn-rounded mb-4" data-toggle="modal" data-target="#modalSubscriptionForm">Create Test</a>
+
+
+                  </div>
 
 <!--                     <form action="{{route('course-search')}}" method="get">
                     <div class="col-sm-4 m-b-xs">
@@ -153,7 +162,7 @@
     
    
 
-   <div class="modal fade" id="formConfirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal fade" id="formConfirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -168,7 +177,61 @@
     </div>
   </div>
 </div>                         
-                 
+
+<!-- model for test -->
+
+<div class="modal fade" id="modalSubscriptionForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Enter Test Details </h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+
+        <div class="md-form mb-5">
+          <i class="fa fa-angle-double-down prefix grey-text"></i>
+          <label data-error="wrong" data-success="right" for="form3">Exam Category</label>
+          
+           {{Form::select('exam_lists_id',$examList,null,['id'=>'exam_lists_id'])}}  
+
+        </div>
+
+        <div class="md-form mb-5">
+          <i class="fa fa-user prefix grey-text"></i>
+          <label data-error="wrong" data-success="right" for="form3">Test Title</label>
+          <input type="text" id="title" class="form-control validate" required>
+
+        </div>
+
+        <div class="md-form mb-4">
+          <i class="fa fa-envelope prefix grey-text"></i>
+          <label data-error="wrong" data-success="right" for="form2">Test Description</label>
+          <input type="test" id="description" class="form-control validate" required>
+        </div>
+
+        <div class="md-form mb-4">
+          <i class="fa fa-book prefix grey-text"></i>
+          <label data-error="wrong" data-success="right" for="form2">Total Marks</label>
+          <input type="test" id="marks" class="form-control validate" required>
+        </div>
+
+        <div class="md-form mb-4">
+          <i class="fa fa-clock-o prefix grey-text"></i>
+          <label data-error="wrong" data-success="right" for="form2">Duration</label>
+          <input type="test" id="duration" class="form-control validate" required>
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button class="btn btn-indigo" onclick="addQuestiontoTest();">Submit<i class="fa fa-paper-plane-o ml-1"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- model for test ends -->                 
                      
 
 
@@ -205,9 +268,48 @@
     @section('scripts')
 
 
-     <script type="text/javascript">
+<script type="text/javascript">
 
 $(document).ready(function(){
+
+    function addQuestiontoTest(){
+  /*alert(id);*/
+  if(!id){
+    alert("Please Select Some Question to add");
+  }
+  else{
+    
+    var title=$("#title").val();
+    var description=$("#description").val();
+    var marks=$("#marks").val();
+    var duration=$("#duration").val();
+    var exam_list_id=$("#exam_lists_id").val();
+
+    var r = confirm("Are You Sure You Wanna Add these Questions?");
+    if (r == true) {
+    console.log(id);
+    $.ajax({
+      headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+        url:"{{route('add-question-to-test')}}", 
+        type:"get",
+        data:{IDs:id,title:title,description:description,marks:marks,duration:duration,exam_list_id:exam_list_id},
+        success: function(result){
+          //alert(result);
+          console.log(result);
+          //location.reload();
+          //location.reload();
+          window.parent.location.reload();
+        
+        $("input[type='checkbox']").prop('checked', false);
+    }});
+
+   }//if ends
+  }
+}
+
+
 
      
   $('.formConfirm').on('click', function(e) {
@@ -233,45 +335,7 @@ $(document).ready(function(){
   });
 });
 </script>
-    <script type="text/javascript">
-
-    $(document).ready(function() {
-
-    // Gets the video src from the data-src on each button
-
-    var $videoSrc;  
-    $('.video-btn').click(function() {
-    $videoSrc = $(this).data( "src" );
-    });
-    console.log($videoSrc);
-
-
-
-    // when the modal is opened autoplay it  
-    $('#myModal').on('shown.bs.modal', function (e) {
-
-    // set the video src to autoplay and not to show related video. Youtube related video is like a box of chocolates... you never know what you're gonna get
-    $("#video").attr('src',$videoSrc + "?rel=0&amp;showinfo=0&amp;modestbranding=1&amp;autoplay=1" ); 
-    })
-
-
-    // stop playing the youtube video when I close the modal
-    $('#myModal').on('hide.bs.modal', function (e) {
-    // a poor man's stop video
-    $("#video").attr('src',$videoSrc); 
-    }) 
-
-
-
-
-
-
-    // document ready  
-    });
-
-
-
-    </script>
+    
 
 
 
@@ -374,6 +438,8 @@ $("input[type='checkbox']:not(.checkAll)").change(function(){
    }//if ends
   }
 }
+
+
 
 
 $('.delete-many').click(function(){

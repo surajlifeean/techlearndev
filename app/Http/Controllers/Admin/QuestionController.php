@@ -8,6 +8,7 @@ use App\QuestionType;
 use App\Question;
 use App\Solution;
 use Session;
+use App\ExamList;
 
 class QuestionController extends Controller
 {
@@ -19,7 +20,8 @@ class QuestionController extends Controller
     public function index()
     {
         
-        // $question=Question::paginate(10);
+         $examList=ExamList::where('status','A')->orderBy('title')->pluck('title', 'id');
+        
 
          $question = Question::join('question_types', 'question_types.id', '=', 'questions.question_types_id')
             ->select('questions.*', 'question_types.title as question_type')->orderBy('question_types.title')
@@ -27,7 +29,7 @@ class QuestionController extends Controller
 
         // dd($question);
 
-        return view('Admin.question.index')->withQuestion($question);
+        return view('Admin.question.index')->withQuestion($question)->withExamList($examList);
     }
 
     /**
