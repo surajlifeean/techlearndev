@@ -18,7 +18,15 @@ class TestController extends Controller
      */
     public function index()
     {
-        //
+        // $test=Test::paginate(10);
+
+
+        $test = Test::join('exam_lists', 'exam_lists.id', '=', 'tests.exam_lists_id')
+            ->select('tests.*', 'exam_lists.title as category')
+            ->paginate();
+            
+
+        return view('Admin.test.index')->withTest($test);
     }
 
     /**
@@ -28,9 +36,9 @@ class TestController extends Controller
      */
     public function create()
     {
-         $examList=ExamList::where('status','A')->orderBy('title')->pluck('title', 'id');
+        //  $examList=ExamList::where('status','A')->orderBy('title')->pluck('title', 'id');
         
-        return view('Admin.question.test')->withExamList($examList);
+        // return view('Admin.question.test')->withExamList($examList);
     }
 
     /**
@@ -136,5 +144,43 @@ class TestController extends Controller
         Session::flash('success', 'Test Added successfully!');
         echo "done";
     }
+
+
+        public function delete($id,Request $request)
+    {   //dd($id);
+        $question =Test::find($id);
+        //dd($examCategory);
+         if($question->delete()){
+            $request->session()->flash('success', 'Test deleted successfully.');
+            return redirect('/admin/test');
+        } else {
+            $request->session()->flash('error', 'item not deleted.');
+            return redirect('/admin/test');
+        }
+    }
+
+        
+        public function statuschange($id,Request $request)
+    {   //dd($id);
+        $question = Test::find($id);
+        //dd($customer);
+        if($question->status == 'A'){
+    //dd($customer->status);
+            $question->status = 'I';
+            if($question->save()){
+                $request->session()->flash('success', 'Test deactivated successfully.');
+                return redirect('/admin/test');
+            }
+        } else {
+            $question->status = 'A';
+            if($question->save()){
+                $request->session()->flash('success', 'Test activated successfully.');
+                return redirect('/admin/test');
+            }
+        }
+    }
+
+
+
 
 }

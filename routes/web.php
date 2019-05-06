@@ -100,8 +100,13 @@ Route::resource('question', 'Admin\QuestionController');
 Route::get('question/statuschange/{id}', array('as' => 'admin.question.statuschange', 'uses' => 'Admin\QuestionController@statuschange'));
 Route::get('question/delete/{id}', array('as' => 'admin.question.delete', 'uses' => 'Admin\QuestionController@delete'));
 
+
 Route::resource('test', 'Admin\TestController');
 Route::get('add-question-to-test','Admin\TestController@addQuestionToTest')->name('add-question-to-test');
+Route::get('test/delete/{id}', array('as' => 'admin.test.delete', 'uses' => 'Admin\TestController@delete'));
+Route::get('test/statuschange/{id}', array('as' => 'admin.test.statuschange', 'uses' => 'Admin\TestController@statuschange'));
+
+
 
 Route::any('course-search','Admin\CourseManagementController@coursesearch')->name('course-search');
 Route::get('delete-course', 'Admin\CourseManagementController@deletecourse')->name('delete-course');
