@@ -226,7 +226,7 @@
         </div>
       </div>
       <div class="modal-footer d-flex justify-content-center">
-        <button class="btn btn-indigo" onclick="addQuestiontoTest();">Submit<i class="fa fa-paper-plane-o ml-1"></i></button>
+        <button class="btn btn-indigo addQuestion">Submit</button>
       </div>
     </div>
   </div>
@@ -272,8 +272,10 @@
 
 $(document).ready(function(){
 
-    function addQuestiontoTest(){
-  /*alert(id);*/
+
+
+  $('.addQuestion').on('click', function(e) {
+  // alert(id);
   if(!id){
     alert("Please Select Some Question to add");
   }
@@ -288,10 +290,10 @@ $(document).ready(function(){
     var r = confirm("Are You Sure You Wanna Add these Questions?");
     if (r == true) {
     console.log(id);
+  
+
     $.ajax({
-      headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  }
+      
         url:"{{route('add-question-to-test')}}", 
         type:"get",
         data:{IDs:id,title:title,description:description,marks:marks,duration:duration,exam_list_id:exam_list_id},
@@ -307,7 +309,7 @@ $(document).ready(function(){
 
    }//if ends
   }
-}
+});
 
 
 

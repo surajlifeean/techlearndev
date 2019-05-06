@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Test;
 use App\TestQuestion;
+use App\ExamList;
+use Session;
 
 class TestController extends Controller
 {
@@ -26,7 +28,9 @@ class TestController extends Controller
      */
     public function create()
     {
-        //
+         $examList=ExamList::where('status','A')->orderBy('title')->pluck('title', 'id');
+        
+        return view('Admin.question.test')->withExamList($examList);
     }
 
     /**
@@ -88,8 +92,8 @@ class TestController extends Controller
     public function addQuestionToTest()
     {
         
+        // $ids="1,2,4";
         $ids=$_REQUEST['IDs'];
-       //echo $ids;
         $ids=explode(',',$ids);
         $title=$_REQUEST['title'];
         $description=$_REQUEST['description'];
@@ -103,9 +107,17 @@ class TestController extends Controller
         $test->description=$description;
         $test->total_marks=$marks;
         $test->duration=$duration;
-        $test->exam_list_id=$exam_list_id;
+        $test->exam_lists_id=$exam_list_id;
         $test->question_count=count($ids);
         $test->save();
+        // $test=new Test;
+        // $test->title="Abc";
+        // $test->description="desc";
+        // $test->total_marks=10;
+        // $test->duration=10;
+        // $test->exam_lists_id=1;
+        // $test->question_count=count($ids);
+        // $test->save();
 
         foreach ($ids as $id) {
          $tq=new TestQuestion;
@@ -113,6 +125,13 @@ class TestController extends Controller
          $tq->question_id=$id;
          $tq->save();
         }
+
+        // foreach ($ids as $id) {
+        //  $tq=new TestQuestion;
+        //  $tq->test_id=$test->id;
+        //  $tq->question_id=$id;
+        //  $tq->save();
+        // }
 
         Session::flash('success', 'Test Added successfully!');
         echo "done";
